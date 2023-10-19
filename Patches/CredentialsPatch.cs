@@ -83,11 +83,11 @@ public static class Credentials
                 Main.credentialsText += $"\n{additionalCredentials}";
             } */
 
-            Main.credentialsText += $"\r\n<color=#ffc0cb>ReReEdited by</color> <color=#f34c50>JustMeDark</color>";
+            Main.credentialsText += $"\r\n<color={Main.ModColor}>Edited by</color> <color=#ffffff>JustMeDark</color>";
 #endif
 
             if (Main.IsAprilFools)
-                Main.credentialsText = $"\r\n<color=#00bfff>Town Of Host</color> v11.45.14";
+                Main.credentialsText = $"\r\n<color={Main.ModColor}>Town Of Laikrai</color> v69.420.96";
 
             var credentials = Object.Instantiate(__instance.text);
             credentials.text = Main.credentialsText;

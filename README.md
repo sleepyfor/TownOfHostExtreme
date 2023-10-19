@@ -1,9 +1,9 @@
 
-<h1 align="center">Town of Host Re-Edited</h1>
+<h1 align="center">Town of Host ReReEdited</h1>
 
 <br>
 
-<img align="left" alt="Cover" src="Resources/Background/TOHE-Background-Old.jpg" width="50%" height="350" /> 
+<img align="left" alt="Cover" src="Resources/Background/menu.jpg" width="50%" height="350" /> 
 
 <p align="right">
   
@@ -34,8 +34,8 @@
 **Credit to these mods and their developers for the code and help:**
 ### :star: [TOHE](https://github.com/KARPED1EM/TownOfHostEdited) :
 > 
-> - Our repo is forked from TOHE
-### :star: [TOH](https://github.com/tukasa0001/TownOfHost) :
+> - Our repo is forked from TownOfHost-ReEdited
+### :star: [TOH](https://github.com/Loonie-Toons/TownOfHost-ReEdited) :
 > 
 > - Our repo is based initially on TOH
 > 
