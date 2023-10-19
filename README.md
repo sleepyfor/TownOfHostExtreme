@@ -32,10 +32,10 @@
 <br>
 
 **Credit to these mods and their developers for the code and help:**
-### :star: [TOHE](https://github.com/KARPED1EM/TownOfHostEdited) :
+### :star: [TOHE](https://github.com/Loonie-Toons/TownOfHost-ReEdited) :
 > 
 > - Our repo is forked from TownOfHost-ReEdited
-### :star: [TOH](https://github.com/Loonie-Toons/TownOfHost-ReEdited) :
+### :star: [TOH](https://github.com/tukasa0001/TownOfHost) :
 > 
 > - Our repo is based initially on TOH
 > 
