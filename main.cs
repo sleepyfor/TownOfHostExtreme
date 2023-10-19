@@ -431,6 +431,8 @@ public class Main : BasePlugin
                 {CustomRoles.BloodKnight, "#630000"},
                 {CustomRoles.Juggernaut, "#A41342"},
                 {CustomRoles.Parasite, "#ff1919"},
+                {CustomRoles.Karen, "#ff1919"},
+                {CustomRoles.Manager, "#ff1919"},
                 {CustomRoles.Crewpostor, "#ff1919"},
                 {CustomRoles.Refugee, "#ff1919"},
                 {CustomRoles.Infectious, "#7B8968"},

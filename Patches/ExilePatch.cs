@@ -158,6 +158,8 @@ class ExileControllerWrapUpPatch
                 CustomRoles.Morphling or
                 CustomRoles.Sniper or
                 CustomRoles.Warlock or
+                CustomRoles.Karen or
+                CustomRoles.Manager or
                 CustomRoles.Workaholic or
                 CustomRoles.Chameleon or
                 CustomRoles.Engineer or

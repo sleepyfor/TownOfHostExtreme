@@ -596,6 +596,8 @@ internal static class CustomRolesHelper
             CustomRoles.ShapeMaster or
             CustomRoles.Zombie or
             CustomRoles.Warlock or
+            CustomRoles.Manager or
+            CustomRoles.Karen or
             CustomRoles.Assassin or
             CustomRoles.Cultivator or
             CustomRoles.Hacker or

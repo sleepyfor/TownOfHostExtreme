@@ -1199,6 +1199,7 @@ public static class Options
         SetupRoleOptions(40000, TabGroup.ImpostorRoles, CustomRoles.Godfather);
         GodfatherChangeOpt = StringOptionItem.Create(40010, "GodfatherTargetCountMode", GodfatherChangeMode, 0, TabGroup.ImpostorRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Godfather]);
+        SetupRoleOptions(900500, TabGroup.ImpostorRoles, CustomRoles.Karen);
         Morphling.SetupCustomOption();
         SetupRoleOptions(3100, TabGroup.ImpostorRoles, CustomRoles.Mafia);
         MafiaCanKillNum = IntegerOptionItem.Create(3200, "MafiaCanKillNum", new(0, 15, 1), 1, TabGroup.ImpostorRoles, false)
@@ -1212,6 +1213,10 @@ public static class Options
         MafiaShapeshiftDur = FloatOptionItem.Create(3212, "ShapeshiftDuration", new(1f, 180f, 1f), 30f, TabGroup.ImpostorRoles, false)
             .SetParent(LegacyMafia)
             .SetValueFormat(OptionFormat.Seconds);
+        SetupRoleOptions(9600, TabGroup.ImpostorRoles, CustomRoles.Manager);
+        ManagerVoteCount = IntegerOptionItem.Create(9610, "ManagerVoteCount", new(1, 99, 1), 2, TabGroup.ImpostorRoles, false)
+            .SetParent(CustomRoleSpawnChances[CustomRoles.Manager])
+            .SetValueFormat(OptionFormat.Votes);
         TimeThief.SetupCustomOption();
         SetupRoleOptions(3400, TabGroup.ImpostorRoles, CustomRoles.Vindicator);
         VindicatorAdditionalVote = IntegerOptionItem.Create(3410, "MayorAdditionalVote", new(1, 20, 1), 3, TabGroup.ImpostorRoles, false)
@@ -1515,11 +1520,6 @@ public static class Options
         MayorRevealWhenDoneTasks = BooleanOptionItem.Create(9514, "MayorRevealWhenDoneTasks", false, TabGroup.CrewmateRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Mayor]);
         MayorTasks = OverrideTasksData.Create(9515, TabGroup.CrewmateRoles, CustomRoles.Mayor);
-        SetupRoleOptions(9600, TabGroup.ImpostorRoles, CustomRoles.Manager);
-        ManagerVoteCount = IntegerOptionItem.Create(9610, "ManagerVoteCount", new(1, 99, 1), 2, TabGroup.ImpostorRoles, false)
-            .SetParent(CustomRoleSpawnChances[CustomRoles.Manager])
-            .SetValueFormat(OptionFormat.Votes);
-        SetupRoleOptions(Karen.Id, TabGroup.ImpostorRoles, CustomRoles.Karen);
         Monarch.SetupCustomOption();
         Farseer.SetupCustomOption();
         Monitor.SetupCustomOption();
