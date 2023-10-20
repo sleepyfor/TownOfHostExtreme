@@ -349,6 +349,19 @@ class CheckForEndVotingPatch
                         });
                     }
                 }
+
+                if (CheckRole(ps.TargetPlayerId, CustomRoles.Manager) && !Options.ManagerHideVote.GetBool()) //Manager
+                {
+                    for (var i2 = 0; i2 < Options.ManagerVoteCount.GetFloat(); i2++)
+                    {
+                        statesList.Add(new MeetingHud.VoterState()
+                        {
+                            VoterId = ps.TargetPlayerId,
+                            VotedForId = ps.VotedFor
+                        });
+                    }
+                }
+
                 if (CheckRole(ps.TargetPlayerId, CustomRoles.Vindicator) && !Options.VindicatorHideVote.GetBool()) //Vindicator
                 {
                     for (var i2 = 0; i2 < Options.VindicatorAdditionalVote.GetFloat(); i2++)

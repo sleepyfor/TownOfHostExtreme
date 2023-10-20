@@ -206,6 +206,7 @@ public static class Options
     public static OptionItem MayorHideVote;
     public static OptionItem MayorRevealWhenDoneTasks;
     public static OptionItem ManagerVoteCount;
+    public static OptionItem ManagerHideVote;
     public static OptionItem OppoImmuneToAttacksWhenTasksDone;
     public static OptionItem DoctorTaskCompletedBatteryCharge;
     public static OptionItem SpeedBoosterUpSpeed;
@@ -1217,6 +1218,8 @@ public static class Options
         ManagerVoteCount = IntegerOptionItem.Create(9610, "ManagerVoteCount", new(1, 99, 1), 2, TabGroup.ImpostorRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Manager])
             .SetValueFormat(OptionFormat.Votes);
+        ManagerVoteCount = BooleanOptionItem.Create(9620, "ManagerHideVote", false, TabGroup.ImpostorRoles, false)
+            .SetParent(CustomRoleSpawnChances[CustomRoles.Manager]);
         TimeThief.SetupCustomOption();
         SetupRoleOptions(3400, TabGroup.ImpostorRoles, CustomRoles.Vindicator);
         VindicatorAdditionalVote = IntegerOptionItem.Create(3410, "MayorAdditionalVote", new(1, 20, 1), 3, TabGroup.ImpostorRoles, false)

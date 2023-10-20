@@ -25,7 +25,7 @@ public class Main : BasePlugin
     public const string OriginalForkId = "OriginalTOH";
 
     public static readonly string ModName = "Town Of Host ReReEdited";
-    public static readonly string ForkId = "TOHE";
+    public static readonly string ForkId = "TOHRRE";
     public static readonly string ModColor = "#C092C0";
     public static readonly bool AllowPublicRoom = true;
 
