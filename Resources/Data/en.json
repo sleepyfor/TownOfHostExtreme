@@ -2078,6 +2078,7 @@
     "FireworksWaitPhase": "Wait for it...",
     "FireworksReadyFirePhase": "Fire!",
     "ManagerVoteCount": "Manager Votes",
+    "ManagerHideVote": "Hide Manager Votes",
     "EnterVentWinCountDown": "Enter vent within <b>{0}</b> seconds to win!",
     "InvalidArgs": "Invalid Args",
     "On": "ON",
