@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 
 public static class Mediumshiper
 {

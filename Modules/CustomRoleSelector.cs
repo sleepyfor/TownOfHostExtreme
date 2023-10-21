@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Roles.Neutral;
+using TOHX.Roles.Neutral;
 
-namespace TOHE.Modules;
+namespace TOHX.Modules;
 
 internal class CustomRoleSelector
 {

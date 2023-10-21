@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Modules;
+using TOHX.Modules;
 using UnityEngine;
-using TOHE.Roles.Crewmate;
-using static TOHE.Translator;
+using TOHX.Roles.Crewmate;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Impostor;
+namespace TOHX.Roles.Impostor;
 
 public static class Vampire
 {

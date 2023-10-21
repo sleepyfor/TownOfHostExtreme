@@ -2,9 +2,9 @@
 using Hazel;
 using System;
 using System.Linq;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 internal class EAC
 {

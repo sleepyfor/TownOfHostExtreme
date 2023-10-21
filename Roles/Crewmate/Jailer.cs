@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
-using static TOHE.Options;
-using static TOHE.Translator;
+using static TOHX.Options;
+using static TOHX.Translator;
 using Hazel;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 
 public static class Jailer
 {

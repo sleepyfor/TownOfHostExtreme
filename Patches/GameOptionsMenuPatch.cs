@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 using Object = UnityEngine.Object;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(GameSettingMenu), nameof(GameSettingMenu.InitializeOptions))]
 public static class GameSettingMenuPatch
@@ -148,7 +148,7 @@ public static class GameOptionsMenuPatch
             menus.Add(tohSettings.gameObject);
 
             var tohTab = Object.Instantiate(roleTab, roleTab.transform.parent);
-            tohTab.transform.FindChild("Hat Button").FindChild("Icon").GetComponent<SpriteRenderer>().sprite = Utils.LoadSprite($"TOHE.Resources.Images.TabIcon_{tab}.png", 100f);
+            tohTab.transform.FindChild("Hat Button").FindChild("Icon").GetComponent<SpriteRenderer>().sprite = Utils.LoadSprite($"TOHX.Resources.Images.TabIcon_{tab}.png", 100f);
             tabs.Add(tohTab);
             var tohTabHighlight = tohTab.transform.FindChild("Hat Button").FindChild("Tab Background").GetComponent<SpriteRenderer>();
             highlights.Add(tohTabHighlight);

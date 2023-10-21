@@ -1,8 +1,8 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(RoleOptionSetting), nameof(RoleOptionSetting.UpdateValuesAndText))]
 class ChanceChangePatch

@@ -6,15 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TOHE.Modules;
-using TOHE.Roles.AddOns.Impostor;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.AddOns.Impostor;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 static class ExtendedPlayerControl
 {

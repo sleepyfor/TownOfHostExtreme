@@ -2,7 +2,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TOHE;
+namespace TOHX;
 
 public class AirshipElectricalDoors
 {

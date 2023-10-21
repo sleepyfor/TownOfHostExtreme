@@ -7,22 +7,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
 using UnityEngine;
-using static TOHE.Translator;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
+using static TOHX.Translator;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
 
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]
 internal class ChatCommands
 {
-    private static string modLogFiles = @"./TOHE-DATA/ModLogs.txt";
-    private static string modTagsFiles = @"./TOHE-DATA/Tags/MOD_TAGS";
-    private static string sponsorTagsFiles = @"./TOHE-DATA/Tags/SPONSOR_TAGS";
+    private static string modLogFiles = @"./TOHX-DATA/ModLogs.txt";
+    private static string modTagsFiles = @"./TOHX-DATA/Tags/MOD_TAGS";
+    private static string sponsorTagsFiles = @"./TOHX-DATA/Tags/SPONSOR_TAGS";
 
 
     public static List<string> ChatHistory = new();

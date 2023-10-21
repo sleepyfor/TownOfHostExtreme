@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Hazel;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(GameManager), nameof(GameManager.Serialize))]
 class GameManagerSerializeFix

@@ -7,7 +7,7 @@ using Assets.InnerNet;
 using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
-namespace TOHE;
+namespace TOHX;
 
 // ##https://github.com/Yumenopai/TownOfHost_Y
 public class ModNews

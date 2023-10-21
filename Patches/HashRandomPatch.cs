@@ -1,7 +1,7 @@
 using HarmonyLib;
 using System;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(HashRandom))]
 class HashRandomPatch

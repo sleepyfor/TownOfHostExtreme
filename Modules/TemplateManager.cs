@@ -8,13 +8,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class TemplateManager
 {
-    private static readonly string TEMPLATE_FILE_PATH = "./TOHE-DATA/template.txt";
+    private static readonly string TEMPLATE_FILE_PATH = "./TOHX-DATA/template.txt";
     private static Dictionary<string, Func<string>> _replaceDictionary = new()
     {
         ["RoomCode"] = () => InnerNet.GameCode.IntToGameName(AmongUsClient.Instance.GameId),
@@ -50,8 +50,8 @@ public static class TemplateManager
         {
             try
             {
-                if (!Directory.Exists(@"TOHE-DATA")) Directory.CreateDirectory(@"TOHE-DATA");
-                if (File.Exists(@"./TOHE-DATA/templates.txt")) File.Delete(@"./TOHE-DATA/templates.txt");
+                if (!Directory.Exists(@"TOHX-DATA")) Directory.CreateDirectory(@"TOHX-DATA");
+                if (File.Exists(@"./TOHX-DATA/templates.txt")) File.Delete(@"./TOHX-DATA/templates.txt");
                 if (File.Exists(@"./template.txt")) File.Move(@"./template.txt", TEMPLATE_FILE_PATH);
                 else
                 {
@@ -66,7 +66,7 @@ public static class TemplateManager
                         };
                     else fileName = "English";
                     Logger.Warn($"创建新的 Template 文件：{fileName}", "TemplateManager");
-                    File.WriteAllText(TEMPLATE_FILE_PATH, GetResourcesTxt($"TOHE.Resources.Config.template.{fileName}.txt"));
+                    File.WriteAllText(TEMPLATE_FILE_PATH, GetResourcesTxt($"TOHX.Resources.Config.template.{fileName}.txt"));
                 }
             }
             catch (Exception ex)

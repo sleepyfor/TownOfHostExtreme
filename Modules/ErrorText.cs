@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 public class ErrorText : MonoBehaviour
 {

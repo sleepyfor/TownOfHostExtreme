@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 using static UnityEngine.ParticleSystem.PlaybackState;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 
 public static class Swapper
 {

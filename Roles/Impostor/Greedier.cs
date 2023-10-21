@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TOHE;
+namespace TOHX;
 
 // 来源：https://github.com/Yumenopai/TownOfHost_Y
 public static class Greedier

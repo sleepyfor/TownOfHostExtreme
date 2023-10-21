@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace TOHE;
+namespace TOHX;
 
 public class HashAuth
 {

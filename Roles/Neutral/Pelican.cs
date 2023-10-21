@@ -1,9 +1,9 @@
 ﻿using Hazel;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Roles.Crewmate;
+using TOHX.Roles.Crewmate;
 using UnityEngine;
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Pelican
 {

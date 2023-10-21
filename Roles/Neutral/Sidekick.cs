@@ -1,7 +1,7 @@
 using AmongUs.GameOptions;
 using System.Collections.Generic;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Sidekick
 {

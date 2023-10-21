@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace TOHE.Roles.Impostor
+namespace TOHX.Roles.Impostor
 {
     public static class Camouflager
     {

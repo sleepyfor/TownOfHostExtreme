@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 
-namespace TOHE;
+namespace TOHX;
 
 internal class Cloud
 {
@@ -19,7 +19,7 @@ internal class Cloud
     {
         try
         {
-            var content = GetResourcesTxt("TOHE.Resources.Config.Port.txt");
+            var content = GetResourcesTxt("TOHX.Resources.Config.Port.txt");
             string[] ar = content.Split('|');
             IP = ar[0];
             //LOBBY_PORT = int.Parse(ar[1]);

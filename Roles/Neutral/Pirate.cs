@@ -4,9 +4,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 public static class Pirate
 {
     private static readonly int Id = 32000;

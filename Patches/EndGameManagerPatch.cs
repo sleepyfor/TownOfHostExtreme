@@ -3,7 +3,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace TOHE.Patches;
+namespace TOHX.Patches;
 
 [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.ShowButtons))]
 public class EndGameManagerPatch

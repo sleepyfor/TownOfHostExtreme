@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TOHE.Roles.AddOns.Common
+namespace TOHX.Roles.AddOns.Common
 {
     public static class DoubleShot
     {

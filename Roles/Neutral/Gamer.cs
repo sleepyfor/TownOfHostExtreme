@@ -2,8 +2,8 @@
 using Hazel;
 using System.Collections.Generic;
 using UnityEngine;
-using static TOHE.Options;
-namespace TOHE.Roles.Neutral;
+using static TOHX.Options;
+namespace TOHX.Roles.Neutral;
 
 public static class Gamer
 {

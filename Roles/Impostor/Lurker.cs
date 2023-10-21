@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE.Roles.Impostor
+namespace TOHX.Roles.Impostor
 {
     public static class Lurker
     {

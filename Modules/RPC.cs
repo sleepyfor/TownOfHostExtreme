@@ -5,16 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TOHE.Modules;
-using TOHE.Roles.AddOns.Crewmate;
-using TOHE.Roles.AddOns.Impostor;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Roles.AddOns.Crewmate;
+using TOHX.Roles.AddOns.Impostor;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
+using static TOHX.Translator;
 using static UnityEngine.RemoteConfigSettingsHelper;
 
-namespace TOHE;
+namespace TOHX;
 
 enum CustomRPC
 {

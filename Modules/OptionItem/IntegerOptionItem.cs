@@ -1,4 +1,4 @@
-namespace TOHE;
+namespace TOHX;
 
 public class IntegerOptionItem : OptionItem
 {

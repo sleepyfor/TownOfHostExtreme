@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Roles.Neutral;
-using static TOHE.Options;
-using static TOHE.Translator;
+using TOHX.Roles.Neutral;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Impostor
+namespace TOHX.Roles.Impostor
 {
     public static class Devourer
     {

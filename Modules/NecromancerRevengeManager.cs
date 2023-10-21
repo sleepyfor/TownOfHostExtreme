@@ -1,11 +1,11 @@
 using HarmonyLib;
 using Hazel;
 using System;
-using TOHE.Modules;
+using TOHX.Modules;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class NecromancerRevengeManager
 {

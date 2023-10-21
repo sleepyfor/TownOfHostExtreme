@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 
 public static class TimeManager
 {

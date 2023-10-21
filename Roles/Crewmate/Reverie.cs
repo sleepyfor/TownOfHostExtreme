@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class Reverie
 {

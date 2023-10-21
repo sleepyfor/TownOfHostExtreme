@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE.Roles.AddOns.Crewmate;
+namespace TOHX.Roles.AddOns.Crewmate;
 
 public static class Workhorse
 {

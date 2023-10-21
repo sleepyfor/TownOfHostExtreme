@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(OneWayShadows), nameof(OneWayShadows.IsIgnored))]
 public static class OneWayShadowsIsIgnoredPatch

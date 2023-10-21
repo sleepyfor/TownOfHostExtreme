@@ -1,8 +1,8 @@
 using Hazel;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class NameColorManager
 {

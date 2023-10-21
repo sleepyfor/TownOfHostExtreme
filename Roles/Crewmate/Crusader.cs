@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 
 public static class Crusader
 {

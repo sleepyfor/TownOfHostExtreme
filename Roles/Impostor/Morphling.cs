@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE.Roles.Impostor;
+namespace TOHX.Roles.Impostor;
 
 public static class Morphling
 {

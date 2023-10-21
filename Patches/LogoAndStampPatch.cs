@@ -3,9 +3,9 @@ using HarmonyLib;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 //参考：https://github.com/ykundesu/SuperNewRoles/blob/master/SuperNewRoles/Patches/LogoAndStampPatch.cs
 [HarmonyPatch]

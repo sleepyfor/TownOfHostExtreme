@@ -1,7 +1,7 @@
 using AmongUs.Data;
 using HarmonyLib;
 
-namespace TOHE;
+namespace TOHX;
 
 // ²Î¿¼£ºhttps://github.com/ykundesu/SuperNewRoles/blob/master/SuperNewRoles/Patches/SNROnlySearch.cs
 public static class TOHEOnlySearch

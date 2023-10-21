@@ -2,11 +2,11 @@ using Hazel;
 using UnityEngine;
 using AmongUs.GameOptions;
 using System.Collections.Generic;
-using static TOHE.Options;
-using static TOHE.Translator;
+using static TOHX.Options;
+using static TOHX.Translator;
 using System.Linq;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Vulture
 {

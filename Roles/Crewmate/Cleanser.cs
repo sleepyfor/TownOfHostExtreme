@@ -2,10 +2,10 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
-using static TOHE.Options;
-using static TOHE.Translator;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 public static class Cleanser
 {
     private static readonly int Id = 23420;

@@ -4,10 +4,10 @@ using Il2CppSystem.Text;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static TOHE.Options;
-using static TOHE.Translator;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Impostor;
+namespace TOHX.Roles.Impostor;
 
 public static class EvilTracker
 {

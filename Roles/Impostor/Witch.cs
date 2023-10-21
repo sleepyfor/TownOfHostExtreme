@@ -2,12 +2,12 @@ using Hazel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
-using static TOHE.Options;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Impostor;
+namespace TOHX.Roles.Impostor;
 
 public static class Witch
 {

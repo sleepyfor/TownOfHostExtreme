@@ -2,12 +2,12 @@
 using Hazel;
 using System;
 using System.Linq;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class RetributionistRevengeManager
 {

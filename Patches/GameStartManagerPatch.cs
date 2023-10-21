@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using TOHE.Modules;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.Neutral;
 using Object = UnityEngine.Object;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(GameStartManager), nameof(GameStartManager.Update))]
 public static class GameStartManagerUpdatePatch

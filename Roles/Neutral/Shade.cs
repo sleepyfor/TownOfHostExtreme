@@ -3,11 +3,11 @@ using Hazel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TOHE.Roles.Crewmate;
-using static TOHE.Options;
-using static TOHE.Translator;
+using TOHX.Roles.Crewmate;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Shade
 {

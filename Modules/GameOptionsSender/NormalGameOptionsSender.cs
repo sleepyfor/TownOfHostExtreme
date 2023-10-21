@@ -1,6 +1,6 @@
 using AmongUs.GameOptions;
 
-namespace TOHE.Modules;
+namespace TOHX.Modules;
 
 public class NormalGameOptionsSender : GameOptionsSender
 {

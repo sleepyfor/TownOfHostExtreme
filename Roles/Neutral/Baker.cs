@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Hazel;
 
-using static TOHE.Translator;
-using static TOHE.Options;
+using static TOHX.Translator;
+using static TOHX.Options;
 using System.Linq;
 
-namespace TOHE.Roles.Neutral
+namespace TOHX.Roles.Neutral
 {
     public static class Baker
     {

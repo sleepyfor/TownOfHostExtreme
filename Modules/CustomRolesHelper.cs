@@ -1,9 +1,9 @@
 using AmongUs.GameOptions;
 using System.Linq;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Neutral;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Neutral;
 
-namespace TOHE;
+namespace TOHX;
 
 internal static class CustomRolesHelper
 {

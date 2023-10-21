@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TOHE;
+namespace TOHX;
 
 //参考
 //https://github.com/Koke1024/Town-Of-Moss/blob/main/TownOfMoss/Patches/MeltDownBoost.cs

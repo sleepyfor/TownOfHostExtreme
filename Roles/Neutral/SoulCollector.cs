@@ -1,9 +1,9 @@
 using Hazel;
 using System.Collections.Generic;
-using static TOHE.Options;
-using static TOHE.Translator;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 public static class SoulCollector
 {
     private static readonly int Id = 34420;

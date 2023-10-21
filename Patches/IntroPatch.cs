@@ -3,11 +3,11 @@ using HarmonyLib;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TOHE.Roles.Neutral;
+using TOHX.Roles.Neutral;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(IntroCutscene), nameof(IntroCutscene.ShowRole))]
 class SetUpRoleTextPatch

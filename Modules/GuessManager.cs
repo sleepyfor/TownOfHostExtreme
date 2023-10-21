@@ -6,13 +6,13 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Neutral;
-using TOHE.Roles.AddOns.Common;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Neutral;
+using TOHX.Roles.AddOns.Common;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class GuessManager
 {

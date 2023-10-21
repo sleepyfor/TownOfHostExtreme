@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hazel;
-using TOHE.Roles.Impostor;
-using static TOHE.Options;
-using static TOHE.Translator;
+using TOHX.Roles.Impostor;
+using static TOHX.Options;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 public static class PlagueBearer
 {
     private static readonly int Id = 26000;

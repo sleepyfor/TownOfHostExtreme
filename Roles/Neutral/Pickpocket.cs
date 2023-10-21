@@ -1,8 +1,8 @@
 using AmongUs.GameOptions;
 using System.Collections.Generic;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Pickpocket
 {

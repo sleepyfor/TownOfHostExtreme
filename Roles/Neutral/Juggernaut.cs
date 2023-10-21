@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class Juggernaut
 {

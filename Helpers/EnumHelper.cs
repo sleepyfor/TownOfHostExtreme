@@ -1,6 +1,6 @@
 using System;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class EnumHelper
 {

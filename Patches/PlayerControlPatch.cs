@@ -8,15 +8,15 @@ using HarmonyLib;
 using Hazel;
 using InnerNet;
 using UnityEngine;
-using TOHE.Modules;
-using TOHE.Patches;
-using TOHE.Roles.AddOns.Crewmate;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Patches;
+using TOHX.Roles.AddOns.Crewmate;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CheckProtect))]
 class CheckProtectPatch

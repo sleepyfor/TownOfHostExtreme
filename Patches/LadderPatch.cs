@@ -2,7 +2,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TOHE;
+namespace TOHX;
 
 public class FallFromLadder
 {

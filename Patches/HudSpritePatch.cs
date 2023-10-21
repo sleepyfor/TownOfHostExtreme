@@ -1,13 +1,13 @@
 ﻿using HarmonyLib;
-using TOHE.Modules;
-using TOHE.Roles.Impostor;
+using TOHX.Modules;
+using TOHX.Roles.Impostor;
 using UnityEngine;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class CustomButton
 {
-    public static Sprite Get(string name) => Utils.LoadSprite($"TOHE.Resources.Images.Skills.{name}.png", 115f);
+    public static Sprite Get(string name) => Utils.LoadSprite($"TOHX.Resources.Images.Skills.{name}.png", 115f);
 }
 
 [HarmonyPriority(520)]

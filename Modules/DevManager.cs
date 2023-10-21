@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace TOHE;
+namespace TOHX;
 
 public class DevUser
 {
@@ -29,7 +29,7 @@ public class DevUser
     //public string GetTag() => Color == "null" ? $"<size=1.2>{Tag}</size>\r\n" : $"<color={Color}><size=1.2>{(Tag == "#Dev" ? Translator.GetString("Developer") : Tag)}</size></color>\r\n";
     public string GetTag() 
     {
-        string tagColorFilePath = @$"./TOHE-DATA/Tags/SPONSOR_TAGS/{Code}.txt";
+        string tagColorFilePath = @$"./TOHX-DATA/Tags/SPONSOR_TAGS/{Code}.txt";
 
         if (Color == "null" || Color == string.Empty) return $"<size=1.2>{Tag}</size>\r\n";
         var startColor = "FFFF00";

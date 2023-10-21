@@ -1,13 +1,13 @@
 ﻿using Hazel;
 using System.Collections.Generic;
-using TOHE.Modules;
-using TOHE.Roles.Neutral;
-using TOHE.Roles.Crewmate;
-using static TOHE.Options;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Roles.Neutral;
+using TOHX.Roles.Crewmate;
+using static TOHX.Options;
+using static TOHX.Translator;
 using System.Linq;
 
-namespace TOHE.Roles.Impostor;
+namespace TOHX.Roles.Impostor;
 
 internal static class Assassin
 {

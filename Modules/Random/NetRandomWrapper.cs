@@ -1,6 +1,6 @@
 using System;
 
-namespace TOHE;
+namespace TOHX;
 
 public class NetRandomWrapper : IRandom
 {

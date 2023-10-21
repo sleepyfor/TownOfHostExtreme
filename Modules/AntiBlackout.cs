@@ -3,10 +3,10 @@ using Hazel;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using TOHE.Modules;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.Neutral;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class AntiBlackout
 {

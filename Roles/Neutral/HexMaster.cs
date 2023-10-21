@@ -3,10 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static TOHE.Options;
-using static TOHE.Translator;
-using TOHE.Roles.Crewmate;
-namespace TOHE.Roles.Neutral;
+using static TOHX.Options;
+using static TOHX.Translator;
+using TOHX.Roles.Crewmate;
+namespace TOHX.Roles.Neutral;
 
 public static class HexMaster
 {

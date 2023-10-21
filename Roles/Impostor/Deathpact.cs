@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
-using TOHE.Roles.Neutral;
+using TOHX.Roles.Neutral;
 using UnityEngine;
-using static TOHE.Options;
-using static TOHE.Translator;
-using static TOHE.Utils;
+using static TOHX.Options;
+using static TOHX.Translator;
+using static TOHX.Utils;
 
-namespace TOHE.Roles.Impostor
+namespace TOHX.Roles.Impostor
 {
     public static class Deathpact
     {

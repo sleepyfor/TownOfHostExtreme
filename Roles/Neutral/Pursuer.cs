@@ -1,9 +1,9 @@
 ﻿using Hazel;
 using System.Collections.Generic;
-using TOHE.Modules;
+using TOHX.Modules;
 using UnityEngine;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Pursuer
 {

@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TOHE.Patches;
+namespace TOHX.Patches;
 
 [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetRight))]
 class ChatBubbleSetRightPatch

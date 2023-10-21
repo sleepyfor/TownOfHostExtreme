@@ -11,16 +11,16 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using TOHE.Modules;
-using TOHE.Roles.AddOns.Crewmate;
-using TOHE.Roles.AddOns.Impostor;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.AddOns.Crewmate;
+using TOHX.Roles.AddOns.Impostor;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
 using UnityEngine;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class Utils
 {
@@ -1582,7 +1582,7 @@ public static class Utils
     public static bool IsPlayerModerator(string friendCode)
     {
         if (friendCode == "") return false;
-        var friendCodesFilePath = @"./TOHE-DATA/Moderators.txt";
+        var friendCodesFilePath = @"./TOHX-DATA/Moderators.txt";
         var friendCodes = File.ReadAllLines(friendCodesFilePath);
         return friendCodes.Any(code => code.Contains(friendCode));
     }
@@ -1702,7 +1702,7 @@ public static class Utils
             {
                 if (IsPlayerModerator(player.FriendCode))
                 {
-                    string colorFilePath = @$"./TOHE-DATA/Tags/MOD_TAGS/{player.FriendCode}.txt";
+                    string colorFilePath = @$"./TOHX-DATA/Tags/MOD_TAGS/{player.FriendCode}.txt";
                     string startColorCode = "8bbee0";
                     string endColorCode = "8bbee0";
                     string ColorCode = "";

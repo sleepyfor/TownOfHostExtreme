@@ -4,17 +4,17 @@ using Hazel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Modules;
-using TOHE.Roles.AddOns.Crewmate;
-using TOHE.Roles.AddOns.Impostor;
-using TOHE.Roles.AddOns.Common;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
-using static TOHE.Modules.CustomRoleSelector;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Roles.AddOns.Crewmate;
+using TOHX.Roles.AddOns.Impostor;
+using TOHX.Roles.AddOns.Common;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
+using static TOHX.Modules.CustomRoleSelector;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.CoStartGame))]
 internal class ChangeRoleSettings

@@ -6,12 +6,12 @@ using InnerNet;
 using Steamworks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Neutral;
-using static TOHE.Translator;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Neutral;
+using static TOHX.Translator;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnGameJoined))]
 class OnGameJoinedPatch

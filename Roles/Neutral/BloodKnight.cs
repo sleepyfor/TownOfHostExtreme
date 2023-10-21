@@ -3,9 +3,9 @@ using Hazel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class BloodKnight
 {

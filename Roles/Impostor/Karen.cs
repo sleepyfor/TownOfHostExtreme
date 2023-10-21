@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TOHE.Roles.Impostor
+namespace TOHX.Roles.Impostor
 {
     public static class Karen
     {

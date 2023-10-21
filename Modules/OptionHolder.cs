@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
 
-using TOHE.Modules;
-using TOHE.Roles.AddOns.Crewmate;
-using TOHE.Roles.AddOns.Impostor;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Impostor;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.AddOns.Crewmate;
+using TOHX.Roles.AddOns.Impostor;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Impostor;
+using TOHX.Roles.Neutral;
 
-namespace TOHE;
+namespace TOHX;
 
 [Flags]
 public enum CustomGameMode

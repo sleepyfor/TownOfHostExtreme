@@ -3,12 +3,12 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Modules;
-using TOHE.Roles.Crewmate;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.Crewmate;
+using TOHX.Roles.Neutral;
 using UnityEngine;
 
-namespace TOHE;
+namespace TOHX;
 
 public class PlayerState
 {

@@ -1,10 +1,10 @@
 ﻿using Hazel;
 using System.Linq;
 using System.Collections.Generic;
-using TOHE.Modules;
+using TOHX.Modules;
 using UnityEngine;
 
-namespace TOHE.Roles.Crewmate;
+namespace TOHX.Roles.Crewmate;
 
 public static class Counterfeiter
 {

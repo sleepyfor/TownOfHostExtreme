@@ -1,8 +1,8 @@
 ﻿using Hazel;
 using System.Collections.Generic;
-using static TOHE.Translator;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 public static class Agitater
 {
     private static readonly int Id = 12420;

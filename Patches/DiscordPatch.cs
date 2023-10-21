@@ -3,7 +3,7 @@ using Discord;
 using System;
 using AmongUs.Data;
 
-namespace TOHE.Patches
+namespace TOHX.Patches
 {
     // Originally from Town of Us Rewritten, by Det
     [HarmonyPatch(typeof(ActivityManager), nameof(ActivityManager.UpdateActivity))]

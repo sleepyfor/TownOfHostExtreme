@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TOHE.Roles.Crewmate
+namespace TOHX.Roles.Crewmate
 {
     public static class Captain
     {

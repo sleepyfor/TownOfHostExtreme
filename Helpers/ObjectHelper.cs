@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TOHE;
+namespace TOHX;
 
 public static class ObjectHelper
 {

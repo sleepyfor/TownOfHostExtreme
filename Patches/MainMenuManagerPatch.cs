@@ -6,10 +6,10 @@ using System.Linq;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Object = UnityEngine.Object;
-using static TOHE.Translator;
-using static TOHE.Credentials;
+using static TOHX.Translator;
+using static TOHX.Credentials;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(MainMenuManager))]
 public static class MainMenuManagerPatch
@@ -63,7 +63,7 @@ public static class MainMenuManagerPatch
         GameObject splashArt = new("SplashArt");
         splashArt.transform.position = new Vector3(0, 0f, 600f); //= new Vector3(0, 0.40f, 600f);
         var spriteRenderer = splashArt.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = Utils.LoadSprite("TOHE.Resources.Background.menu.jpg", 150f);
+        spriteRenderer.sprite = Utils.LoadSprite("TOHX.Resources.Background.menu.jpg", 150f);
 
 
         //__instance.playLocalButton.inactiveSprites.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0f, 0.7765f);

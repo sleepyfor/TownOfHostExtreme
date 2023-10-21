@@ -3,11 +3,11 @@ using Hazel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Roles.Neutral;
+using TOHX.Roles.Neutral;
 using UnityEngine;
-using static TOHE.RandomSpawn;
+using static TOHX.RandomSpawn;
 
-namespace TOHE;
+namespace TOHX;
 
 internal static class SoloKombatManager
 {

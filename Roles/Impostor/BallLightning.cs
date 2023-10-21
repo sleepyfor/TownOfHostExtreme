@@ -1,12 +1,12 @@
 ﻿using Hazel;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Modules;
-using TOHE.Roles.Neutral;
+using TOHX.Modules;
+using TOHX.Roles.Neutral;
 using UnityEngine;
-using static TOHE.Options;
+using static TOHX.Options;
 
-namespace TOHE.Roles.Impostor;
+namespace TOHX.Roles.Impostor;
 
 public static class BallLightning
 {

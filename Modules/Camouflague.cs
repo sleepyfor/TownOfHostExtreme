@@ -1,8 +1,8 @@
 using AmongUs.Data;
 using System.Collections.Generic;
-using TOHE.Roles.Impostor;
+using TOHX.Roles.Impostor;
 
-namespace TOHE;
+namespace TOHX;
 
 static class PlayerOutfitExtension
 {

@@ -3,9 +3,9 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
-using TOHE.Roles.AddOns.Crewmate;
+using TOHX.Roles.AddOns.Crewmate;
 
-namespace TOHE;
+namespace TOHX;
 
 [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.AddTasksFromList))]
 class AddTasksFromListPatch

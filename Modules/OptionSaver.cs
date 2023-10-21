@@ -2,12 +2,12 @@
 using System.IO;
 using System.Text.Json;
 
-namespace TOHE.Modules;
+namespace TOHX.Modules;
 
 // https://github.com/tukasa0001/TownOfHost/blob/main/Modules/OptionSaver.cs
 public static class OptionSaver
 {
-    private static readonly DirectoryInfo SaveDataDirectoryInfo = new("./TOHE-DATA/SaveData/");
+    private static readonly DirectoryInfo SaveDataDirectoryInfo = new("./TOHX-DATA/SaveData/");
     private static readonly FileInfo OptionSaverFileInfo = new($"{SaveDataDirectoryInfo.FullName}/Options.json");
     private static readonly LogHandler logger = Logger.Handler(nameof(OptionSaver));
 

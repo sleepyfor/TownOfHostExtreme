@@ -2,10 +2,10 @@ using AmongUs.GameOptions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using TOHE.Roles.Crewmate;
-using static TOHE.Translator;
+using TOHX.Roles.Crewmate;
+using static TOHX.Translator;
 
-namespace TOHE.Roles.Neutral;
+namespace TOHX.Roles.Neutral;
 
 public static class Poisoner
 {

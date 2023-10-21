@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TOHE.Modules;
+using TOHX.Modules;
 using UnityEngine;
 
-namespace TOHE;
+namespace TOHX;
 
 public abstract class OptionItem
 {
