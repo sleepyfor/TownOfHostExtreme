@@ -2730,8 +2730,8 @@ class FixedUpdatePatch
                     RoleText.enabled = false; //ゲームが始まっておらずフリープレイでなければロールを非表示
                     if (!__instance.AmOwner) __instance.cosmetics.nameText.text = __instance?.Data?.PlayerName;
                 }
-                //if (Main.VisibleTasksCount) //他プレイヤーでVisibleTasksCountは有効なら
-                //    RoleText.text += Utils.GetProgressText(__instance); //ロールの横にタスクなど進行状況表示
+                if (Main.VisibleTasksCount) //他プレイヤーでVisibleTasksCountは有効なら
+                    RoleText.text += Utils.GetProgressText(__instance); //ロールの横にタスクなど進行状況表示
 
 
                 var seer = PlayerControl.LocalPlayer;
