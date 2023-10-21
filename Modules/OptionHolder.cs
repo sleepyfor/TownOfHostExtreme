@@ -1509,8 +1509,8 @@ public static class Options
         Judge.SetupCustomOption();
         SetupRoleOptions(9150, TabGroup.CrewmateRoles, CustomRoles.Lookout);
         Marshall.SetupCustomOption();
-        SetupRoleOptions(47500, TabGroup.CrewmateRoles, CustomRoles.Spy);
-        SetupRoleOptions(47600, TabGroup.CrewmateRoles, CustomRoles.Colorist);
+        SetupRoleOptions(9540, TabGroup.CrewmateRoles, CustomRoles.Spy);
+        SetupRoleOptions(9550, TabGroup.CrewmateRoles, CustomRoles.Colorist);
         SetupRoleOptions(9500, TabGroup.CrewmateRoles, CustomRoles.Mayor);
         MayorAdditionalVote = IntegerOptionItem.Create(9510, "MayorAdditionalVote", new(1, 99, 1), 3, TabGroup.CrewmateRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Mayor])

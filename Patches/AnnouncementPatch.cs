@@ -48,7 +48,24 @@ public class ModNewsHistory
         if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.English)
         {
             {
-                // TOHRRE v4.0.6
+                // TOHX v4.1.0
+                var news = new ModNews
+                {
+                    Number = 100007,
+                    Title = "TownOfHost Extreme v4.1.0",
+                    SubTitle = "\r★★ New Roles and Fixes! ★★",
+                    ShortTitle = "TOHX v4.1.0",
+                    Text = "<size=150%>Welcome to TownOfHost Extreme v4.1.0.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                        + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
+                        //+ "\n【Changes】\n - Rebrand to TownOfHost Extreme"
+                        + "\n【Added】\n - Role: Spy\n\r - Role: Colorist\n\r"
+                        + "\n【Fixes】\n - Fixed lag issues\n\r - Fixed missing task bar in game",
+                    Date = "2023-10-21T00:00:00Z"
+                };
+                AllModNews.Add(news);
+            }
+            {
+                // TOHX v4.0.6
                 var news = new ModNews
                 {
                     Number = 100006,
@@ -57,10 +74,10 @@ public class ModNewsHistory
                     ShortTitle = "TOHX v4.0.6",
                     Text = "<size=150%>Welcome to TownOfHost Extreme v4.0.6.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
-                        + "\n【Changes】\n - Rebrand to TownOfHost Extreme"
+                        + "\n【Changes】\n - Rebrand to TownOfHost Extreme\r\n"
                         + "\n【Added】\n - Added back Speed Booster\n\r - Added back Flash\n\r"
                         + "\n【Fixes】\n - Fixed Manager Hide Votes being casted to an integer\n\r",
-                    Date = "2023-10-20T00:00:00Z"
+                    Date = "2023-10-21T00:00:00Z"
                 };
                 AllModNews.Add(news);
             }
