@@ -3,7 +3,7 @@
 
 <br>
 
-<img align="left" alt="Cover" src="Resources/Background/menu.jpg" width="528" height="320" /> 
+<img align="left" alt="Cover" src="Resources/Background/menu.jpg" width="490" height="320" /> 
 
 <p align="right">
   
@@ -16,8 +16,7 @@
 <p align="center">
 
 <center>
-<a href="https://discord.gg/9YdSgkF7yC" target="_blank"><img src="https://img.shields.io/badge/Discord%20-%231DA1F2.svg?&style=for-the-badge&logo=discord&logoColor=white&color=5662f6"/></a><br>
-<a href="https://github.com/JustMeDark/TownOfHostReReEdited/releases/latest" target="_blank"><img src="https://img.shields.io/badge/Latest Version%20-%231DA1F2.svg?&style=for-the-badge&logo=github&logoColor=white&color=181717"/></a>
+<a href="https://discord.gg/9YdSgkF7yC" target="_blank"><img src="https://img.shields.io/badge/Discord%20-%231DA1F2.svg?&style=for-the-badge&logo=discord&logoColor=white&color=5662f6"/></a><br> <a href="https://github.com/JustMeDark/TownOfHostReReEdited/releases/latest" target="_blank"><img src="https://img.shields.io/badge/Latest Version%20-%231DA1F2.svg?&style=for-the-badge&logo=github&logoColor=white&color=181717"/></a>
 </center>
 
 
