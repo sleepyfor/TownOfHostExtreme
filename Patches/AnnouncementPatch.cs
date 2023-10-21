@@ -53,12 +53,12 @@ public class ModNewsHistory
                 {
                     Number = 100006,
                     Title = "TownOfHost ReReEdited v4.0.6",
-                    SubTitle = "★★★★Public lobbies!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.6",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.6.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ Fixes! ★★",
+                    ShortTitle = "TOHRRE v4.0.6",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.6.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Added】\n - Added back Speed Booster\n\r - Added back Flash\n\r"
-                    + "\n【Fixes】\n - Fixed Manager Hide Votes being casted to an integer\n\r",
+                        + "\n【Fixes】\n - Fixed Manager Hide Votes being casted to an integer\n\r",
                     Date = "2023-10-20T00:00:00Z"
                 };
                 AllModNews.Add(news);
@@ -69,9 +69,9 @@ public class ModNewsHistory
                 {
                     Number = 100005,
                     Title = "TownOfHostReReEdited v4.0.5",
-                    SubTitle = "★★★★Public lobbies!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.5",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.5.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ Public lobbies! ★★",
+                    ShortTitle = "TOHRRE v4.0.5",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.5.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Added】\n - Added an option for manager to hide votes\r\n"
                         + "\n【Fixes】\n - Public lobbies are now supported\n\r - Fixed Manager votes not showing\n\r",
@@ -85,9 +85,9 @@ public class ModNewsHistory
                 {
                     Number = 100004,
                     Title = "TownOfHostReReEdited v4.0.4",
-                    SubTitle = "★★★★Changes and Fixes!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.4",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.4.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ Changes and Fixes! ★★",
+                    ShortTitle = "TOHRRE v4.0.4",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.4.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Changes】\n - New image on the main menu\n\r - All buttons on main menu are color matched to the background now\n\r"
                         + "\n【Removed】\n - Removed the website and patreon buttons\n\r",
@@ -101,9 +101,9 @@ public class ModNewsHistory
                 {
                     Number = 100003,
                     Title = "TownOfHostReReEdited v4.0.3",
-                    SubTitle = "★★★★More Fixes!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.3",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.3.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ More Fixes! ★★",
+                    ShortTitle = "TOHRRE v4.0.3",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.3.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Fixes】\n - Fixed Manager having no colour\n\r - Fixed Karen not existing\n\r - Fixed Manager being a madmate\n\r"
                         + "\n【Changes】\n - Changed github and discord links\n\r",
@@ -117,9 +117,9 @@ public class ModNewsHistory
                 {
                     Number = 100002,
                     Title = "TownOfHostReReEdited v4.0.2",
-                    SubTitle = "★★★★Fixes!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.2",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.2.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ Fixes! ★★",
+                    ShortTitle = "TOHRRE v4.0.2",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.2.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Fixes】\n - Fixed captain having no colour\n\r - Fixed missing strings\n\r"
                         + "\n【Changes】\n - Changed the edited text\n\r - Changed the mod colour\n\r",
@@ -133,9 +133,9 @@ public class ModNewsHistory
                 {
                     Number = 100001,
                     Title = "TownOfHostReReEdited v4.0.1",
-                    SubTitle = "★★★★The Start!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.1",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.1.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ Aye Aye Captain! ★★",
+                    ShortTitle = "TOHRRE v4.0.1",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.1.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Added】\n - New role: Captain (From Dark Roles)\n\r",
                     Date = "2023-9-15T00:00:00Z"
@@ -148,9 +148,9 @@ public class ModNewsHistory
                 {
                     Number = 100000,
                     Title = "TownOfHostReReEdited v4.0.0",
-                    SubTitle = "★★★★The Start!★★★★",
-                    ShortTitle = "★TOHRRE v4.0.0",
-                    Text = "<size=150%>Welcome to TOHRRE v4.0.0.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    SubTitle = "\r★★ The Start! ★★",
+                    ShortTitle = "TOHRRE v4.0.0",
+                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.0.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0/TOH 4.1.2\r\n"
                         + "\n【Added】\n - New role: Karen (From Dark Roles)\n\r - New role: Manager (From DarkRoles)\n\r",
                     Date = "2023-9-9T00:00:00Z"
