@@ -36,6 +36,8 @@ internal static class CustomRolesHelper
                 CustomRoles.BountyHunter => CustomRoles.Shapeshifter,
                 CustomRoles.Trickster => CustomRoles.Impostor,
                 CustomRoles.Witch => CustomRoles.Impostor,
+                CustomRoles.Spy => CustomRoles.Engineer,
+                CustomRoles.Colorist => CustomRoles.Engineer,
                 CustomRoles.ShapeMaster => CustomRoles.Shapeshifter,
                 CustomRoles.ShapeshifterTOHE => CustomRoles.Shapeshifter,
                 CustomRoles.Chronomancer => CustomRoles.Impostor,

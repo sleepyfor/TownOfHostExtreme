@@ -463,6 +463,8 @@ public class PlayerGameOptionsSender : GameOptionsSender
         {
             switch (subRole)
             {
+                case CustomRoles.Colorist:
+                case CustomRoles.Spy:
                 case CustomRoles.Watcher:
                     opt.SetBool(BoolOptionNames.AnonymousVotes, false);
                     break;

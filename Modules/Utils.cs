@@ -233,7 +233,7 @@ public static class Utils
     }
     public static bool KillFlashCheck(PlayerControl killer, PlayerControl target, PlayerControl seer)
     {
-        if (seer.Is(CustomRoles.GM) || seer.Is(CustomRoles.Seer)) return true;
+        if (seer.Is(CustomRoles.GM) || seer.Is(CustomRoles.Seer) || seer.Is(CustomRoles.Spy)) return true;
         if (seer.Data.IsDead || killer == seer || target == seer) return false;
         if (seer.Is(CustomRoles.EvilTracker)) return EvilTracker.KillFlashCheck(killer, target);
         return false;
