@@ -354,7 +354,10 @@ public class TaskState
                 else player.Notify(string.Format(Translator.GetString("SpeedBoosterTaskDone"), Main.AllPlayerSpeed[player.PlayerId].ToString("0.0#####")));
             }
 
-
+            if (player.Is(CustomRoles.Flashman) && player.IsAlive())
+            {
+                Main.AllPlayerSpeed[player.PlayerId] += Options.FlashmanSpeed.GetFloat();
+            }
 
             /*
             //叛徒修理搞破坏
