@@ -18,7 +18,7 @@ class Webhook
         Dictionary<string, string> strs = new()
         {
             { "content", text },
-            { "username", "TOHE-Debugger" },
+            { "username", "TOHX-Debugger" },
             { "avatar_url", "https://npm.elemecdn.com/hexo-static@1.0.1/img/avatar.webp" }
         };
         TaskAwaiter<HttpResponseMessage> awaiter = httpClient.PostAsync(

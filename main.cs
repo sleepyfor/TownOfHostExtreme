@@ -36,8 +36,8 @@ public class Main : BasePlugin
     public static readonly string MainMenuText = " ";
 
     public const string PluginGuid = "com.karped1em.townofhostedited";
-    public const string PluginVersion = "4.0.6";
-    public const string PluginDisplayVersion = "4.0.6";
+    public const string PluginVersion = "4.1.0";
+    public const string PluginDisplayVersion = "4.1.0";
     public static readonly string SupportedVersionAU = "2023.7.11";
     public const bool Canary = false;
 
@@ -264,7 +264,7 @@ public class Main : BasePlugin
         VersionCheat = Config.Bind("Client Options", "VersionCheat", false);
         GodMode = Config.Bind("Client Options", "GodMode", false);
 
-        Logger = BepInEx.Logging.Logger.CreateLogSource("TOHE");
+        Logger = BepInEx.Logging.Logger.CreateLogSource("TOHX");
         TOHX.Logger.Enable();
         TOHX.Logger.Disable("NotifyRoles");
         TOHX.Logger.Disable("SwitchSystem");

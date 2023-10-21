@@ -1501,9 +1501,9 @@ public static class Options
         TextOptionItem.Create(100009, "RoleType.CrewPower", TabGroup.CrewmateRoles)
             .SetGameMode(CustomGameMode.Standard)
             .SetColor(new Color32(140, 255, 255, byte.MaxValue));
+        Captain.SetupCustomOption();
         CopyCat.SetupCustomOption();
         SetupRoleOptions(9100, TabGroup.CrewmateRoles, CustomRoles.Dictator);
-        Captain.SetupCustomOption();
         SetupRoleOptions(9200, TabGroup.CrewmateRoles, CustomRoles.Guardian);
         GuardianTasks = OverrideTasksData.Create(9210, TabGroup.CrewmateRoles, CustomRoles.Guardian);
         Judge.SetupCustomOption();

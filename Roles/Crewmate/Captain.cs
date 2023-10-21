@@ -11,7 +11,7 @@ namespace TOHX.Roles.Crewmate
         public static OptionItem CaptainAbilityUses;
         public static OptionItem CaptainDies;
         public static int AbilityUses;
-        public static int Id = 900500;
+        public static int Id = 900600;
 
         public static void SetupCustomOption()
         {
