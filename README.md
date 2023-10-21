@@ -3,7 +3,7 @@
 
 <br>
 
-<img align="left" alt="Cover" src="Resources/Background/menu.jpg" width="416" height="234" /> 
+<img align="left" alt="Cover" src="Resources/Background/menu.jpg" width="400" height="225" /> 
 
 <p align="right">
   
