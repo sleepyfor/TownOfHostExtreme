@@ -16,7 +16,7 @@ using UnityEngine;
 [assembly: AssemblyVersion(TOHE.Main.PluginVersion)]
 namespace TOHE;
 
-[BepInPlugin(PluginGuid, "TOHE", PluginVersion)]
+[BepInPlugin(PluginGuid, "TOHX", PluginVersion)]
 [BepInIncompatibility("jp.ykundesu.supernewroles")]
 [BepInProcess("Among Us.exe")]
 public class Main : BasePlugin
@@ -24,8 +24,8 @@ public class Main : BasePlugin
     // == プログラム設定 / Program Config ==
     public const string OriginalForkId = "OriginalTOH";
 
-    public static readonly string ModName = "Town Of Host ReReEdited";
-    public static readonly string ForkId = "TOHRRE";
+    public static readonly string ModName = "Town Of Host Extreme";
+    public static readonly string ForkId = "TOHX";
     public static readonly string ModColor = "#C092C0";
     public static readonly bool AllowPublicRoom = true;
 

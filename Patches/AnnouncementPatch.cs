@@ -52,11 +52,12 @@ public class ModNewsHistory
                 var news = new ModNews
                 {
                     Number = 100006,
-                    Title = "TownOfHost ReReEdited v4.0.6",
+                    Title = "TownOfHost Extreme v4.0.6",
                     SubTitle = "\r★★ Fixes! ★★",
-                    ShortTitle = "TOHRRE v4.0.6",
-                    Text = "<size=150%>Welcome to TOH ReReEdited v4.0.6.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
+                    ShortTitle = "TOHX v4.0.6",
+                    Text = "<size=150%>Welcome to TownOfHost Extreme v4.0.6.</size>\n\n<size=125%>Support for Among Us v2023.7.11 and v2023.7.12</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
+                        + "\n【Changes】\n - Rebrand to TownOfHost Extreme"
                         + "\n【Added】\n - Added back Speed Booster\n\r - Added back Flash\n\r"
                         + "\n【Fixes】\n - Fixed Manager Hide Votes being casted to an integer\n\r",
                     Date = "2023-10-20T00:00:00Z"

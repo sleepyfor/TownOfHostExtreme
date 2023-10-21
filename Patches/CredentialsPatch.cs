@@ -83,7 +83,7 @@ public static class Credentials
                 Main.credentialsText += $"\n{additionalCredentials}";
             } */
 
-            Main.credentialsText += $"\r\n<color={Main.ModColor}>Edited by</color> <color=#ffffff>JustMeDark</color>";
+            Main.credentialsText += $"\r\n<color={Main.ModColor}>By</color> <color=#ffffff>JustMeDark</color>";
 #endif
 
             if (Main.IsAprilFools)

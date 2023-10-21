@@ -13,8 +13,9 @@ namespace TOHE.Patches
         private static string region = "";
         public static void Prefix([HarmonyArgument(0)] Activity activity)
         {
-            var details = $"TOHRRE v{Main.PluginDisplayVersion}";
+            var details = $"TOHX v{Main.PluginDisplayVersion}";
             activity.Details = details;
+            activity.Name = "TOHX";
 
             try
             {
@@ -34,14 +35,14 @@ namespace TOHE.Patches
 
                         if (lobbycode != "" && region != "")
                         {
-                            details = $"TOHRRE - {lobbycode} ({region})";
+                            details = $"TOHX - {lobbycode} ({region})";
                         }
 
                         activity.Details = details;
                     }
                     else
                     {
-                        details = $"TOHRRE v{Main.PluginDisplayVersion}";
+                        details = $"TOHX v{Main.PluginDisplayVersion}";
                     }
                 }
             }
@@ -50,7 +51,7 @@ namespace TOHE.Patches
             {
                 Logger.Error("Error in updating discord rpc", "DiscordPatch");
                 Logger.Exception(ex, "DiscordPatch");
-                details = $"TOHRRE v{Main.PluginDisplayVersion}";
+                details = $"TOHX v{Main.PluginDisplayVersion}";
                 activity.Details = details;
             }
         }
