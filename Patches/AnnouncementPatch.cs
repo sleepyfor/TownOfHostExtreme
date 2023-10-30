@@ -48,6 +48,21 @@ public class ModNewsHistory
         if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.English)
         {
             {
+                // TOHX v4.1.1
+                var news = new ModNews
+                {
+                    Number = 100008,
+                    Title = "TownOfHost Extreme v4.1.1",
+                    SubTitle = "\r★★ Fungle Is Here!! ★★",
+                    ShortTitle = "TOHX v4.1.1",
+                    Text = "<size=150%>Welcome to TownOfHost Extreme v4.1.1.</size>\n\n<size=125%>Support for Among Us 2023.10.24</size>\n"
+                        + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
+                        + "\n【Changes】\n - Updated: TOHX now supports 2023.10.24!\n\r",
+                    Date = "2023-10-21T00:00:00Z"
+                };
+                AllModNews.Add(news);
+            }
+            {
                 // TOHX v4.1.0
                 var news = new ModNews
                 {
