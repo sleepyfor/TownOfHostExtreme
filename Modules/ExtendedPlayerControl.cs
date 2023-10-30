@@ -677,6 +677,7 @@ static class ExtendedPlayerControl
             CustomRoles.Sidekick => Jackal.CanUseSabotageSK.GetBool(),
             CustomRoles.Traitor => Traitor.CanUseSabotage.GetBool(),
             CustomRoles.Parasite => true,
+            CustomRoles.Troll => true,
             CustomRoles.Glitch => true,
             CustomRoles.PotionMaster => true,
             CustomRoles.Refugee => true,

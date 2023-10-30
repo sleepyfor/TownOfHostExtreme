@@ -306,6 +306,11 @@ public class PlayerGameOptionsSender : GameOptionsSender
                 AURoleOptions.EngineerInVentMaxTime = 0f;
                 opt.SetVision(Options.JesterHasImpostorVision.GetBool());
                 break;
+            case CustomRoles.Troll:
+                AURoleOptions.EngineerCooldown = 0f;
+                AURoleOptions.EngineerInVentMaxTime = 0f;
+                opt.SetVision(true);
+                break;
             case CustomRoles.Doomsayer:
                 opt.SetVision(Doomsayer.ImpostorVision.GetBool());
                 break;
@@ -319,6 +324,7 @@ public class PlayerGameOptionsSender : GameOptionsSender
             case CustomRoles.Shade:
             case CustomRoles.HexMaster:
             case CustomRoles.Parasite:
+            case CustomRoles.Troll:
             case CustomRoles.Occultist:
             case CustomRoles.Agitater:
                 opt.SetVision(true);

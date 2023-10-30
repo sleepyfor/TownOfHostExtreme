@@ -444,6 +444,7 @@ public static class Amnesiac
         if (player.Is(CustomRoles.Pelican) && target.Is(CustomRoles.Pelican)) return true;
         if (player.Is(CustomRoles.Refugee) && target.Is(CustomRoles.Refugee)) return true;
         if (player.Is(CustomRoles.Parasite) && target.Is(CustomRoles.Parasite)) return true;
+        if (player.Is(CustomRoles.Troll) && target.Is(CustomRoles.Troll)) return true;
         if (player.Is(CustomRoles.NSerialKiller) && target.Is(CustomRoles.NSerialKiller)) return true;
         if (player.Is(CustomRoles.Pickpocket) && target.Is(CustomRoles.Pickpocket)) return true;
         if (player.Is(CustomRoles.Traitor) && target.Is(CustomRoles.Traitor)) return true;

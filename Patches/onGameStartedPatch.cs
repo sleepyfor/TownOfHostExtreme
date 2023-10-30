@@ -587,6 +587,9 @@ internal class SelectRolesPatch
                     case CustomRoles.Glitch:
                         Glitch.Add(pc.PlayerId);
                         break;
+                    case CustomRoles.Captain:
+                        Captain.Add(pc.PlayerId);
+                        break;
                     case CustomRoles.CopyCat:
                         CopyCat.Add(pc.PlayerId);
                         break;

@@ -36,13 +36,13 @@ public class Main : BasePlugin
     public static readonly string MainMenuText = " ";
 
     public const string PluginGuid = "com.karped1em.townofhostedited";
-    public const string PluginVersion = "4.1.1";
-    public const string PluginDisplayVersion = "4.1.1";
+    public const string PluginVersion = "4.2.0";
+    public const string PluginDisplayVersion = "4.2.0";
     public static readonly string SupportedVersionAU = "2023.10.24";
     public const bool Canary = false;
 
     public static readonly bool ShowGitHubButton = true;
-    public static readonly string GitHubInviteUrl = "https://github.com/JustMeDark/TownOfHostReReEdited";
+    public static readonly string GitHubInviteUrl = "https://github.com/JustMeDark/TownOfHostExtreme";
 
     public static readonly bool ShowDiscordButton = true;
     public static readonly string DiscordInviteUrl = "https://discord.gg/VMDfnzdJYV";
@@ -433,6 +433,7 @@ public class Main : BasePlugin
                 {CustomRoles.BloodKnight, "#630000"},
                 {CustomRoles.Juggernaut, "#A41342"},
                 {CustomRoles.Parasite, "#ff1919"},
+                {CustomRoles.Troll, "#ff1919"},
                 {CustomRoles.Karen, "#ff1919"},
                 {CustomRoles.Manager, "#ff1919"},
                 {CustomRoles.Crewpostor, "#ff1919"},
@@ -651,6 +652,7 @@ public enum CustomRoles
     Swooper,
     Crewpostor,
     Parasite,
+    Troll,
     Disperser,
     Camouflager,
     Saboteur,

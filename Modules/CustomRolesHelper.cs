@@ -31,6 +31,7 @@ internal static class CustomRolesHelper
                 CustomRoles.Executioner => CustomRoles.Crewmate,
                 CustomRoles.Lawyer => CustomRoles.Crewmate,
                 CustomRoles.Karen => CustomRoles.Impostor,
+                CustomRoles.Troll => CustomRoles.Madmate,
                 CustomRoles.Manager => CustomRoles.Shapeshifter,
                 CustomRoles.Vampire => CustomRoles.Impostor,
                 CustomRoles.BountyHunter => CustomRoles.Shapeshifter,
@@ -253,6 +254,7 @@ internal static class CustomRolesHelper
             CustomRoles.Werewolf => RoleTypes.Impostor,
             CustomRoles.Maverick => RoleTypes.Impostor,
             CustomRoles.Parasite => RoleTypes.Impostor,
+            CustomRoles.Troll => RoleTypes.Engineer,
             CustomRoles.NWitch => RoleTypes.Impostor,
             CustomRoles.CovenLeader => RoleTypes.Impostor,
             CustomRoles.Necromancer => RoleTypes.Impostor,
@@ -548,6 +550,7 @@ internal static class CustomRolesHelper
             CustomRoles.Poisoner or
         //    CustomRoles.Sorcerer or
             CustomRoles.Parasite or
+            CustomRoles.Troll or
             CustomRoles.NSerialKiller or
             CustomRoles.Werewolf or
             CustomRoles.Banshee or
@@ -868,6 +871,7 @@ internal static class CustomRolesHelper
             CustomRoles.Crewpostor or
             CustomRoles.Convict or
             CustomRoles.Refugee or
+            CustomRoles.Troll or
             CustomRoles.Parasite;
     }
     public static bool IsNimbleNeutral(this CustomRoles role)
@@ -1540,7 +1544,8 @@ internal static class CustomRolesHelper
            CustomRoles.PlagueBearer => CountTypes.PlagueBearer,
            CustomRoles.Agitater => CountTypes.Agitater,
            CustomRoles.Parasite => CountTypes.Impostor,
-    //       CustomRoles.Sorcerer => CountTypes.Coven,
+           CustomRoles.Troll => CountTypes.Impostor,
+           //       CustomRoles.Sorcerer => CountTypes.Coven,
            CustomRoles.NSerialKiller => CountTypes.NSerialKiller,
            CustomRoles.Juggernaut => CountTypes.Juggernaut,
            CustomRoles.Jinx => CountTypes.Coven,

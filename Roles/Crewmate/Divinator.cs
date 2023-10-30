@@ -320,6 +320,7 @@ public static class Divinator
                 CustomRoles.Crewpostor or
                 CustomRoles.Marshall or
                 CustomRoles.Workaholic or
+                CustomRoles.Troll or 
                 CustomRoles.Phantom or
                 CustomRoles.Terrorist
                 => "Result29",

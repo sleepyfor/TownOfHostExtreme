@@ -79,10 +79,15 @@ class ExileControllerWrapUpPatch
                 }
             }
             foreach (var pc in Main.AllPlayerControls)
+            {
                 //判断小丑胜利 (EAC封禁名单成为小丑达成胜利条件无法胜利)
                 if (role == CustomRoles.Jester)
                     if (DecidedWinner) CustomWinnerHolder.ShiftWinnerAndSetWinner(CustomWinner.Jester);
                     else CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Jester);
+                if (role == CustomRoles.Troll)
+                    if (DecidedWinner) CustomWinnerHolder.ShiftWinnerAndSetWinner(CustomWinner.Impostor);
+                    else CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Impostor);
+            }
                     CustomWinnerHolder.WinnerIds.Add(exiled.PlayerId);
                     DecidedWinner = true;
 

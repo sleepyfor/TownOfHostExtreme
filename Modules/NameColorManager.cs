@@ -70,6 +70,7 @@ public static class NameColorManager
         if (seer.Is(CustomRoles.Infectious) && (target.Is(CustomRoles.Infectious))) color = Main.roleColors[CustomRoles.Infectious];
         if (seer.Is(CustomRoles.Virus) && (target.Is(CustomRoles.Virus))) color = Main.roleColors[CustomRoles.Virus];
         if (seer.Is(CustomRoles.Parasite) && (target.Is(CustomRoles.Parasite))) color = Main.roleColors[CustomRoles.Parasite];
+        if (seer.Is(CustomRoles.Troll) && (target.Is(CustomRoles.Troll))) color = Main.roleColors[CustomRoles.Troll];
         if (seer.Is(CustomRoles.Traitor) && (target.Is(CustomRoles.Traitor))) color = Main.roleColors[CustomRoles.Traitor];
         if (seer.Is(CustomRoles.DarkHide) && (target.Is(CustomRoles.DarkHide))) color = Main.roleColors[CustomRoles.DarkHide];
         if (seer.Is(CustomRoles.Pickpocket) && (target.Is(CustomRoles.Pickpocket))) color = Main.roleColors[CustomRoles.Pickpocket];
@@ -95,6 +96,7 @@ public static class NameColorManager
         if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Madmate) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Admired) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Bait];
         if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Parasite) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
+        if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Troll) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Crewpostor) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Convict) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Necroview) && target.Is(CustomRoles.Refugee) && target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
@@ -112,6 +114,7 @@ public static class NameColorManager
         // Visionary
         if (seer.Is(CustomRoles.Visionary) && target.Is(CustomRoleTypes.Impostor) && !target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Visionary) && target.Is(CustomRoles.Madmate) && !target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
+        if (seer.Is(CustomRoles.Visionary) && target.Is(CustomRoles.Troll) && !target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Visionary) && target.Is(CustomRoles.Admired) && !target.Data.IsDead) color = Main.roleColors[CustomRoles.Bait];
         if (seer.Is(CustomRoles.Visionary) && target.Is(CustomRoles.Parasite) && !target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];
         if (seer.Is(CustomRoles.Visionary) && target.Is(CustomRoles.Crewpostor) && !target.Data.IsDead) color = Main.roleColors[CustomRoles.Impostor];

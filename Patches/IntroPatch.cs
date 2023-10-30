@@ -126,7 +126,15 @@ class BeginCrewmatePatch
             __instance.overlayHandle.color = Palette.ImpostorRed;
             return false;
         }
-         else if (PlayerControl.LocalPlayer.Is(CustomRoles.Crewpostor))
+        else if (PlayerControl.LocalPlayer.Is(CustomRoles.Troll))
+        {
+            teamToDisplay = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
+            teamToDisplay.Add(PlayerControl.LocalPlayer);
+            __instance.BeginImpostor(teamToDisplay);
+            __instance.overlayHandle.color = Palette.ImpostorRed;
+            return false;
+        }
+        else if (PlayerControl.LocalPlayer.Is(CustomRoles.Crewpostor))
         {
             teamToDisplay = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             teamToDisplay.Add(PlayerControl.LocalPlayer);
@@ -298,6 +306,15 @@ class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("SubText.Madmate");
         }
 
+        if (PlayerControl.LocalPlayer.Is(CustomRoles.Troll))
+        {
+            __instance.TeamTitle.text = GetString("TeamMadmate");
+            __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(255, 25, 25, byte.MaxValue);
+            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
+            __instance.ImpostorText.gameObject.SetActive(true);
+            __instance.ImpostorText.text = GetString("SubText.Madmate");
+        }
+
         if (PlayerControl.LocalPlayer.Is(CustomRoles.Parasite))
         {
             __instance.TeamTitle.text = GetString("TeamMadmate");
@@ -396,6 +413,13 @@ class BeginImpostorPatch
             return true;
         }
         else if (PlayerControl.LocalPlayer.Is(CustomRoles.Parasite))
+        {
+            yourTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
+            yourTeam.Add(PlayerControl.LocalPlayer);
+            __instance.overlayHandle.color = Palette.ImpostorRed;
+            return true;
+        }
+        else if (PlayerControl.LocalPlayer.Is(CustomRoles.Troll))
         {
             yourTeam = new Il2CppSystem.Collections.Generic.List<PlayerControl>();
             yourTeam.Add(PlayerControl.LocalPlayer);

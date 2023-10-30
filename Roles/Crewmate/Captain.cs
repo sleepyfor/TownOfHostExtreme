@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Epic.OnlineServices;
 
 namespace TOHX.Roles.Crewmate
 {
     public static class Captain
     {
+        public static Dictionary<byte, int> AbilityUses = new();
+        public static List<byte> playerIdList = new();
         public static OptionItem CaptainAbilityUses;
         public static OptionItem CaptainDies;
-        public static int AbilityUses;
+        public static bool IsEnable = false;
         public static int Id = 900600;
 
         public static void SetupCustomOption()
@@ -22,7 +25,16 @@ namespace TOHX.Roles.Crewmate
 
         public static void Init()
         {
-            AbilityUses = CaptainAbilityUses.GetValue();
+            playerIdList = new();
+            AbilityUses = new();
+            IsEnable = false;
+        }
+
+        public static void Add(byte playerId)
+        {
+            playerIdList.Add(playerId);
+            AbilityUses.Add(playerId, CaptainAbilityUses.GetInt());
+            IsEnable = true;
         }
         public static string GetUses() => Utils.ColorString(Utils.GetRoleColor(CustomRoles.Sheriff).ShadeColor(0.25f), $"{AbilityUses}");
 
