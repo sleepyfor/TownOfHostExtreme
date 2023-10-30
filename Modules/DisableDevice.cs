@@ -13,18 +13,21 @@ class DisableDevice
     private static int frame = 0;
     public static readonly Dictionary<string, Vector2> DevicePos = new()
     {
-        ["SkeldAdmin"] = new Vector2 (3.48f, -8.62f),
+         ["SkeldAdmin"] = new Vector2 (3.48f, -8.62f),
         ["SkeldCamera"] = new Vector2 (-13.06f, -2.45f),
         ["MiraHQAdmin"] = new Vector2 (21.02f, 19.09f),
         ["MiraHQDoorLog"] = new Vector2 (16.22f, 5.82f),
-        ["PolusLeftAdmin"] = new Vector2 (22.80f, -21.52f),
-        ["PolusRightAdmin"] = new Vector2 (24.66f, -21.52f),
-        ["PolusCamera"] = new Vector2 (2.96f, -12.74f),
-        ["PolusVital"] = new Vector2 (26.70f, -15.94f),
-        ["AirshipCockpitAdmin"] = new Vector2 (-22.32f, 0.91f),
-        ["AirshipRecordsAdmin"] = new Vector2 (19.89f, 12.60f),
-        ["AirshipCamera"] = new Vector2 (8.10f, -9.63f),
-        ["AirshipVital"] = new Vector2 (25.24f, -7.94f)
+        ["PolusLeftAdmin"] = new Vector2(22.80f, -21.52f),
+        ["PolusRightAdmin"] = new Vector2(24.66f, -21.52f),
+        ["PolusCamera"] = new Vector2(2.96f, -12.74f),
+        ["PolusVital"] = new Vector2(26.70f, -15.94f),
+        ["AirshipCockpitAdmin"] = new Vector2(-22.32f, 0.91f),
+        ["AirshipRecordsAdmin"] = new Vector2(19.89f, 12.60f),
+        ["AirshipCamera"] = new Vector2(8.10f, -9.63f),
+        ["AirshipVital"] = new Vector2(25.24f, -7.94f),
+        ["AirshipVital"] = new Vector2(25.24f, -7.94f),
+        ["FungleCamera"] = new Vector2(6.20f, 0.10f),
+        ["FungleVital"] = new Vector2(-2.50f, -9.80f)
     };
     public static float UsableDistance()
     {
@@ -36,6 +39,7 @@ class DisableDevice
             MapNames.Polus => 1.8f,
             //MapNames.Dleks => 1.5f,
             MapNames.Airship => 1.8f,
+            MapNames.Fungle => 1.8f,
             _ => 0.0f
         };
     }
@@ -94,6 +98,12 @@ class DisableDevice
                                 doComms |= Vector2.Distance(PlayerPos, DevicePos["AirshipCamera"]) <= UsableDistance();
                             if (Options.DisableAirshipVital.GetBool())
                                 doComms |= Vector2.Distance(PlayerPos, DevicePos["AirshipVital"]) <= UsableDistance();
+                            break;
+                        case 5:
+                            if (Options.DisableFungleBinoculars.GetBool())
+                                doComms |= Vector2.Distance(PlayerPos, DevicePos["FungleCamera"]) <= UsableDistance();
+                            if (Options.DisableFungleVital.GetBool())
+                                doComms |= Vector2.Distance(PlayerPos, DevicePos["FungleVital"]) <= UsableDistance();
                             break;
                     }
                 }
@@ -175,6 +185,12 @@ public class RemoveDisableDevicesPatch
                     consoles.DoIf(x => x.name == "task_cams", x => x.gameObject.GetComponent<BoxCollider2D>().enabled = false || ignore);
                 if (Options.DisableAirshipVital.GetBool())
                     consoles.DoIf(x => x.name == "panel_vitals", x => x.gameObject.GetComponent<CircleCollider2D>().enabled = false || ignore);
+                break;
+            case 5:
+                if (Options.DisableFungleBinoculars.GetBool())
+                    consoles.DoIf(x => x.name == "BinocularsSecurityConsole", x => x.gameObject.GetComponent<PolygonCollider2D>().enabled = false || ignore);
+                if (Options.DisableFungleVital.GetBool())
+                    consoles.DoIf(x => x.name == "VitalsConsole", x => x.gameObject.GetComponent<BoxCollider2D>().enabled = false || ignore);
                 break;
         }
     }

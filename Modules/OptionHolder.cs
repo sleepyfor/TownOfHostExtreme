@@ -624,6 +624,9 @@ public static class Options
     public static OptionItem DisableAirshipRecordsAdmin;
     public static OptionItem DisableAirshipCamera;
     public static OptionItem DisableAirshipVital;
+    public static OptionItem DisableFungleDevices;
+    public static OptionItem DisableFungleBinoculars;
+    public static OptionItem DisableFungleVital;
     public static OptionItem DisableDevicesIgnoreConditions;
     public static OptionItem DisableDevicesIgnoreImpostors;
     public static OptionItem DisableDevicesIgnoreNeutrals;
@@ -641,6 +644,7 @@ public static class Options
     public static OptionItem MiraChance;
     public static OptionItem PolusChance;
     public static OptionItem AirshipChance;
+    public static OptionItem FungleChance;
     public static OptionItem UseMoreRandomMapSelection;
     public static OptionItem AddedDleks;
     public static OptionItem RandomSpawn;
@@ -2390,6 +2394,9 @@ public static class Options
         AirshipChance = IntegerOptionItem.Create(19913, "AirshipChance", new(0, 100, 5), 10, TabGroup.GameSettings, false)
             .SetParent(RandomMapsMode)
             .SetValueFormat(OptionFormat.Percent);
+        FungleChance = IntegerOptionItem.Create(19914, "FungleChance", new(0, 100, 5), 10, TabGroup.GameSettings, false)
+           .SetParent(RandomMapsMode)
+           .SetValueFormat(OptionFormat.Percent);
         UseMoreRandomMapSelection = BooleanOptionItem.Create(19920, "UseMoreRandomMapSelection", false, TabGroup.GameSettings, false)
             .SetParent(RandomMapsMode)
             .SetValueFormat(OptionFormat.Percent);
@@ -2590,6 +2597,15 @@ public static class Options
             .SetGameMode(CustomGameMode.Standard);
         DisableAirshipVital = BooleanOptionItem.Create(22919, "DisableAirshipVital", false, TabGroup.GameSettings, false)
             .SetParent(DisableAirshipDevices)
+            .SetGameMode(CustomGameMode.Standard);
+        DisableFungleDevices = BooleanOptionItem.Create(22920, "DisableFungleDevices", false, TabGroup.GameSettings, false)
+            .SetParent(DisableDevices)
+            .SetGameMode(CustomGameMode.Standard);
+        DisableFungleBinoculars = BooleanOptionItem.Create(22921, "DisableFungleBinoculars", false, TabGroup.GameSettings, false)
+            .SetParent(DisableFungleDevices)
+            .SetGameMode(CustomGameMode.Standard);
+        DisableFungleVital = BooleanOptionItem.Create(22922, "DisableFungleVital", false, TabGroup.GameSettings, false)
+            .SetParent(DisableFungleDevices)
             .SetGameMode(CustomGameMode.Standard);
         DisableDevicesIgnoreConditions = BooleanOptionItem.Create(22920, "IgnoreConditions", false, TabGroup.GameSettings, false)
             .SetParent(DisableDevices)

@@ -93,6 +93,7 @@ public static class Pelican
             1 => new Vector2(-11.4f, 8.2f), // MIRA HQ
             2 => new Vector2(42.6f, -19.9f), // Polus
             4 => new Vector2(-16.8f, -6.2f), // Airship
+            5 => new Vector2(9.6f, 23.2f),
             _ => throw new System.NotImplementedException(),
         };
     }
@@ -116,7 +117,7 @@ public static class Pelican
         originalSpeed.Remove(target.PlayerId);
         originalSpeed.Add(target.PlayerId, Main.AllPlayerSpeed[target.PlayerId]);
 
-        target.RpcTeleport(new Vector2 (GetBlackRoomPS().x, GetBlackRoomPS().y));
+        target.RpcTeleport(new Vector2(GetBlackRoomPS().x, GetBlackRoomPS().y));
         Main.AllPlayerSpeed[target.PlayerId] = 0.5f;
         ReportDeadBodyPatch.CanReport[target.PlayerId] = false;
         target.MarkDirtySettings();
@@ -193,7 +194,7 @@ public static class Pelican
                 var pos = GetBlackRoomPS();
                 var dis = Vector2.Distance(pos, target.transform.position);
                 if (dis < 1f) continue;
-                target.RpcTeleport(new Vector2 (pos.x, pos.y));
+                target.RpcTeleport(pos);
                 Utils.NotifyRoles(SpecifySeer: target);
             }
         }

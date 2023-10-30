@@ -52,6 +52,17 @@ class CheckProtectPatch
         return true;
     }
 }
+[HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CmdCheckMurder))] // Modded
+class CmdCheckMurderPatch
+{
+    public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] PlayerControl target)
+    {
+        Logger.Info($"{__instance.GetNameWithRole()} => {target.GetNameWithRole()}", "CmdCheckMurder");
+
+        if (!AmongUsClient.Instance.AmHost) return true;
+        return CheckMurderPatch.Prefix(__instance, target);
+    }
+}
 [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CheckMurder))]
 class CheckMurderPatch
 {
@@ -84,7 +95,7 @@ class CheckMurderPatch
 
         //不正キル防止処理
         if (target.Data == null || //PlayerDataがnullじゃないか確認
-            target.inVent || target.inMovingPlat //targetの状態をチェック
+            target.inVent || target.inMovingPlat || target.MyPhysics.Animations.IsPlayingEnterVentAnimation() || target.MyPhysics.Animations.IsPlayingAnyLadderAnimation()//targetの状態をチェック
         )
         {
             Logger.Info("目标处于无法被击杀状态，击杀被取消", "CheckMurder");
@@ -144,8 +155,8 @@ class CheckMurderPatch
                 (killer.GetCustomRole().IsNeutral() && Options.NeutralCanKillFragile.GetBool()) ||
                 (killer.GetCustomRole().IsCrewmate() && Options.CrewCanKillFragile.GetBool()))
             {
-                if (Options.FragileKillerLunge.GetBool()) killer.RpcMurderPlayer(target);
-                else target.RpcMurderPlayer(target);
+                if (Options.FragileKillerLunge.GetBool()) killer.RpcMurderPlayerV3(target);
+                else target.RpcMurderPlayerV3(target);
                 Main.PlayerStates[target.PlayerId].deathReason = PlayerState.DeathReason.Shattered;
                 target.SetRealKiller(target);
                 killer.ResetKillCooldown();
@@ -635,7 +646,7 @@ class CheckMurderPatch
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
 
                     target.NetTransform.SnapTo(location);
-                    killer.MurderPlayer(target);
+                    killer.MurderPlayer(target, MurderResultFlags.Succeeded);
 
                     if (target.Is(CustomRoles.Avanger))
                     {
@@ -1161,10 +1172,13 @@ class MurderPlayerPatch
 {
     public static void Prefix(PlayerControl __instance, [HarmonyArgument(0)] PlayerControl target)
     {
-        Logger.Info($"{__instance.GetNameWithRole()} => {target.GetNameWithRole()}{(target.protectedByGuardian ? "(Protected)" : "")}", "MurderPlayer");
+        Logger.Info($"{__instance.GetNameWithRole()} => {target.GetNameWithRole()}{(target.protectedByGuardianThisRound ? "(Protected)" : "")}", "MurderPlayer");
 
-        if (RandomSpawn.CustomNetworkTransformPatch.NumOfTP.TryGetValue(__instance.PlayerId, out var num) && num > 2) RandomSpawn.CustomNetworkTransformPatch.NumOfTP[__instance.PlayerId] = 3;
-        if (!target.protectedByGuardian)
+        if (RandomSpawn.CustomNetworkTransformPatch.NumOfTP.TryGetValue(__instance.PlayerId, out var num) && num > 2)
+        {
+            RandomSpawn.CustomNetworkTransformPatch.NumOfTP[__instance.PlayerId] = 3;
+        }
+        if (!target.protectedByGuardianThisRound)
             Camouflage.RpcSetSkin(target, ForceRevert: true);
     }
     public static void Postfix(PlayerControl __instance, [HarmonyArgument(0)] PlayerControl target)

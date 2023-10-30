@@ -118,7 +118,7 @@ public static class Vampire
         }
         else
         {
-            Logger.Info("Vampireに噛まれている" + target.name + "はすでに死んでいました。", "Vampire");
+            Logger.Info($"{target.name} was dead after being bitten by Vampire", "Vampire");
         }
     }
 

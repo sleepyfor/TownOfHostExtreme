@@ -1,4 +1,5 @@
 ﻿using Hazel;
+using MS.Internal.Xml.XPath;
 using System.Collections.Generic;
 using static TOHX.Translator;
 
@@ -67,7 +68,7 @@ public static class Agitater
         if (AgitaterAutoReportBait.GetBool() && target.Is(CustomRoles.Bait)) return true;
         if (target.Is(CustomRoles.Pestilence) || (target.Is(CustomRoles.Veteran) && Main.VeteranInProtect.ContainsKey(target.PlayerId)))
         {
-            target.RpcMurderPlayer(killer);
+            target.RpcMurderPlayerV3(killer);
             ResetBomb();
             return false;
         }
@@ -130,7 +131,7 @@ public static class Agitater
 
         if (target.Is(CustomRoles.Pestilence) || (target.Is(CustomRoles.Veteran) && Main.VeteranInProtect.ContainsKey(target.PlayerId)))
         {
-            target.RpcMurderPlayer(player);
+            target.RpcMurderPlayerV3(player);
             ResetBomb();
             return;
         }

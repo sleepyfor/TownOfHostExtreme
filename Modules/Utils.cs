@@ -82,20 +82,22 @@ public static class Utils
         Logger.Info($" {location}", "Teleport - Location");
 
         if (player.inVent)
+        {
             player.MyPhysics.RpcBootFromVent(0);
+        }
 
-        if (AmongUsClient.Instance.AmHost)
-            player.NetTransform.SnapTo(location);
+        // Modded
+        var playerlastSequenceId = player.NetTransform.lastSequenceId + 8;
+        player.NetTransform.SnapTo(location, (ushort)playerlastSequenceId);
+        Logger.Info($" {(ushort)playerlastSequenceId}", "Teleport - Player NetTransform lastSequenceId + 8 - writer");
 
-        MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(player.NetTransform.NetId, (byte)RpcCalls.SnapTo, SendOption.None);
-        Logger.Info($" {player.NetTransform.NetId}", "Teleport - NetTransform Id");
 
-        NetHelpers.WriteVector2(location, writer);
-
-        writer.Write(player.NetTransform.lastSequenceId);
-        Logger.Info($" {player.NetTransform.lastSequenceId}", "Teleport - Player NetTransform lastSequenceId - writer");
-
-        AmongUsClient.Instance.FinishRpcImmediately(writer);
+        // Vanilla
+        MessageWriter messageWriter = AmongUsClient.Instance.StartRpcImmediately(player.NetTransform.NetId, (byte)RpcCalls.SnapTo, SendOption.Reliable);
+        NetHelpers.WriteVector2(location, messageWriter);
+        messageWriter.Write(player.NetTransform.lastSequenceId + 10U);
+        AmongUsClient.Instance.FinishRpcImmediately(messageWriter);
+        Logger.Info($" {player.NetTransform.lastSequenceId + 10U}", "Teleport - Player NetTransform lastSequenceId + 10U - writer");
     }
     public static void RpcRandomVentTeleport(this PlayerControl player)
     {
@@ -126,16 +128,16 @@ public static class Utils
         {
             case SystemTypes.Electrical:
                 {
+                    if (mapId == 5) return false; // if The Fungle return false
                     var SwitchSystem = ShipStatus.Instance.Systems[type].Cast<SwitchSystem>();
                     return SwitchSystem != null && SwitchSystem.IsActive;
                 }
             case SystemTypes.Reactor:
                 {
-                    if (mapId == 2) return false;
-                    else if (mapId == 4)
+                    if (mapId == 2) return false; // if Polus return false
+                    else if (mapId is 4) // Only Airhip
                     {
-                        var HeliSabotageSystem = ShipStatus.Instance.Systems[type].Cast<HeliSabotageSystem>();
-                        return HeliSabotageSystem != null && HeliSabotageSystem.IsActive;
+                       return IsActive(SystemTypes.HeliSabotage);
                     }
                     else
                     {
@@ -145,19 +147,25 @@ public static class Utils
                 }
             case SystemTypes.Laboratory:
                 {
-                    if (mapId != 2) return false;
+                    if (mapId != 2) return false; // Only Polus
                     var ReactorSystemType = ShipStatus.Instance.Systems[type].Cast<ReactorSystemType>();
                     return ReactorSystemType != null && ReactorSystemType.IsActive;
                 }
             case SystemTypes.LifeSupp:
                 {
-                    if (mapId is 2 or 4) return false;
+                    if (mapId is 2 or 4 or 5) return false; // Only Skeld & Mira HQ
                     var LifeSuppSystemType = ShipStatus.Instance.Systems[type].Cast<LifeSuppSystemType>();
                     return LifeSuppSystemType != null && LifeSuppSystemType.IsActive;
                 }
+            case SystemTypes.HeliSabotage:
+                {
+                    if (mapId != 4) return false;// Only Airhip
+                    var HeliSabotageSystem = ShipStatus.Instance.Systems[type].Cast<HeliSabotageSystem>();
+                    return HeliSabotageSystem != null && HeliSabotageSystem.IsActive;
+                }
             case SystemTypes.Comms:
                 {
-                    if (mapId == 1)
+                    if (mapId is 1 or 5) // Only Mira HQ & The Fungle
                     {
                         var HqHudSystemType = ShipStatus.Instance.Systems[type].Cast<HqHudSystemType>();
                         return HqHudSystemType != null && HqHudSystemType.IsActive;
@@ -167,6 +175,12 @@ public static class Utils
                         var HudOverrideSystemType = ShipStatus.Instance.Systems[type].Cast<HudOverrideSystemType>();
                         return HudOverrideSystemType != null && HudOverrideSystemType.IsActive;
                     }
+                }
+            case SystemTypes.MushroomMixupSabotage:
+                {
+                    if (mapId != 5) return false; // Only The Fungle
+                    var MushroomMixupSabotageSystem = ShipStatus.Instance.Systems[type].Cast<MushroomMixupSabotageSystem>();
+                    return MushroomMixupSabotageSystem != null && MushroomMixupSabotageSystem.IsActive;
                 }
             default:
                 return false;

@@ -36,9 +36,9 @@ public class Main : BasePlugin
     public static readonly string MainMenuText = " ";
 
     public const string PluginGuid = "com.karped1em.townofhostedited";
-    public const string PluginVersion = "4.1.0";
-    public const string PluginDisplayVersion = "4.1.0 (Hotfix)";
-    public static readonly string SupportedVersionAU = "2023.7.11";
+    public const string PluginVersion = "4.1.1";
+    public const string PluginDisplayVersion = "4.1.1";
+    public static readonly string SupportedVersionAU = "2023.10.24";
     public const bool Canary = false;
 
     public static readonly bool ShowGitHubButton = true;

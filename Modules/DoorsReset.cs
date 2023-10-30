@@ -10,7 +10,7 @@ public static class DoorsReset
     public static void Initialize()
     {
         // AirshipとPolus以外は非対応
-        if ((MapNames)Main.NormalOptions.MapId is not (MapNames.Airship or MapNames.Polus))
+        if (((MapNames)Main.NormalOptions.MapId is not (MapNames.Airship or MapNames.Polus or MapNames.Fungle)) || Options.DisableCloseDoor.GetBool())
         {
             isEnabled = false;
             return;
@@ -42,7 +42,7 @@ public static class DoorsReset
     {
         foreach (var door in ShipStatus.Instance.AllDoors)
         {
-            SetDoorOpenState(door, true);
+            SetDoorOpenState((PlainDoor)door, true);
         }
         DoorsSystem.IsDirty = true;
     }
@@ -51,7 +51,7 @@ public static class DoorsReset
     {
         foreach (var door in ShipStatus.Instance.AllDoors)
         {
-            SetDoorOpenState(door, false);
+            SetDoorOpenState((PlainDoor)door, false);
         }
         DoorsSystem.IsDirty = true;
     }
@@ -61,7 +61,7 @@ public static class DoorsReset
         foreach (var door in ShipStatus.Instance.AllDoors)
         {
             var isOpen = IRandom.Instance.Next(2) > 0;
-            SetDoorOpenState(door, isOpen);
+            SetDoorOpenState((PlainDoor)door, isOpen);
         }
         DoorsSystem.IsDirty = true;
     }

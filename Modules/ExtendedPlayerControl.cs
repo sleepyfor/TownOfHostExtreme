@@ -179,7 +179,7 @@ static class ExtendedPlayerControl
         if (killer.AmOwner)
         {
             killer.ProtectPlayer(target, colorId);
-            killer.MurderPlayer(target);
+            killer.MurderPlayer(target, ResultFlags);
         }
         // Other Clients
         if (killer.PlayerId != 0)
@@ -192,6 +192,7 @@ static class ExtendedPlayerControl
                 .EndRpc();
             sender.StartRpc(killer.NetId, (byte)RpcCalls.MurderPlayer)
                 .WriteNetObject(target)
+                .Write((byte)MurderResultFlags.DecisionByHost)
                 .EndRpc();
             sender.EndMessage();
             sender.SendMessage();
@@ -264,12 +265,13 @@ static class ExtendedPlayerControl
         if (target == null) target = killer;
         if (killer.AmOwner)
         {
-            killer.MurderPlayer(target);
+            killer.MurderPlayer(target, ResultFlags);
         }
         else
         {
             MessageWriter messageWriter = AmongUsClient.Instance.StartRpcImmediately(killer.NetId, (byte)RpcCalls.MurderPlayer, SendOption.Reliable, killer.GetClientId());
             messageWriter.WriteNetObject(target);
+            messageWriter.Write((byte)MurderResultFlags.DecisionByHost);
             AmongUsClient.Instance.FinishRpcImmediately(messageWriter);
         }
     }
@@ -311,7 +313,7 @@ static class ExtendedPlayerControl
     }
     public static void RpcDesyncRepairSystem(this PlayerControl target, SystemTypes systemType, int amount)
     {
-        MessageWriter messageWriter = AmongUsClient.Instance.StartRpcImmediately(ShipStatus.Instance.NetId, (byte)RpcCalls.RepairSystem, SendOption.Reliable, target.GetClientId());
+        MessageWriter messageWriter = AmongUsClient.Instance.StartRpcImmediately(ShipStatus.Instance.NetId, (byte)RpcCalls.UpdateSystem, SendOption.Reliable, target.GetClientId());
         messageWriter.Write((byte)systemType);
         messageWriter.WriteNetObject(target);
         messageWriter.Write((byte)amount);
@@ -393,8 +395,12 @@ static class ExtendedPlayerControl
     {
         if (pc == null || !AmongUsClient.Instance.AmHost || pc.AmOwner) return;
 
-        var systemtypes = SystemTypes.Reactor;
-        if (Main.NormalOptions.MapId == 2) systemtypes = SystemTypes.Laboratory;
+        var systemtypes = (MapNames)Main.NormalOptions.MapId switch
+        {
+            MapNames.Polus => SystemTypes.Laboratory,
+            MapNames.Airship => SystemTypes.HeliSabotage,
+            _ => SystemTypes.Reactor,
+        };
 
         _ = new LateTask(() =>
         {
@@ -1087,21 +1093,22 @@ static class ExtendedPlayerControl
 
         if (killer.PlayerId == target.PlayerId && killer.shapeshifting)
         {
-            _ = new LateTask(() => { killer.RpcMurderPlayer(target); }, 1.5f, "Shapeshifting Suicide Delay");
+            _ = new LateTask(() => { killer.RpcMurderPlayer(target, true); }, 1.5f, "Shapeshifting Suicide Delay");
             return;
         }
 
-        killer.RpcMurderPlayer(target);
+        killer.RpcMurderPlayer(target, true);
     }
     public static void RpcMurderPlayerV2(this PlayerControl killer, PlayerControl target)
     {
         if (target == null) target = killer;
         if (AmongUsClient.Instance.AmClient)
         {
-            killer.MurderPlayer(target);
+            killer.MurderPlayer(target, ResultFlags);
         }
         MessageWriter messageWriter = AmongUsClient.Instance.StartRpcImmediately(killer.NetId, (byte)RpcCalls.MurderPlayer, SendOption.None, -1);
         messageWriter.WriteNetObject(target);
+        messageWriter.Write((byte)MurderResultFlags.DecisionByHost);
         AmongUsClient.Instance.FinishRpcImmediately(messageWriter);
         Utils.NotifyRoles();
     }
@@ -1226,4 +1233,5 @@ static class ExtendedPlayerControl
         return GameStates.InGame || (target != null && (Main.PlayerStates[target.PlayerId].deathReason == PlayerState.DeathReason.Vote));
     }
 
+    public const MurderResultFlags ResultFlags = MurderResultFlags.Succeeded | MurderResultFlags.DecisionByHost;
 }

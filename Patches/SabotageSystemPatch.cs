@@ -5,7 +5,7 @@ namespace TOHX;
 //参考
 //https://github.com/Koke1024/Town-Of-Moss/blob/main/TownOfMoss/Patches/MeltDownBoost.cs
 
-[HarmonyPatch(typeof(ReactorSystemType), nameof(ReactorSystemType.Detoriorate))]
+[HarmonyPatch(typeof(ReactorSystemType), nameof(ReactorSystemType.Deteriorate))]
 public static class ReactorSystemTypePatch
 {
     public static void Prefix(ReactorSystemType __instance)
@@ -21,7 +21,7 @@ public static class ReactorSystemTypePatch
         return;
     }
 }
-[HarmonyPatch(typeof(HeliSabotageSystem), nameof(HeliSabotageSystem.Detoriorate))]
+[HarmonyPatch(typeof(HeliSabotageSystem), nameof(HeliSabotageSystem.Deteriorate))]
 public static class HeliSabotageSystemPatch
 {
     public static void Prefix(HeliSabotageSystem __instance)
@@ -33,7 +33,7 @@ public static class HeliSabotageSystemPatch
                 __instance.Countdown = Options.AirshipReactorTimeLimit.GetFloat();
     }
 }
-[HarmonyPatch(typeof(SwitchSystem), nameof(SwitchSystem.RepairDamage))]
+[HarmonyPatch(typeof(SwitchSystem), nameof(SwitchSystem.UpdateSystem))]
 public static class SwitchSystemRepairDamagePatch
 {
     public static bool Prefix(SwitchSystem __instance, [HarmonyArgument(1)] byte amount)
@@ -82,7 +82,7 @@ public static class ElectricTaskCompletePatch
 }
 // https://github.com/tukasa0001/TownOfHost/blob/357f7b5523e4bdd0bb58cda1e0ff6cceaa84813d/Patches/SabotageSystemPatch.cs
 // Method called when sabotage occurs
-[HarmonyPatch(typeof(SabotageSystemType), nameof(SabotageSystemType.RepairDamage))]
+[HarmonyPatch(typeof(SabotageSystemType), nameof(SabotageSystemType.UpdateSystem))]
 public static class SabotageSystemTypeRepairDamagePatch
 {
     private static bool isCooldownModificationEnabled;

@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Hazel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using TOHX.Roles.Impostor;
 using TOHX.Roles.Neutral;
 using UnityEngine;
 using static TOHX.Translator;
+
 
 namespace TOHX;
 
@@ -30,7 +32,23 @@ class ShipFixedUpdatePatch
         }
     }
 }
-[HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.RepairSystem))]
+[HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.UpdateSystem), typeof(SystemTypes), typeof(PlayerControl), typeof(MessageReader))]
+public static class MessageReaderUpdateSystemPatch
+{
+    public static void Prefix(ShipStatus __instance, [HarmonyArgument(0)] SystemTypes systemType, [HarmonyArgument(1)] PlayerControl player, [HarmonyArgument(2)] MessageReader reader)
+    {
+        if (systemType is SystemTypes.Ventilation) return;
+
+        RepairSystemPatch.Prefix(__instance, systemType, player, MessageReader.Get(reader).ReadByte());
+    }
+    public static void Postfix(ShipStatus __instance, [HarmonyArgument(0)] SystemTypes systemType, [HarmonyArgument(1)] PlayerControl player, [HarmonyArgument(2)] MessageReader reader)
+    {
+        if (systemType is SystemTypes.Ventilation) return;
+
+        RepairSystemPatch.Postfix(__instance, systemType, player, MessageReader.Get(reader).ReadByte());
+    }
+}
+[HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.UpdateSystem), new Type[] { typeof(SystemTypes), typeof(PlayerControl), typeof(byte) })]
 class RepairSystemPatch
 {
     public static bool IsComms;
@@ -44,6 +62,8 @@ class RepairSystemPatch
             Logger.SendInGame("SystemType: " + systemType.ToString() + ", PlayerName: " + player.GetNameWithRole().RemoveHtmlTags() + ", amount: " + amount);
 
         if (!AmongUsClient.Instance.AmHost) return true; //以下、ホストのみ実行
+
+        if (systemType is SystemTypes.Ventilation) return true;
 
         IsComms = PlayerControl.LocalPlayer.myTasks.ToArray().Any(x => x.TaskType == TaskTypes.FixComms);
 
@@ -129,9 +149,27 @@ class RepairSystemPatch
 
         return true;
     }
-    public static void Postfix(ShipStatus __instance)
+    public static void Postfix(ShipStatus __instance,
+         [HarmonyArgument(0)] SystemTypes systemType,
+         [HarmonyArgument(1)] PlayerControl player,
+         [HarmonyArgument(2)] byte amount)
     {
         Camouflage.CheckCamouflage();
+
+        if (systemType == SystemTypes.Electrical && 0 <= amount && amount <= 4)
+        {
+            var SwitchSystem = ShipStatus.Instance.Systems[SystemTypes.Electrical].Cast<SwitchSystem>();
+            if (SwitchSystem != null && SwitchSystem.IsActive)
+            {
+                switch (player.GetCustomRole())
+                {
+                    case CustomRoles.SabotageMaster:
+                        Logger.Info($"{player.GetNameWithRole().RemoveHtmlTags()} instant-fix-lights", "SwitchSystem");
+                        SabotageMaster.SwitchSystemRepair(SwitchSystem, amount);
+                        break;
+                }
+            }
+        }
     }
     public static void CheckAndOpenDoorsRange(ShipStatus __instance, int amount, int min, int max)
     {
@@ -146,7 +184,7 @@ class RepairSystemPatch
     {
         if (DoorIds.Contains(amount)) foreach (var id in DoorIds)
             {
-                __instance.RpcRepairSystem(SystemTypes.Doors, id);
+                __instance.RpcUpdateSystem(SystemTypes.Doors, (byte)id);
             }
     }
 }
@@ -158,7 +196,7 @@ class CloseDoorsPatch
         return !(Options.DisableSabotage.GetBool() || Options.CurrentGameMode == CustomGameMode.SoloKombat);
     }
 }
-[HarmonyPatch(typeof(SwitchSystem), nameof(SwitchSystem.RepairDamage))]
+[HarmonyPatch(typeof(SwitchSystem), nameof(SwitchSystem.UpdateSystem))]
 class SwitchSystemRepairPatch
 {
     public static void Postfix(SwitchSystem __instance, [HarmonyArgument(0)] PlayerControl player, [HarmonyArgument(1)] byte amount)

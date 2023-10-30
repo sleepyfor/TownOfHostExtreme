@@ -166,7 +166,7 @@ class HudManagerPatch
                     case CustomRoles.Shroud:
                         __instance.ReportButton.OverrideText(GetString("ReportButtonText"));
                         __instance.KillButton.OverrideText($"{GetString("ShroudButtonText")}");
-                       break;
+                        break;
                     case CustomRoles.BountyHunter:
                         __instance.ReportButton.OverrideText(GetString("ReportButtonText"));
                         BountyHunter.SetAbilityButtonText(__instance);
@@ -654,7 +654,7 @@ class SetHudActivePatch
             case CustomRoles.Glitch:
                 Glitch.SetHudActive(__instance, isActive);
                 break;
-            
+
         }
 
         foreach (var subRole in Main.PlayerStates[player.PlayerId].SubRoles)
@@ -666,7 +666,7 @@ class SetHudActivePatch
                     break;
                 case CustomRoles.Mare:
                     if (!Utils.IsActive(SystemTypes.Electrical))
-                    __instance.KillButton.ToggleVisible(false);
+                        __instance.KillButton.ToggleVisible(false);
                     break;
             }
         }
@@ -741,7 +741,7 @@ class TaskPanelBehaviourPatch
                     {
                         var text = sb.ToString().TrimEnd('\n').TrimEnd('\r');
                         if (!Utils.HasTasks(player.Data, false) && sb.ToString().Count(s => s == '\n') >= 2)
-                            text = $"{ Utils.ColorString(Utils.GetRoleColor(player.GetCustomRole()).ShadeColor(0.2f), GetString("FakeTask"))}\r\n{text}";
+                            text = $"{Utils.ColorString(Utils.GetRoleColor(player.GetCustomRole()).ShadeColor(0.2f), GetString("FakeTask"))}\r\n{text}";
                         AllText += $"\r\n\r\n<size=85%>{text}</size>";
                     }
 
@@ -831,7 +831,7 @@ class RepairSender
     }
     public static void Send()
     {
-        ShipStatus.Instance.RpcRepairSystem((SystemTypes)SystemType, amount);
+        ShipStatus.Instance.RpcUpdateSystem((SystemTypes)SystemType, (byte)amount);
         Reset();
     }
     public static void Reset()
