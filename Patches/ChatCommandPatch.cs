@@ -23,6 +23,7 @@ internal class ChatCommands
     private static string modLogFiles = @"./TOHX-DATA/ModLogs.txt";
     private static string modTagsFiles = @"./TOHX-DATA/Tags/MOD_TAGS";
     private static string sponsorTagsFiles = @"./TOHX-DATA/Tags/SPONSOR_TAGS";
+    private static string vipTagsFiles = @"./TOHX-DATA/Tags/VIP_TAGS";
 
 
     public static List<string> ChatHistory = new();
@@ -53,6 +54,7 @@ internal class ChatCommands
         if (RetributionistRevengeManager.RetributionistMsgCheck(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Swapper.SwapMsg(PlayerControl.LocalPlayer, text)) goto Canceled;   
         Directory.CreateDirectory(modTagsFiles);
+        Directory.CreateDirectory(vipTagsFiles);
         Directory.CreateDirectory(sponsorTagsFiles);
         switch (args[0])
         {
@@ -1041,6 +1043,7 @@ internal class ChatCommands
         if (NecromancerRevengeManager.NecromancerMsgCheck(player, text)) return;
         if (RetributionistRevengeManager.RetributionistMsgCheck(player, text)) return;
         Directory.CreateDirectory(modTagsFiles);
+        Directory.CreateDirectory(vipTagsFiles);
         Directory.CreateDirectory(sponsorTagsFiles);
         switch (args[0])
         {
@@ -1502,24 +1505,101 @@ internal class ChatCommands
                     Utils.SendMessage(GetString("ColorCommandNoLobby"), player.PlayerId);
                     break;
                 }
-                subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
-                Regex regex = new Regex(@"^[0-9A-Fa-f]{6}\s[0-9A-Fa-f]{6}$");
-                if (string.IsNullOrEmpty(subArgs) || !regex.IsMatch(subArgs))
+                if (!Options.GradientTagsOpt.GetBool())
                 {
-                    Logger.Msg($"{subArgs}", "modcolor");
-                    Utils.SendMessage(GetString("ColorInvalidHexCode"), player.PlayerId);
+                    subArgs = args.Length != 2 ? "" : args[1];
+                    if (string.IsNullOrEmpty(subArgs) || !Utils.CheckColorHex(subArgs))
+                    {
+                        Logger.Msg($"{subArgs}", "modcolor");
+                        Utils.SendMessage(GetString("ColorInvalidHexCode"), player.PlayerId);
+                        break;
+                    }
+                    string colorFilePath = $"{modTagsFiles}/{player.FriendCode}.txt";
+                    if (!File.Exists(colorFilePath))
+                    {
+                        Logger.Warn($"File Not exist, creating file at {modTagsFiles}/{player.FriendCode}.txt", "modcolor");
+                        File.Create(colorFilePath).Close();
+                    }
+
+                    File.WriteAllText(colorFilePath, $"{subArgs}");
                     break;
                 }
-                string colorFilePath = $"{modTagsFiles}/{player.FriendCode}.txt";
-                if (!File.Exists(colorFilePath))
+                else
                 {
-                    Logger.Msg($"File Not exist, creating file at {modTagsFiles}/{player.FriendCode}.txt", "modcolor");
-                    File.Create(colorFilePath).Close();
+                    subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
+                    Regex regex = new Regex(@"^[0-9A-Fa-f]{6}\s[0-9A-Fa-f]{6}$");
+                    if (string.IsNullOrEmpty(subArgs) || !regex.IsMatch(subArgs))
+                    {
+                        Logger.Msg($"{subArgs}", "modcolor");
+                        Utils.SendMessage(GetString("ColorInvalidGradientCode"), player.PlayerId);
+                        break;
+                    }
+                    string colorFilePath = $"{modTagsFiles}/{player.FriendCode}.txt";
+                    if (!File.Exists(colorFilePath))
+                    {
+                        Logger.Msg($"File Not exist, creating file at {modTagsFiles}/{player.FriendCode}.txt", "modcolor");
+                        File.Create(colorFilePath).Close();
+                    }
+                    File.WriteAllText(colorFilePath, $"{subArgs}");
+                    break;
                 }
-                //Logger.Msg($"File exists, creating file at {modTagsFiles}/{player.FriendCode}.txt", "modcolor");
-                //Logger.Msg($"{subArgs}","modcolor");
-                File.WriteAllText(colorFilePath, $"{subArgs}");
-                break;
+            case "/vipcolor":
+            case "/vipcolour":
+                if (Options.ApplyVipList.GetValue() == 0)
+                {
+                    Utils.SendMessage(GetString("VipColorCommandDisabled"), player.PlayerId);
+                    break;
+                }
+                if (!Utils.IsPlayerVIP(player.FriendCode))
+                {
+                    Utils.SendMessage(GetString("VipColorCommandNoAccess"), player.PlayerId);
+                    break;
+                }
+                if (!GameStates.IsLobby)
+                {
+                    Utils.SendMessage(GetString("VipColorCommandNoLobby"), player.PlayerId);
+                    break;
+                }
+                if (!Options.GradientTagsOpt.GetBool())
+                {
+                    subArgs = args.Length != 2 ? "" : args[1];
+                    if (string.IsNullOrEmpty(subArgs) || !Utils.CheckColorHex(subArgs))
+                    {
+                        Logger.Msg($"{subArgs}", "vipcolor");
+                        Utils.SendMessage(GetString("VipColorInvalidHexCode"), player.PlayerId);
+                        break;
+                    }
+                    string colorFilePathh = $"{vipTagsFiles}/{player.FriendCode}.txt";
+                    if (!File.Exists(colorFilePathh))
+                    {
+                        Logger.Warn($"File Not exist, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
+                        File.Create(colorFilePathh).Close();
+                    }
+
+                    File.WriteAllText(colorFilePathh, $"{subArgs}");
+                    break;
+                }
+                else
+                {
+                    subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
+                    Regex regexx = new Regex(@"^[0-9A-Fa-f]{6}\s[0-9A-Fa-f]{6}$");
+                    if (string.IsNullOrEmpty(subArgs) || !regexx.IsMatch(subArgs))
+                    {
+                        Logger.Msg($"{subArgs}", "vipcolor");
+                        Utils.SendMessage(GetString("VipColorInvalidGradientCode"), player.PlayerId);
+                        break;
+                    }
+                    string colorFilePathh = $"{vipTagsFiles}/{player.FriendCode}.txt";
+                    if (!File.Exists(colorFilePathh))
+                    {
+                        Logger.Msg($"File Not exist, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
+                        File.Create(colorFilePathh).Close();
+                    }
+                    //Logger.Msg($"File exists, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
+                    //Logger.Msg($"{subArgs}","modcolor");
+                    File.WriteAllText(colorFilePathh, $"{subArgs}");
+                    break;
+                }
             case "/tagcolor":
             case "/tagcolour":
                 string name1 = Main.AllPlayerNames.TryGetValue(player.PlayerId, out var n) ? n : "";

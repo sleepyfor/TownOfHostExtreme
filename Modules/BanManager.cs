@@ -15,6 +15,7 @@ public static class BanManager
     private static readonly string DENY_NAME_LIST_PATH = @"./TOHX-DATA/DenyName.txt";
     private static readonly string BAN_LIST_PATH = @"./TOHX-DATA/BanList.txt";
     private static readonly string MODERATOR_LIST_PATH = @"./TOHX-DATA/Moderators.txt";
+    private static readonly string VIP_LIST_PATH = @"./TOHX-DATA/VIP-List.txt";
     private static List<string> EACList = new();
     public static void Init()
     {
@@ -39,7 +40,11 @@ public static class BanManager
                 File.Create(MODERATOR_LIST_PATH).Close();
                 File.WriteAllText(MODERATOR_LIST_PATH, GetResourcesTxt("TOHX.Resources.Config.Moderators.txt"));
             }
-
+            if (!File.Exists(VIP_LIST_PATH))
+            {
+                Logger.Warn("Creating a new VIP-List.txt file", "BanManager");
+                File.Create(VIP_LIST_PATH).Close();
+            }
             //读取EAC名单
             var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("TOHX.Resources.Config.EACList.txt");
             stream.Position = 0;

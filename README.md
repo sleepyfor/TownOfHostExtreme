@@ -36,6 +36,7 @@
 ### :star: [Town Of Host: Enhanced](https://github.com/0xDrMoe/TownofHost-Enhanced) :
 > 
 > - Improved CheckGameEndPatch
+> - VIP and gradient tag stuff 
 >  
 ### :star: [TOH](https://github.com/tukasa0001/TownOfHost) :
 > 
