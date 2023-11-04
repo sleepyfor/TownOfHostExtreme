@@ -149,6 +149,7 @@ class ExileControllerWrapUpPatch
                 CustomRoles.Wildling or
                 CustomRoles.Twister or
                 CustomRoles.Deathpact or
+                CustomRoles.Grappler or
                 CustomRoles.Dazzler or
                 CustomRoles.Devourer or
                 CustomRoles.Nuker or

@@ -231,6 +231,7 @@ internal class ChangeRoleSettings
             Greedier.Init();
             Collector.Init();
             QuickShooter.Init();
+            Grappler.Init();
             Camouflager.Init();
             Divinator.Init();
             Jailer.Init();
@@ -601,6 +602,9 @@ internal class SelectRolesPatch
                         break;
                     case CustomRoles.QuickShooter:
                         QuickShooter.Add(pc.PlayerId);
+                        break;
+                    case CustomRoles.Grappler:
+                        Grappler.Add(pc.PlayerId);
                         break;
                     case CustomRoles.Mayor:
                         Main.MayorUsedButtonCount[pc.PlayerId] = 0;

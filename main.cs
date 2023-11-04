@@ -642,6 +642,7 @@ public enum CustomRoles
     Cleaner,
     BallLightning,
     Greedier,
+    Grappler,
     CursedWolf,
     ImperiusCurse,
     QuickShooter,

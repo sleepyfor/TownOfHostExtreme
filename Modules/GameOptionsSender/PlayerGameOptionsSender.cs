@@ -350,6 +350,10 @@ public class PlayerGameOptionsSender : GameOptionsSender
             case CustomRoles.QuickShooter:
                 AURoleOptions.ShapeshifterCooldown = QuickShooter.ShapeshiftCooldown.GetFloat();
                 break;
+            case CustomRoles.Grappler:
+                AURoleOptions.ShapeshifterCooldown = Grappler.ShapeshiftCooldown.GetFloat();
+                AURoleOptions.ShapeshifterDuration = Grappler.ShapeshiftDuration.GetFloat();
+                break;
             case CustomRoles.Camouflager:
                 Camouflager.ApplyGameOptions();
                 break;

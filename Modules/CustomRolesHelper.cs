@@ -116,6 +116,7 @@ internal static class CustomRolesHelper
                 CustomRoles.OverKiller => CustomRoles.Impostor,
                 CustomRoles.Hangman => CustomRoles.Shapeshifter,
                 CustomRoles.Sunnyboy => CustomRoles.Scientist,
+                CustomRoles.Grappler => CustomRoles.Shapeshifter,
                 CustomRoles.Phantom => Options.PhantomCanVent.GetBool() ? CustomRoles.Engineer : CustomRoles.Crewmate,
                 CustomRoles.Judge => CustomRoles.Crewmate,
                 CustomRoles.Councillor => CustomRoles.Impostor,
@@ -641,6 +642,7 @@ internal static class CustomRolesHelper
             CustomRoles.ImperiusCurse or
             CustomRoles.QuickShooter or
             CustomRoles.Eraser or
+            CustomRoles.Grappler or
             CustomRoles.OverKiller or
             CustomRoles.Hangman or
             CustomRoles.Bard or

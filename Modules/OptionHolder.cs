@@ -1170,6 +1170,7 @@ public static class Options
         SerialKiller.SetupCustomOption();
         Assassin.SetupCustomOption();
         QuickShooter.SetupCustomOption();
+        Grappler.SetupCustomOption();
         SetupRoleOptions(1550, TabGroup.ImpostorRoles, CustomRoles.Saboteur);
         SaboteurCD = FloatOptionItem.Create(1560, "KillCooldown", new(0f, 180f, 2.5f), 20f, TabGroup.ImpostorRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Saboteur])
