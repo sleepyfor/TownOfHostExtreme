@@ -31,6 +31,11 @@
 ### :star: TownOfHost-ReEdited :
 > 
 > - Our repo is forked from TownOfHost-ReEdited
+>
+### :star: [Town Of Host: Enhanced](https://github.com/0xDrMoe/TownofHost-Enhanced) :
+> 
+> - Improved CheckGameEndPatch
+>
 ### :star: [TOH](https://github.com/tukasa0001/TownOfHost) :
 > 
 > - Our repo is based initially on TOH
