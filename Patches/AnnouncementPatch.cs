@@ -48,6 +48,22 @@ public class ModNewsHistory
         if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.English)
         {
             {
+                // TOHX v4.2.0
+                var news = new ModNews
+                {
+                    Number = 100009,
+                    Title = "TownOfHost Extreme v4.2.0",
+                    SubTitle = "\r★★ More Roles! ★★",
+                    ShortTitle = "TOHX v4.2.0",
+                    Text = "<size=150%>Welcome to TownOfHost Extreme v4.2.0!</size>\n\n<size=125%>Support for Among Us 2023.10.24</size>\n"
+                        + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
+                        + "\n【Added】\n - Role: Grappler (Impostors)\n\r - Role: Troll (Madmates)\n\r - Addon: Choking Hazard\n\r"
+                        + "\n【Fixes】\n - Fixed an issue with captain displaying the dictionary rather than uses left\n\r",
+                    Date = "2023-11-4T00:00:00Z"
+                };
+                AllModNews.Add(news);
+            }
+            {
                 // TOHX v4.1.1
                 var news = new ModNews
                 {
@@ -58,7 +74,7 @@ public class ModNewsHistory
                     Text = "<size=150%>Welcome to TownOfHost Extreme v4.1.1.</size>\n\n<size=125%>Support for Among Us 2023.10.24</size>\n"
                         + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
                         + "\n【Changes】\n - Updated: TOHX now supports 2023.10.24!\n\r",
-                    Date = "2023-10-21T00:00:00Z"
+                    Date = "2023-10-30T00:00:00Z"
                 };
                 AllModNews.Add(news);
             }
