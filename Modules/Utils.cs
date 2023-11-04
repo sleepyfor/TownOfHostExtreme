@@ -642,7 +642,7 @@ public static class Utils
                 if (Sheriff.ShowShotLimit.GetBool()) ProgressText.Append(Sheriff.GetShotLimit(playerId));
                 break;
             case CustomRoles.Captain:
-                ProgressText.Append(Captain.GetUses());
+                ProgressText.Append(Captain.GetUses(playerId));
                 break;
             case CustomRoles.Veteran:
                 var taskState2 = Main.PlayerStates?[playerId].GetTaskState();

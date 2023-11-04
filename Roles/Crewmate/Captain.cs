@@ -36,7 +36,7 @@ namespace TOHX.Roles.Crewmate
             AbilityUses.Add(playerId, CaptainAbilityUses.GetInt());
             IsEnable = true;
         }
-        public static string GetUses() => Utils.ColorString(Utils.GetRoleColor(CustomRoles.Sheriff).ShadeColor(0.25f), $"{AbilityUses}");
+        public static string GetUses(byte playerId) => Utils.ColorString(Utils.GetRoleColor(CustomRoles.Sheriff).ShadeColor(0.25f), AbilityUses.TryGetValue(playerId, out var uses) ? $"({uses})" : "Invalid");
 
     }
 }
