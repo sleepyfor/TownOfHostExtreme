@@ -28,7 +28,8 @@
 <br>
 
 **Credit to these mods and their developers for the code and help:**
-## :star: TownOfHost-ReEdited :
+> 
+### :star: TownOfHost-ReEdited :
 > 
 > - Our repo is forked from TownOfHost-ReEdited
 >
