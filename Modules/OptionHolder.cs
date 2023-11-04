@@ -198,6 +198,7 @@ public static class Options
     public static OptionItem GGTryHideMsg;
     public static OptionItem LuckeyProbability;
     public static OptionItem LuckyProbability;
+    public static OptionItem ChokeChance;
     public static OptionItem VindicatorAdditionalVote;
     public static OptionItem VindicatorHideVote;
     public static OptionItem MayorAdditionalVote;
@@ -1857,6 +1858,9 @@ public static class Options
             .SetParent(CustomRoleSpawnChances[CustomRoles.Lucky]);
         NeutralCanBeLucky = BooleanOptionItem.Create(14313, "NeutralCanBeLucky", true, TabGroup.Addons, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Lucky]);
+        SetupAdtRoleOptions(17500, CustomRoles.ChokingHazard, canSetNum: true);
+        ChokeChance = IntegerOptionItem.Create(17510, "ChokeChance", new(0, 100, 5), 50, TabGroup.Addons, false)
+            .SetParent(CustomRoleSpawnChances[CustomRoles.ChokingHazard]);
         SetupAdtRoleOptions(14400, CustomRoles.Necroview, canSetNum: true, tab: TabGroup.Addons);
         ImpCanBeNecroview = BooleanOptionItem.Create(14410, "ImpCanBeNecroview", true, TabGroup.Addons, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Necroview]);

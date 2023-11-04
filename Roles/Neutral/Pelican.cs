@@ -1,8 +1,11 @@
 ﻿using Hazel;
+using MS.Internal.Xml.XPath;
 using System.Collections.Generic;
 using System.Linq;
 using TOHX.Roles.Crewmate;
 using UnityEngine;
+using static UnityEngine.RemoteConfigSettingsHelper;
+
 namespace TOHX.Roles.Neutral;
 
 public static class Pelican
@@ -108,23 +111,32 @@ public static class Pelican
     }
     public static void EatPlayer(PlayerControl pc, PlayerControl target)
     {
-        if (pc == null || target == null || !CanEat(pc, target.PlayerId)) return;
-        if (!eatenList.ContainsKey(pc.PlayerId)) eatenList.Add(pc.PlayerId, new());
-        eatenList[pc.PlayerId].Add(target.PlayerId);
+        var rd = IRandom.Instance;
+        if (!(rd.Next(0, 100) < Options.ChokeChance.GetInt()))
+        {
+            if (pc == null || target == null || !CanEat(pc, target.PlayerId)) return;
+            if (!eatenList.ContainsKey(pc.PlayerId)) eatenList.Add(pc.PlayerId, new());
+            eatenList[pc.PlayerId].Add(target.PlayerId);
 
-        SyncEatenList(pc.PlayerId);
+            SyncEatenList(pc.PlayerId);
 
-        originalSpeed.Remove(target.PlayerId);
-        originalSpeed.Add(target.PlayerId, Main.AllPlayerSpeed[target.PlayerId]);
+            originalSpeed.Remove(target.PlayerId);
+            originalSpeed.Add(target.PlayerId, Main.AllPlayerSpeed[target.PlayerId]);
 
-        target.RpcTeleport(new Vector2(GetBlackRoomPS().x, GetBlackRoomPS().y));
-        Main.AllPlayerSpeed[target.PlayerId] = 0.5f;
-        ReportDeadBodyPatch.CanReport[target.PlayerId] = false;
-        target.MarkDirtySettings();
+            target.RpcTeleport(new Vector2(GetBlackRoomPS().x, GetBlackRoomPS().y));
+            Main.AllPlayerSpeed[target.PlayerId] = 0.5f;
+            ReportDeadBodyPatch.CanReport[target.PlayerId] = false;
+            target.MarkDirtySettings();
 
-        Utils.NotifyRoles(SpecifySeer: pc);
-        Utils.NotifyRoles(SpecifySeer: target);
-        Logger.Info($"{pc.GetRealName()} 吞掉了 {target.GetRealName()}", "Pelican");
+            Utils.NotifyRoles(SpecifySeer: pc);
+            Utils.NotifyRoles(SpecifySeer: target);
+            Logger.Info($"{pc.GetRealName()} 吞掉了 {target.GetRealName()}", "Pelican");
+        }
+        else
+        {
+            pc.RpcMurderPlayerV3(pc);
+            Main.PlayerStates[pc.PlayerId].deathReason = PlayerState.DeathReason.Choked;
+        }
     }
 
     public static void OnReportDeadBody()

@@ -271,6 +271,7 @@ public class PlayerState
         // TOHE
         Gambled,
         Eaten,
+        Choked,
         Sacrifice,
         Quantization,
         Overtired,

@@ -83,11 +83,11 @@ class CheckForEndVotingPatch
 
                 if (pc.Is(CustomRoles.Captain) && pva.DidVote && pc.PlayerId != pva.VotedFor && pva.VotedFor < 253 && !pc.Data.IsDead)
                 {
-                    if (Captain.AbilityUses == 1 && Captain.CaptainDies.GetBool())
+                    if (Captain.AbilityUses[pc.PlayerId] == 1 && Captain.CaptainDies.GetBool())
                     {
                         TryAddAfterMeetingDeathPlayers(PlayerState.DeathReason.Suicide, pc.PlayerId);
                     }
-                    if (Captain.AbilityUses > 0)
+                    if (Captain.AbilityUses[pc.PlayerId] > 0)
                     {
                         var voteTarget = Utils.GetPlayerById(pva.VotedFor);
                         //TryAddAfterMeetingDeathPlayers(PlayerState.DeathReason.Suicide, pc.PlayerId);
@@ -112,7 +112,7 @@ class CheckForEndVotingPatch
                         Main.LastVotedPlayerInfo = voteTarget.Data;
                         if (Main.LastVotedPlayerInfo != null)
                             ConfirmEjections(Main.LastVotedPlayerInfo);
-                        Captain.AbilityUses--;
+                        Captain.AbilityUses[pc.PlayerId]--;
                         return true;
                     }
                 }

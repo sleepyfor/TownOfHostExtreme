@@ -324,7 +324,6 @@ public class PlayerGameOptionsSender : GameOptionsSender
             case CustomRoles.Shade:
             case CustomRoles.HexMaster:
             case CustomRoles.Parasite:
-            case CustomRoles.Troll:
             case CustomRoles.Occultist:
             case CustomRoles.Agitater:
                 opt.SetVision(true);
