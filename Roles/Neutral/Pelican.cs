@@ -112,7 +112,7 @@ public static class Pelican
     public static void EatPlayer(PlayerControl pc, PlayerControl target)
     {
         var rd = IRandom.Instance;
-        if (!(rd.Next(0, 100) < Options.ChokeChance.GetInt()))
+        if (target.Is(CustomRoles.ChokingHazard) && !(rd.Next(0, 100) < Options.ChokeChance.GetInt()))
         {
             if (pc == null || target == null || !CanEat(pc, target.PlayerId)) return;
             if (!eatenList.ContainsKey(pc.PlayerId)) eatenList.Add(pc.PlayerId, new());
