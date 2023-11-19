@@ -78,6 +78,25 @@ class ExileControllerWrapUpPatch
                     DecidedWinner = true;
                 }
             }
+
+            // Reaper
+
+            if (Main.AllPlayerControls.Any(x => x.Is(CustomRoles.Reaper) && !x.IsAlive() && x.GetRealKiller()?.PlayerId == exiled.PlayerId))
+            {
+                if (!Options.InnocentCanWinByImp.GetBool() && role.IsImpostor())
+                {
+                    Logger.Info("Exeiled Winner Check", "Reaper");
+                }
+                else
+                {
+                    if (DecidedWinner) CustomWinnerHolder.ShiftWinnerAndSetWinner(CustomWinner.Reaper);
+                    else CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Reaper);
+                    Main.AllPlayerControls.Where(x => x.Is(CustomRoles.Reaper) && x.IsAlive() && exiled.PlayerId == Reaper.TargetPlayer[x.PlayerId])
+                        .Do(x => CustomWinnerHolder.WinnerIds.Add(x.PlayerId));
+                    DecidedWinner = true;
+                }
+            }
+
             foreach (var pc in Main.AllPlayerControls)
             {
                 //判断小丑胜利 (EAC封禁名单成为小丑达成胜利条件无法胜利)

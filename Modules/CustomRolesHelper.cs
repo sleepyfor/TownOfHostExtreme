@@ -226,6 +226,7 @@ internal static class CustomRolesHelper
             CustomRoles.Monarch => RoleTypes.Impostor,
             CustomRoles.Deputy => RoleTypes.Impostor,
             CustomRoles.Arsonist => RoleTypes.Impostor,
+            CustomRoles.Reaper => RoleTypes.Impostor,
             CustomRoles.Jackal => RoleTypes.Impostor,
             CustomRoles.Medusa => RoleTypes.Impostor,
             CustomRoles.Sidekick => RoleTypes.Impostor,
@@ -777,6 +778,7 @@ internal static class CustomRolesHelper
             CustomRoles.Poisoner or
             CustomRoles.Reverie or
             CustomRoles.Arsonist or
+            CustomRoles.Reaper or
             CustomRoles.Revolutionist or
             CustomRoles.Maverick or
             CustomRoles.NWitch or
@@ -1667,6 +1669,7 @@ internal static class CustomRolesHelper
             CountTypes.DarkHide => CustomRoles.DarkHide,
             CountTypes.Spiritcaller => CustomRoles.Spiritcaller,
             CountTypes.Arsonist => CustomRoles.Arsonist,
+            CountTypes.Reaper => CustomRoles.Reaper,
             CountTypes.RuthlessRomantic => CustomRoles.RuthlessRomantic,
             _ => throw new System.NotImplementedException()
         };

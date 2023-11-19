@@ -238,6 +238,12 @@ class CheckMurderPatch
                 case CustomRoles.Poisoner:
                     if (!Poisoner.OnCheckMurder(killer, target)) return false;
                     break;
+                case CustomRoles.Reaper:
+                    /*   Reaper.HasTarget[killer.PlayerId] = true;
+                       killer.SetKillCooldown();
+                       Reaper.TargetPlayer[killer.PlayerId] = target.PlayerId;*/
+                    if (!Reaper.OnCheckMurder(killer, target)) return false;
+                    break;
                 case CustomRoles.Witness:
                     killer.SetKillCooldown();
                     if (Main.AllKillers.ContainsKey(target.PlayerId))

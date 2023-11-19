@@ -37,7 +37,7 @@ public class Main : BasePlugin
 
     public const string PluginGuid = "com.karped1em.townofhostedited";
     public const string PluginVersion = "5.0.0";
-    public const string PluginDisplayVersion = "5.0.0 (Dev 1)";
+    public const string PluginDisplayVersion = "5.0.0_dev";
     public static readonly string SupportedVersionAU = "2023.10.24";
     public const bool Canary = false;
 
@@ -518,6 +518,7 @@ public class Main : BasePlugin
                 {CustomRoles.Visionary, "#ff1919"},
                 {CustomRoles.Recruit, "#00b4eb"},
                 {CustomRoles.Admired, "#ee43c3"},
+                  {CustomRoles.Reaped, "#A30100"},
                 {CustomRoles.Glow, "#E2F147"},
                 {CustomRoles.Diseased, "#AAAAAA"},
                 {CustomRoles.Antidote,"#FF9876"},
@@ -870,6 +871,7 @@ public enum CustomRoles
     Soulless,
     Gravestone,
     Lazy,
+    Reaped,
     Autopsy,
     Loyal,
     EvilSpirit,
@@ -974,6 +976,7 @@ public enum AdditionalWinners
     RuthlessRomantic = CustomRoles.RuthlessRomantic,
     Jackal = CustomRoles.Jackal,
     Reaper = CustomRoles.Reaper,
+    Reaped = CustomRoles.Reaped,
     Sidekick = CustomRoles.Sidekick,
     Pursuer = CustomRoles.Pursuer,
     Phantom = CustomRoles.Phantom,
