@@ -464,6 +464,7 @@ internal static class CustomRolesHelper
             CustomRoles.Gamer or
             CustomRoles.Doomsayer or
             CustomRoles.Executioner or
+            CustomRoles.Reaper or
             CustomRoles.Innocent or
             CustomRoles.Jester or
             CustomRoles.Sunnyboy or
@@ -509,6 +510,7 @@ internal static class CustomRolesHelper
             CustomRoles.Gamer or
             CustomRoles.Doomsayer or
             CustomRoles.Executioner or
+            CustomRoles.Reaper or
             CustomRoles.Innocent or
             CustomRoles.Jester or
             CustomRoles.Masochist or
@@ -1549,6 +1551,7 @@ internal static class CustomRolesHelper
            CustomRoles.Agitater => CountTypes.Agitater,
            CustomRoles.Parasite => CountTypes.Impostor,
            CustomRoles.Troll => CountTypes.Impostor,
+           CustomRoles.Reaper => CountTypes.Reaper,
            //       CustomRoles.Sorcerer => CountTypes.Coven,
            CustomRoles.NSerialKiller => CountTypes.NSerialKiller,
            CustomRoles.Juggernaut => CountTypes.Juggernaut,
@@ -1587,6 +1590,7 @@ internal static class CustomRolesHelper
             CustomRoles.God => CustomWinner.God,
             CustomRoles.Mario => CustomWinner.Mario,
             CustomRoles.Innocent => CustomWinner.Innocent,
+            CustomRoles.Reaper => CustomWinner.Reaper,
             CustomRoles.Pelican => CustomWinner.Pelican,
             CustomRoles.Youtuber => CustomWinner.Youtuber,
             CustomRoles.Egoist => CustomWinner.Egoist,
@@ -1684,6 +1688,7 @@ public enum CountTypes
     Coven,
     Jackal,
     Pelican,
+    Reaper,
     Gamer,
     BloodKnight,
     Poisoner,

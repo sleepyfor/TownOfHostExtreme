@@ -527,6 +527,7 @@ public static class Utils
             case CustomRoles.Spiritcaller:
             case CustomRoles.PlagueBearer:
             case CustomRoles.Pestilence:
+            case CustomRoles.Reaper:
             case CustomRoles.Masochist:
             case CustomRoles.Doomsayer:
             case CustomRoles.Seeker:

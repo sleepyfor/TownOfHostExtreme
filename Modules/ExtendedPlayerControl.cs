@@ -13,6 +13,7 @@ using TOHX.Roles.Impostor;
 using TOHX.Roles.Neutral;
 using UnityEngine;
 using static TOHX.Translator;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 namespace TOHX;
 
@@ -461,6 +462,7 @@ static class ExtendedPlayerControl
             CustomRoles.Saboteur => Utils.IsActive(SystemTypes.Electrical) || Utils.IsActive(SystemTypes.Laboratory) || Utils.IsActive(SystemTypes.Comms) || Utils.IsActive(SystemTypes.LifeSupp) || Utils.IsActive(SystemTypes.Reactor),
             CustomRoles.Sniper => Sniper.CanUseKillButton(pc),
             CustomRoles.Sheriff => Sheriff.CanUseKillButton(pc.PlayerId),
+            CustomRoles.Reaper => pc.IsAlive(),
             CustomRoles.Jailer => pc.IsAlive(),
             CustomRoles.Crusader => Crusader.CanUseKillButton(pc.PlayerId),
             CustomRoles.CopyCat => pc.IsAlive(),
@@ -533,7 +535,7 @@ static class ExtendedPlayerControl
             CustomRoles.ChiefOfPolice => ChiefOfPolice.CanUseKillButton(pc.PlayerId),
 
             _ => pc.Is(CustomRoleTypes.Impostor),
-        };
+        };;
     }
     public static bool CanUseImpostorVentButton(this PlayerControl pc)
     {
@@ -598,6 +600,7 @@ static class ExtendedPlayerControl
             CustomRoles.Pickpocket => Pickpocket.CanVent.GetBool(),
             CustomRoles.HexMaster => true,
             CustomRoles.Occultist => true,
+            CustomRoles.Reaper => true,
             CustomRoles.Wraith => true,
             CustomRoles.Shade => true,
          //   CustomRoles.Chameleon => true,
@@ -637,6 +640,7 @@ static class ExtendedPlayerControl
             CustomRoles.Innocent or
             CustomRoles.Pelican or
             CustomRoles.Counterfeiter or
+            CustomRoles.Reaper or
             CustomRoles.Pursuer or
             CustomRoles.Revolutionist or
             CustomRoles.FFF or

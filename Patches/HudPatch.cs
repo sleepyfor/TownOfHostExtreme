@@ -631,7 +631,10 @@ class SetHudActivePatch
                 __instance.AbilityButton.ToggleVisible(false);
                 __instance.ImpostorVentButton.ToggleVisible(false);
                 break;
-
+            case CustomRoles.Reaper:
+                __instance.ImpostorVentButton.ToggleVisible(true);
+                __instance.KillButton.ToggleVisible(true);
+                break;
             case CustomRoles.Minimalism:
             case CustomRoles.KB_Normal:
                 __instance.SabotageButton.ToggleVisible(false);
