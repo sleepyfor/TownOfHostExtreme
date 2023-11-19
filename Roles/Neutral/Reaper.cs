@@ -16,7 +16,8 @@ public static class Reaper
 
     public static void SetupOptions()
     {
-        TargetCooldown = FloatOptionItem.Create(Id + 2, "ReaperTargetCooldown", new(0f, 180f, 2.5f), 8f, TabGroup.NeutralRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Totocalcio])
+        SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Reaper);
+        TargetCooldown = FloatOptionItem.Create(Id + 2, "ReaperTargetCooldown", new(0f, 180f, 2.5f), 8f, TabGroup.NeutralRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Reaper])
            .SetValueFormat(OptionFormat.Seconds);
     }
 

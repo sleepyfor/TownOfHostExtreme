@@ -2030,6 +2030,10 @@ public static class Options
             .SetParent(CustomRoleSpawnChances[CustomRoles.Masochist])
             .SetValueFormat(OptionFormat.Times);
 
+        // Reaper
+
+        Reaper.SetupOptions();
+
         // Seeker
 
         Seeker.SetupCustomOption();
