@@ -37,6 +37,7 @@
 > 
 > - Improved CheckGameEndPatch
 > - VIP and gradient tag stuff 
+> - A few commands (some being RPS, Coinflip, and the tag color stuff)
 >  
 ### :star: [TOH](https://github.com/tukasa0001/TownOfHost) :
 > 
