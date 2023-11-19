@@ -530,6 +530,64 @@ internal class ChatCommands
                     File.AppendAllText(modLogFiles, logMessage2 + Environment.NewLine);
 
                     break;
+                case "/vipcolor":
+                case "/vipcolour":
+                    var player = Utils.GetPlayerById(id);
+                    if (Options.ApplyVipList.GetValue() == 0)
+                    {
+                        Utils.SendMessage(GetString("VipColorCommandDisabled"), player.PlayerId);
+                        break;
+                    }
+                    if (!Utils.IsPlayerVIP(player.FriendCode))
+                    {
+                        Utils.SendMessage(GetString("VipColorCommandNoAccess"), player.PlayerId);
+                        break;
+                    }
+                    if (!GameStates.IsLobby)
+                    {
+                        Utils.SendMessage(GetString("VipColorCommandNoLobby"), player.PlayerId);
+                        break;
+                    }
+                    if (!Options.GradientTagsOpt.GetBool())
+                    {
+                        subArgs = args.Length != 2 ? "" : args[1];
+                        if (string.IsNullOrEmpty(subArgs) || !Utils.CheckColorHex(subArgs))
+                        {
+                            Logger.Msg($"{subArgs}", "vipcolor");
+                            Utils.SendMessage(GetString("VipColorInvalidHexCode"), player.PlayerId);
+                            break;
+                        }
+                        string colorFilePathh = $"{vipTagsFiles}/{player.FriendCode}.txt";
+                        if (!File.Exists(colorFilePathh))
+                        {
+                            Logger.Warn($"File Not exist, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
+                            File.Create(colorFilePathh).Close();
+                        }
+
+                        File.WriteAllText(colorFilePathh, $"{subArgs}");
+                        break;
+                    }
+                    else
+                    {
+                        subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
+                        Regex regexx = new Regex(@"^[0-9A-Fa-f]{6}\s[0-9A-Fa-f]{6}$");
+                        if (string.IsNullOrEmpty(subArgs) || !regexx.IsMatch(subArgs))
+                        {
+                            Logger.Msg($"{subArgs}", "vipcolor");
+                            Utils.SendMessage(GetString("VipColorInvalidGradientCode"), player.PlayerId);
+                            break;
+                        }
+                        string colorFilePathh = $"{vipTagsFiles}/{player.FriendCode}.txt";
+                        if (!File.Exists(colorFilePathh))
+                        {
+                            Logger.Msg($"File Not exist, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
+                            File.Create(colorFilePathh).Close();
+                        }
+                        //Logger.Msg($"File exists, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
+                        //Logger.Msg($"{subArgs}","modcolor");
+                        File.WriteAllText(colorFilePathh, $"{subArgs}");
+                        break;
+                    }
                 case "/tagcolor":
                 case "/tagcolour":
                     canceled = true;
