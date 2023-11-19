@@ -1674,10 +1674,10 @@ public static class Utils
     public static void ApplySuffix(PlayerControl player)
     {
         if (!AmongUsClient.Instance.AmHost || player == null) return;
-        
+
         if (!(player.AmOwner || (player.FriendCode.GetDevUser().HasTag())))
         {
-            if (!IsPlayerModerator(player.FriendCode))
+            if (!IsPlayerModerator(player.FriendCode) && !IsPlayerVIP(player.FriendCode))
             {
                 string name1 = Main.AllPlayerNames.TryGetValue(player.PlayerId, out var n1) ? n1 : "";
                 if (GameStates.IsLobby && name1 != player.name && player.CurrentOutfitType == PlayerOutfitType.Default) player.RpcSetName(name1);
@@ -1694,7 +1694,7 @@ public static class Utils
         else
         {
             if (!GameStates.IsLobby) return;
-            if (player.AmOwner && player.FriendCode != "gnuedaphic#7196" && player.FriendCode != "loonietoons" && player.FriendCode != "dovebliss#9271")
+            if (player.AmOwner)
             {
                 if (!player.IsModClient()) return;
                 {
@@ -1702,31 +1702,7 @@ public static class Utils
                         name = $"<color={GetString("HostColor")}>{GetString("HostText")}</color><color={GetString("IconColor")}>{GetString("Icon")}</color><color={GetString("NameColor")}>{name}</color>";
 
                     //name = $"<color=#902efd>{GetString("HostText")}</color><color=#4bf4ff>♥</color>" + name;
-
-                    if (Options.CurrentGameMode == CustomGameMode.SoloKombat)
-                        name = $"<color=#f55252><size=1.7>{GetString("ModeSoloKombat")}</size></color>\r\n" + name;
                 }
-            }
-            if (player.FriendCode == "gnuedaphic#7196") // Loonie
-            {
-                if (GameStates.IsOnlineGame || GameStates.IsLocalGame)
-                    name = $"{GradientColorText("f34c50", "cf2b30", "Loonie")}";
-
-            }
-            if (player.FriendCode == "loonietoons") // Loonie
-            {
-                if (GameStates.IsOnlineGame || GameStates.IsLocalGame)
-                    name = $"{GradientColorText("f34c50", "cf2b30", "Loonie")}";
-            }
-            if (player.FriendCode == "dovebliss#9271") // Cake
-            {
-                if (GameStates.IsOnlineGame || GameStates.IsLocalGame)
-                    name = $"{GradientColorText("bd7269", "a05559", "cake")}";
-            }
-            if (player.FriendCode == "croaktense#0572") // Eevee (duh)
-            {
-                if (GameStates.IsOnlineGame || GameStates.IsLocalGame)
-                    name = $"{GradientColorText("C6C6C6", "6f6f6f", "Eevee")}";
             }
             var modtag = "";
             if (Options.ApplyVipList.GetValue() == 1 && player.FriendCode != PlayerControl.LocalPlayer.FriendCode)
@@ -1818,11 +1794,11 @@ public static class Utils
                     }
                 }
             }
-            else if (player.AmOwner)
+            if (player.AmOwner)
             {
                 name = Options.GetSuffixMode() switch
                 {
-                    SuffixModes.TOHE => name += $"\r\n<color={Main.ModColor}>TOHReReEdited v{Main.PluginDisplayVersion}</color>",
+                    SuffixModes.TOHE => name += $"\r\n<color={Main.ModColor}>TOHE v{Main.PluginDisplayVersion}</color>",
                     SuffixModes.Streaming => name += $"\r\n<size=1.7><color={Main.ModColor}>{GetString("SuffixMode.Streaming")}</color></size>",
                     SuffixModes.Recording => name += $"\r\n<size=1.7><color={Main.ModColor}>{GetString("SuffixMode.Recording")}</color></size>",
                     SuffixModes.RoomHost => name += $"\r\n<size=1.7><color={Main.ModColor}>{GetString("SuffixMode.RoomHost")}</color></size>",
@@ -1832,6 +1808,11 @@ public static class Utils
                     SuffixModes.AutoHost => name += $"\r\n<size=1.7><color={Main.ModColor}>{GetString("SuffixModeText.AutoHost")}</color></size>",
                     _ => name
                 };
+            }
+
+            if (!name.Contains('\r') && player.FriendCode.GetDevUser().HasTag())
+            {
+                name = player.FriendCode.GetDevUser().GetTag() + "<size=1.5>" + modtag + "</size>" + name;
             }
             else name = modtag + name;
         }

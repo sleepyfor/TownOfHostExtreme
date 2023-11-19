@@ -41,7 +41,7 @@ internal class ChatCommands
         var cancelVal = "";
         Main.isChatCommand = true;
         Logger.Info(text, "SendChat");
-        if (text.Length >= 3) if (text[..2] == "/r" && text[..3] != "/rn" && text[..3] != "/rs") args[0] = "/r";
+        //if (text.Length >= 3) if (text[..2] == "/r" && text[..3] != "/rn" && text[..3] != "/rs") args[0] = "/r";
         if (text.Length >= 4) if (text[..3] == "/up") args[0] = "/up";
         if (GuessManager.GuesserMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Judge.TrialMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
@@ -50,9 +50,8 @@ internal class ChatCommands
         if (Councillor.MurderMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Mediumshiper.MsMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (MafiaRevengeManager.MafiaMsgCheck(PlayerControl.LocalPlayer, text)) goto Canceled;
-        if (NecromancerRevengeManager.NecromancerMsgCheck(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (RetributionistRevengeManager.RetributionistMsgCheck(PlayerControl.LocalPlayer, text)) goto Canceled;
-        if (Swapper.SwapMsg(PlayerControl.LocalPlayer, text)) goto Canceled;   
+        if (Swapper.SwapMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         Directory.CreateDirectory(modTagsFiles);
         Directory.CreateDirectory(vipTagsFiles);
         Directory.CreateDirectory(sponsorTagsFiles);
@@ -64,9 +63,10 @@ internal class ChatCommands
                 break;
             case "/v":
             case "/version":
+            case "/versão":
                 canceled = true;
                 string version_text = "";
-                foreach (var kvp in Main.playerVersion.OrderBy(pair => pair.Key))
+                foreach (var kvp in Main.playerVersion.OrderBy(pair => pair.Key).ToArray())
                 {
                     version_text += $"{kvp.Key}:{Main.AllPlayerNames[kvp.Key]}:{kvp.Value.forkId}/{kvp.Value.version}({kvp.Value.tag})\n";
                 }
@@ -83,8 +83,7 @@ internal class ChatCommands
             {
                 case "/win":
                 case "/winner":
-                    if (args.Length < 2 || !int.TryParse(args[1], out int id)) break;
-                    var player = Utils.GetPlayerById(id);
+                case "/vencedor":
                     canceled = true;
                     if (!Main.winnerNameList.Any()) Utils.SendMessage(GetString("NoInfoExists"));
                     else Utils.SendMessage("Winner: " + string.Join(", ", Main.winnerNameList));
@@ -92,6 +91,7 @@ internal class ChatCommands
 
                 case "/l":
                 case "/lastresult":
+                case "/fimdejogo":
                     canceled = true;
                     Utils.ShowKillLog();
                     Utils.ShowLastRoles();
@@ -100,6 +100,7 @@ internal class ChatCommands
 
                 case "/gr":
                 case "/gameresults":
+                case "/resultados":
                     canceled = true;
                     Utils.ShowLastResult();
                     break;
@@ -113,6 +114,8 @@ internal class ChatCommands
                 case "/rs":
                 case "/sum":
                 case "/rolesummary":
+                case "/sumario":
+                case "/sumário":
                 case "/summary":
                     canceled = true;
                     Utils.ShowLastRoles();
@@ -122,15 +125,17 @@ internal class ChatCommands
 
                 case "/rn":
                 case "/rename":
+                case "/renomear":
                     canceled = true;
                     if (args.Length < 1) break;
-                    if (args[1].Length is > 100 or < 1)
+                    if (args[1].Length is > 10 or < 1)
                         Utils.SendMessage(GetString("Message.AllowNameLength"), PlayerControl.LocalPlayer.PlayerId);
                     else Main.nickName = args[1];
                     break;
 
                 case "/hn":
                 case "/hidename":
+                case "/semnome":
                     canceled = true;
                     Main.HideName.Value = args.Length > 1 ? args.Skip(1).Join(delimiter: " ") : Main.HideName.DefaultValue.ToString();
                     GameStartManagerPatch.GameStartManagerStartPatch.HideName.text =
@@ -140,10 +145,12 @@ internal class ChatCommands
                     break;
 
                 case "/level":
+                case "/nível":
+                case "/nivel":
                     canceled = true;
                     subArgs = args.Length < 2 ? "" : args[1];
                     Utils.SendMessage(string.Format(GetString("Message.SetLevel"), subArgs), PlayerControl.LocalPlayer.PlayerId);
-                    int.TryParse(subArgs, out int input);
+                    _ = int.TryParse(subArgs, out int input);
                     if (input is < 1 or > 999)
                     {
                         Utils.SendMessage(GetString("Message.AllowLevelRange"), PlayerControl.LocalPlayer.PlayerId);
@@ -155,16 +162,19 @@ internal class ChatCommands
 
                 case "/n":
                 case "/now":
+                case "/atual":
                     canceled = true;
                     subArgs = args.Length < 2 ? "" : args[1];
                     switch (subArgs)
                     {
                         case "r":
                         case "roles":
+                        case "funções":
                             Utils.ShowActiveRoles();
                             break;
                         case "a":
                         case "all":
+                        case "tudo":
                             Utils.ShowAllActiveSettings();
                             break;
                         default:
@@ -175,22 +185,29 @@ internal class ChatCommands
 
                 case "/dis":
                 case "/disconnect":
+                case "/desconectar":
                     canceled = true;
                     subArgs = args.Length < 2 ? "" : args[1];
                     switch (subArgs)
                     {
                         case "crew":
+                        case "tripulante":
                             GameManager.Instance.enabled = false;
                             GameManager.Instance.RpcEndGame(GameOverReason.HumansDisconnect, false);
                             break;
 
                         case "imp":
+                        case "impostor":
                             GameManager.Instance.enabled = false;
                             GameManager.Instance.RpcEndGame(GameOverReason.ImpostorDisconnect, false);
                             break;
 
                         default:
                             __instance.AddChat(PlayerControl.LocalPlayer, "crew | imp");
+                            if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.Brazilian)
+                            {
+                                __instance.AddChat(PlayerControl.LocalPlayer, "tripulante | impostor");
+                            }
                             cancelVal = "/dis";
                             break;
                     }
@@ -204,29 +221,8 @@ internal class ChatCommands
                     break;
 
                 case "/up":
-                    /*  canceled = true;
-                      subArgs = text.Remove(0, 3);
-                      if (!PlayerControl.LocalPlayer.FriendCode.GetDevUser().IsUp) break;
-                      if (!Options.EnableUpMode.GetBool())
-                      {
-                          Utils.SendMessage(string.Format(GetString("Message.YTPlanDisabled"), GetString("EnableYTPlan")), PlayerControl.LocalPlayer.PlayerId);
-                          break;
-                      }
-                      if (!GameStates.IsLobby)
-                      {
-                          Utils.SendMessage(GetString("Message.OnlyCanUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
-                          break;
-                      }
-                      SendRolesInfo(subArgs, PlayerControl.LocalPlayer.PlayerId, isUp: true);*/
-
                     canceled = true;
                     subArgs = text.Remove(0, 3);
-                    //if (!PlayerControl.LocalPlayer.FriendCode.GetDevUser().IsUp) break;
-                    //if (!Options.EnableUpMode.GetBool())
-                    //{
-                    //    Utils.SendMessage(string.Format(GetString("Message.YTPlanDisabled"), GetString("EnableYTPlan")));
-                    //    break;
-                    //}
                     if (!GameStates.IsLobby)
                     {
                         Utils.SendMessage(GetString("Message.OnlyCanUseInLobby"));
@@ -235,15 +231,17 @@ internal class ChatCommands
                     SendRolesInfo(subArgs, PlayerControl.LocalPlayer.PlayerId, isUp: true);
                     break;
                 case "/setplayers":
+                case "/maxjogadores":
                     canceled = true;
                     subArgs = args.Length < 2 ? "" : args[1];
                     Utils.SendMessage(GetString("Message.MaxPlayers") + subArgs);
-                    var numbereer = System.Convert.ToByte(subArgs);
+                    var numbereer = Convert.ToByte(subArgs);
                     GameOptionsManager.Instance.currentNormalGameOptions.MaxPlayers = numbereer;
                     break;
 
                 case "/h":
                 case "/help":
+                case "/ajuda":
                     canceled = true;
                     Utils.ShowHelp(PlayerControl.LocalPlayer.PlayerId);
                     break;
@@ -259,83 +257,92 @@ internal class ChatCommands
                                 Utils.SendMessage(GetString("Command.icons"));
                                 break;
                             }*/
+
                 case "/kcount":
-                    canceled = true;
-                        int impnum = 0;
-                        int neutralnum = 0;
-                        int covennum = 0;
+                    //canceled = true;
+                    int impnum = 0;
+                    int neutralnum = 0;
+
+                    foreach (var players in Main.AllAlivePlayerControls)
                     {
-                        foreach (var players in Main.AllAlivePlayerControls)
+                        if (Options.ShowImpRemainOnEject.GetBool())
                         {
-                            if (Options.ShowImpRemainOnEject.GetBool())
-                            {
-                                if (players.GetCustomRole().IsImpostor())
+                            if (players.GetCustomRole().IsImpostor())
                                 impnum++;
-                            }
-                            if (Options.ShowNKRemainOnEject.GetBool())
-                            {
-                                if (players.GetCustomRole().IsNK())
-                                neutralnum++;
-                            }
-                            if (Options.ShowCovenRemainOnEject.GetBool())
-                            {
-                                if (players.GetCustomRole().IsCoven())
-                                covennum++;
-                            }
                         }
-                        if (!GameStates.IsLobby && Options.EnableKillerLeftCommand.GetBool()) 
-                        Utils.SendMessage(GetString("Remaining.ImpostorCount") + impnum + "\n\r" + GetString("Remaining.NeutralCount") + neutralnum + "\n\r" + GetString("Remaining.CovenCount") + covennum, PlayerControl.LocalPlayer.PlayerId);
-                        break;
+                        if (Options.ShowNKRemainOnEject.GetBool())
+                        {
+                            if (players.GetCustomRole().IsNK())
+                                neutralnum++;
+                        }
                     }
+                    if (!GameStates.IsLobby && Options.EnableKillerLeftCommand.GetBool())
+                    {
+                        Utils.SendMessage(GetString("Remaining.ImpostorCount") + impnum + "\n\r" + GetString("Remaining.NeutralCount") + neutralnum, PlayerControl.LocalPlayer.PlayerId);
+                    }
+                    break;
 
 
                 case "/d":
                 case "/death":
+                case "/morto":
                     canceled = true;
+                    Logger.Info($"PlayerControl.LocalPlayer.PlayerId: {PlayerControl.LocalPlayer.PlayerId}", "/death command");
                     if (GameStates.IsLobby)
                     {
-                        Utils.SendMessage(GetString("Message.CanNotUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
+                        Logger.Info("IsLobby", "/death command");
+                        Utils.SendMessage(text: GetString("Message.CanNotUseInLobby"), sendTo: PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
-                    if (PlayerControl.LocalPlayer.IsAlive())
+                    else if (PlayerControl.LocalPlayer.IsAlive())
                     {
-                        Utils.SendMessage(GetString("DeathCmd.HeyPlayer") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + GetString("DeathCmd.YouAreRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>\n\n" + GetString("DeathCmd.NotDead"), PlayerControl.LocalPlayer.PlayerId);
+                        Logger.Info("IsAlive", "/death command");
+                        Utils.SendMessage(text: GetString("DeathCmd.HeyPlayer") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + GetString("DeathCmd.YouAreRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>\n\n" + GetString("DeathCmd.NotDead"), sendTo: PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
-                    if (Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].deathReason == PlayerState.DeathReason.Vote)
+                    else if (Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].deathReason == PlayerState.DeathReason.Vote)
                     {
-                        Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Ejected"), PlayerControl.LocalPlayer.PlayerId);
+                        Logger.Info("DeathReason.Vote", "/death command");
+                        Utils.SendMessage(text: GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Ejected"), sendTo: PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
-                    if (Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].deathReason == PlayerState.DeathReason.Shrouded)
+                    else if (Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].deathReason == PlayerState.DeathReason.Shrouded)
                     {
-                        Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Shrouded"), PlayerControl.LocalPlayer.PlayerId);
+                        Logger.Info("DeathReason.Shrouded", "/death command");
+                        Utils.SendMessage(text: GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Shrouded"), sendTo: PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
-                    if (Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].deathReason == PlayerState.DeathReason.FollowingSuicide)
+                    else if (Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].deathReason == PlayerState.DeathReason.FollowingSuicide)
                     {
-                        Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Lovers"), PlayerControl.LocalPlayer.PlayerId);
+                        Logger.Info("DeathReason.FollowingSuicide", "/death command");
+                        Utils.SendMessage(text: GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Lovers"), sendTo: PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
-                    var killer = PlayerControl.LocalPlayer.GetRealKiller();
-                    Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.DeathReason") + "<b>" + Utils.GetVitalText(PlayerControl.LocalPlayer.PlayerId) + "</b>" + "\n\r" + "</b>" + "\n\r" + GetString("DeathCmd.KillerName") + "<b>" + killer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.KillerRole") + "<b>" + $"<color={Utils.GetRoleColorCode(killer.GetCustomRole())}>{Utils.GetRoleName(killer.GetCustomRole())}</color>" + "</b>", PlayerControl.LocalPlayer.PlayerId);
-                    break;
+                    else
+                    {
+                        Logger.Info("GetRealKiller()", "/death command");
+                        var killer = PlayerControl.LocalPlayer.GetRealKiller();
+                        Utils.SendMessage(text: GetString("DeathCmd.YourName") + "<b>" + PlayerControl.LocalPlayer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(PlayerControl.LocalPlayer.GetCustomRole())}>{Utils.GetRoleName(PlayerControl.LocalPlayer.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.DeathReason") + "<b>" + Utils.GetVitalText(PlayerControl.LocalPlayer.PlayerId) + "</b>" + "\n\r" + "</b>" + "\n\r" + GetString("DeathCmd.KillerName") + "<b>" + killer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.KillerRole") + "<b>" + $"<color={Utils.GetRoleColorCode(killer.GetCustomRole())}>{Utils.GetRoleName(killer.GetCustomRole())}</color>" + "</b>", sendTo: PlayerControl.LocalPlayer.PlayerId);
+                        break;
+                    }
 
 
                 case "/m":
                 case "/myrole":
+                case "/minhafunção":
                     canceled = true;
                     var role = PlayerControl.LocalPlayer.GetCustomRole();
                     if (GameStates.IsInGame)
                     {
                         var lp = PlayerControl.LocalPlayer;
                         var sb = new StringBuilder();
+                        //sb.Append(String.Format(GetString("PlayerNameForRoleInfo"), Main.AllPlayerNames[PlayerControl.LocalPlayer.PlayerId]));
                         sb.Append(GetString(role.ToString()) + Utils.GetRoleMode(role) + lp.GetRoleInfo(true));
                         if (Options.CustomRoleSpawnChances.TryGetValue(role, out var opt))
                             Utils.ShowChildrenSettings(Options.CustomRoleSpawnChances[role], ref sb, command: true);
                         var txt = sb.ToString();
                         sb.Clear().Append(txt.RemoveHtmlTags());
-                        foreach (var subRole in Main.PlayerStates[lp.PlayerId].SubRoles)
+                        foreach (var subRole in Main.PlayerStates[lp.PlayerId].SubRoles.ToArray())
                             sb.Append($"\n\n" + GetString($"{subRole}") + Utils.GetRoleMode(subRole) + GetString($"{subRole}InfoLong"));
                         if (CustomRolesHelper.RoleExist(CustomRoles.Ntr) && (role is not CustomRoles.GM and not CustomRoles.Ntr))
                             sb.Append($"\n\n" + GetString($"Lovers") + Utils.GetRoleMode(CustomRoles.Lovers) + GetString($"LoversInfoLong"));
@@ -374,11 +381,15 @@ internal class ChatCommands
                     canceled = true;
                     string msgText1 = GetString("PlayerIdList");
                     foreach (var pc in Main.AllPlayerControls)
-                        msgText1 += "\n" + pc.PlayerId.ToString() + " → " + Main.AllPlayerNames[pc.PlayerId];
+                    {
+                        if (pc == null) continue;
+                        msgText1 += "\n" + pc.PlayerId.ToString() + " → " + pc.GetRealName();
+                    }
                     Utils.SendMessage(msgText1, PlayerControl.LocalPlayer.PlayerId);
                     break;
 
                 case "/ban":
+                case "/banir":
                     canceled = true;
 
                     string banReason = "";
@@ -433,6 +444,7 @@ internal class ChatCommands
                     File.AppendAllText(modLogFiles, logMessage + Environment.NewLine);
                     break;
                 case "/warn":
+                case "/aviso":
                     canceled = true;
                     subArgs = args.Length < 2 ? "" : args[1];
                     if (string.IsNullOrEmpty(subArgs) || !byte.TryParse(subArgs, out byte warnPlayerId))
@@ -481,6 +493,7 @@ internal class ChatCommands
 
                     break;
                 case "/kick":
+                case "/expulsar":
                     canceled = true;
                     subArgs = args.Length < 2 ? "" : args[1];
                     if (string.IsNullOrEmpty(subArgs) || !byte.TryParse(subArgs, out byte kickPlayerId))
@@ -532,65 +545,6 @@ internal class ChatCommands
                     File.AppendAllText(modLogFiles, logMessage2 + Environment.NewLine);
 
                     break;
-                case "/vipcolor":
-                case "/vipcolour":
-                    if (args.Length < 2 || !int.TryParse(args[1], out int id1)) break;
-                    player = Utils.GetPlayerById(id1);
-                    if (Options.ApplyVipList.GetValue() == 0)
-                    {
-                        Utils.SendMessage(GetString("VipColorCommandDisabled"), player.PlayerId);
-                        break;
-                    }
-                    if (!Utils.IsPlayerVIP(player.FriendCode))
-                    {
-                        Utils.SendMessage(GetString("VipColorCommandNoAccess"), player.PlayerId);
-                        break;
-                    }
-                    if (!GameStates.IsLobby)
-                    {
-                        Utils.SendMessage(GetString("VipColorCommandNoLobby"), player.PlayerId);
-                        break;
-                    }
-                    if (!Options.GradientTagsOpt.GetBool())
-                    {
-                        subArgs = args.Length != 2 ? "" : args[1];
-                        if (string.IsNullOrEmpty(subArgs) || !Utils.CheckColorHex(subArgs))
-                        {
-                            Logger.Msg($"{subArgs}", "vipcolor");
-                            Utils.SendMessage(GetString("VipColorInvalidHexCode"), player.PlayerId);
-                            break;
-                        }
-                        string colorFilePathh = $"{vipTagsFiles}/{player.FriendCode}.txt";
-                        if (!File.Exists(colorFilePathh))
-                        {
-                            Logger.Warn($"File Not exist, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
-                            File.Create(colorFilePathh).Close();
-                        }
-
-                        File.WriteAllText(colorFilePathh, $"{subArgs}");
-                        break;
-                    }
-                    else
-                    {
-                        subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
-                        Regex regexx = new Regex(@"^[0-9A-Fa-f]{6}\s[0-9A-Fa-f]{6}$");
-                        if (string.IsNullOrEmpty(subArgs) || !regexx.IsMatch(subArgs))
-                        {
-                            Logger.Msg($"{subArgs}", "vipcolor");
-                            Utils.SendMessage(GetString("VipColorInvalidGradientCode"), player.PlayerId);
-                            break;
-                        }
-                        string colorFilePathh = $"{vipTagsFiles}/{player.FriendCode}.txt";
-                        if (!File.Exists(colorFilePathh))
-                        {
-                            Logger.Msg($"File Not exist, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
-                            File.Create(colorFilePathh).Close();
-                        }
-                        //Logger.Msg($"File exists, creating file at {vipTagsFiles}/{player.FriendCode}.txt", "vipcolor");
-                        //Logger.Msg($"{subArgs}","modcolor");
-                        File.WriteAllText(colorFilePathh, $"{subArgs}");
-                        break;
-                    }
                 case "/tagcolor":
                 case "/tagcolour":
                     canceled = true;
@@ -603,8 +557,8 @@ internal class ChatCommands
                             Utils.SendMessage(GetString("ColorCommandNoLobby"), PlayerControl.LocalPlayer.PlayerId);
                             break;
                         }
-                        subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
-                        if (string.IsNullOrEmpty(subArgs) || !Utils.CheckGradientCode(subArgs))
+                        subArgs = args.Length != 2 ? "" : args[1];
+                        if (string.IsNullOrEmpty(subArgs) || !Utils.CheckColorHex(subArgs))
                         {
                             Logger.Msg($"{subArgs}", "tagcolor");
                             Utils.SendMessage(GetString("TagColorInvalidHexCode"), PlayerControl.LocalPlayer.PlayerId);
@@ -621,27 +575,27 @@ internal class ChatCommands
                     break;
 
                 case "/exe":
+                    canceled = true;
+                    if (GameStates.IsLobby)
                     {
-                        if (args.Length < 2 || !int.TryParse(args[1], out int id3)) break;
-                        player = Utils.GetPlayerById(id3);
-                        canceled = true;
-                        if (GameStates.IsLobby)
-                        {
-                            Utils.SendMessage(GetString("Message.CanNotUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
-                            break;
-                        }
-                        if (player != null)
-                        {
-                            player.Data.IsDead = true;
-                            Main.PlayerStates[player.PlayerId].deathReason = PlayerState.DeathReason.etc;
-                            player.RpcExileV2();
-                            Main.PlayerStates[player.PlayerId].SetDead();
-                            if (player.AmOwner) Utils.SendMessage(GetString("HostKillSelfByCommand"), title: $"<color=#ff0000>{GetString("DefaultSystemMessageTitle")}</color>");
-                            else Utils.SendMessage(string.Format(GetString("Message.Executed"), player.Data.PlayerName));
-                        }
+                        Utils.SendMessage(GetString("Message.CanNotUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
+                    if (args.Length < 2 || !int.TryParse(args[1], out int id)) break;
+                    var player = Utils.GetPlayerById(id);
+                    if (player != null)
+                    {
+                        player.Data.IsDead = true;
+                        Main.PlayerStates[player.PlayerId].deathReason = PlayerState.DeathReason.etc;
+                        player.RpcExileV2();
+                        Main.PlayerStates[player.PlayerId].SetDead();
+                        if (player.AmOwner) Utils.SendMessage(GetString("HostKillSelfByCommand"), title: $"<color=#ff0000>{GetString("DefaultSystemMessageTitle")}</color>");
+                        else Utils.SendMessage(string.Format(GetString("Message.Executed"), player.Data.PlayerName));
+                    }
+                    break;
+
                 case "/kill":
+                case "/matar":
                     canceled = true;
                     if (GameStates.IsLobby)
                     {
@@ -660,6 +614,7 @@ internal class ChatCommands
 
                 case "/colour":
                 case "/color":
+                case "/cor":
                     canceled = true;
                     if (GameStates.IsInGame)
                     {
@@ -679,23 +634,26 @@ internal class ChatCommands
 
                 case "/quit":
                 case "/qt":
+                case "/sair":
                     canceled = true;
                     Utils.SendMessage(GetString("Message.CanNotUseByHost"), PlayerControl.LocalPlayer.PlayerId);
                     break;
 
                 case "/xf":
                     canceled = true;
-                    if (!GameStates.IsInGame)
+                    if (GameStates.IsLobby)
                     {
                         Utils.SendMessage(GetString("Message.CanNotUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
                         break;
                     }
                     foreach (var pc in Main.AllPlayerControls)
                     {
+                        if (pc.IsAlive()) continue;
+
                         pc.RpcSetNameEx(pc.GetRealName(isMeeting: true));
                     }
                     ChatUpdatePatch.DoBlockChat = false;
-                    Utils.NotifyRoles(isForMeeting: GameStates.IsMeeting, NoCache: true);
+                    //Utils.NotifyRoles(isForMeeting: GameStates.IsMeeting, NoCache: true);
                     Utils.SendMessage(GetString("Message.TryFixName"), PlayerControl.LocalPlayer.PlayerId);
                     break;
 
@@ -703,17 +661,12 @@ internal class ChatCommands
                     canceled = true;
                     string msgText = GetString("PlayerIdList");
                     foreach (var pc in Main.AllPlayerControls)
-                        msgText += "\n" + pc.PlayerId.ToString() + " → " + Main.AllPlayerNames[pc.PlayerId];
+                    {
+                        if (pc == null) continue;
+                        msgText += "\n" + pc.PlayerId.ToString() + " → " + pc.GetRealName();
+                    }
                     Utils.SendMessage(msgText, PlayerControl.LocalPlayer.PlayerId);
                     break;
-
-                /*
-                case "/qq":
-                    canceled = true;
-                    if (Main.newLobby) Cloud.ShareLobby(true);
-                    else Utils.SendMessage("很抱歉，每个房间车队姬只会发一次", PlayerControl.LocalPlayer.PlayerId);
-                    break;
-                */
 
                 case "/changerole":
                     if (!DebugModeManager.AmDebugger) break;
@@ -735,6 +688,7 @@ internal class ChatCommands
                     break;
 
                 case "/end":
+                case "/encerrar":
                     canceled = true;
                     CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Draw);
                     GameManager.Instance.LogicFlow.CheckEndCriteria();
@@ -753,8 +707,14 @@ internal class ChatCommands
                 case "/mt":
                 case "/hy":
                     canceled = true;
-                    if (GameStates.IsMeeting) MeetingHud.Instance.RpcClose();
-                    else PlayerControl.LocalPlayer.NoCheckStartMeeting(null, true);
+                    if (GameStates.IsMeeting)
+                    {
+                        MeetingHud.Instance.RpcClose();
+                    }
+                    else
+                    {
+                        PlayerControl.LocalPlayer.NoCheckStartMeeting(null, force: true);
+                    }
                     break;
 
                 case "/cs":
@@ -769,7 +729,63 @@ internal class ChatCommands
                     if (args.Length < 1 || !int.TryParse(args[1], out int sound1)) break;
                     RPC.PlaySoundRPC(PlayerControl.LocalPlayer.PlayerId, (Sounds)sound1);
                     break;
+                case "/rps":
+                    canceled = true;
+                    subArgs = args.Length != 2 ? "" : args[1];
 
+                    if (!GameStates.IsLobby && PlayerControl.LocalPlayer.IsAlive())
+                    {
+                        Utils.SendMessage(GetString("RpsCommandInfo"), PlayerControl.LocalPlayer.PlayerId);
+                        break;
+                    }
+
+                    if (subArgs == "" || !int.TryParse(subArgs, out int playerChoice))
+                    {
+                        Utils.SendMessage(GetString("RpsCommandInfo"), PlayerControl.LocalPlayer.PlayerId);
+                        break;
+                    }
+                    else if (playerChoice < 0 || playerChoice > 2)
+                    {
+                        Utils.SendMessage(GetString("RpsCommandInfo"), PlayerControl.LocalPlayer.PlayerId);
+                        break;
+                    }
+                    else
+                    {
+                        var rand = IRandom.Instance;
+                        int botChoice = rand.Next(0, 3);
+                        var rpsList = new List<string> { GetString("Rock"), GetString("Paper"), GetString("Scissors") };
+                        if (botChoice == playerChoice)
+                        {
+                            Utils.SendMessage(string.Format(GetString("RpsDraw"), rpsList[botChoice]), PlayerControl.LocalPlayer.PlayerId);
+                        }
+                        else if ((botChoice == 0 && playerChoice == 2) ||
+                                 (botChoice == 1 && playerChoice == 0) ||
+                                 (botChoice == 2 && playerChoice == 1))
+                        {
+                            Utils.SendMessage(string.Format(GetString("RpsLose"), rpsList[botChoice]), PlayerControl.LocalPlayer.PlayerId);
+                        }
+                        else
+                        {
+                            Utils.SendMessage(string.Format(GetString("RpsWin"), rpsList[botChoice]), PlayerControl.LocalPlayer.PlayerId);
+                        }
+                        break;
+                    }
+                case "/coinflip":
+                    canceled = true;
+
+                    if (!GameStates.IsLobby && PlayerControl.LocalPlayer.IsAlive())
+                    {
+                        Utils.SendMessage(GetString("CoinFlipCommandInfo"), PlayerControl.LocalPlayer.PlayerId);
+                        break;
+                    }
+                    else
+                    {
+                        var rand = IRandom.Instance;
+                        int botChoice = rand.Next(1, 101);
+                        var coinSide = (botChoice < 51) ? GetString("Heads") : GetString("Tails");
+                        Utils.SendMessage(string.Format(GetString("CoinFlipResult"), coinSide), PlayerControl.LocalPlayer.PlayerId);
+                        break;
+                    }
                 default:
                     Main.isChatCommand = false;
                     break;
@@ -782,7 +798,6 @@ internal class ChatCommands
     Skip:
         if (canceled)
         {
-
             Logger.Info("Command Canceled", "ChatCommand");
             __instance.freeChatField.textArea.Clear();
             __instance.freeChatField.textArea.SetText(cancelVal);
@@ -1102,15 +1117,16 @@ internal class ChatCommands
         if (Swapper.SwapMsg(player, text)) { canceled = true; return; }
         if (Mediumshiper.MsMsg(player, text)) return;
         if (MafiaRevengeManager.MafiaMsgCheck(player, text)) return;
-        if (NecromancerRevengeManager.NecromancerMsgCheck(player, text)) return;
         if (RetributionistRevengeManager.RetributionistMsgCheck(player, text)) return;
         Directory.CreateDirectory(modTagsFiles);
         Directory.CreateDirectory(vipTagsFiles);
         Directory.CreateDirectory(sponsorTagsFiles);
+
         switch (args[0])
         {
             case "/l":
             case "/lastresult":
+            case "/fimdejogo":
                 Utils.ShowKillLog(player.PlayerId);
                 Utils.ShowLastRoles(player.PlayerId);
                 Utils.ShowLastResult(player.PlayerId);
@@ -1118,6 +1134,7 @@ internal class ChatCommands
 
             case "/gr":
             case "/gameresults":
+            case "/resultados":
                 Utils.ShowLastResult(player.PlayerId);
                 break;
 
@@ -1129,6 +1146,8 @@ internal class ChatCommands
             case "/rs":
             case "/sum":
             case "/rolesummary":
+            case "/sumario":
+            case "/sumário":
             case "/summary":
                 Utils.ShowLastRoles(player.PlayerId);
                 break;
@@ -1136,15 +1155,18 @@ internal class ChatCommands
 
             case "/n":
             case "/now":
+            case "/atual":
                 subArgs = args.Length < 2 ? "" : args[1];
                 switch (subArgs)
                 {
                     case "r":
                     case "roles":
+                    case "funções":
                         Utils.ShowActiveRoles(player.PlayerId);
                         break;
                     case "a":
                     case "all":
+                    case "tudo":
                         Utils.ShowAllActiveSettings(player.PlayerId);
                         break;
                     default:
@@ -1160,21 +1182,24 @@ internal class ChatCommands
 
             case "/h":
             case "/help":
+            case "/ajuda":
                 Utils.ShowHelpToClient(player.PlayerId);
                 break;
 
             case "/m":
             case "/myrole":
+            case "/minhafunção":
                 var role = player.GetCustomRole();
                 if (GameStates.IsInGame)
                 {
                     var sb = new StringBuilder();
+                    //sb.Append(String.Format(GetString("PlayerNameForRoleInfo"), Main.AllPlayerNames[player.PlayerId]));
                     sb.Append(GetString(role.ToString()) + Utils.GetRoleMode(role) + player.GetRoleInfo(true));
                     if (Options.CustomRoleSpawnChances.TryGetValue(role, out var opt))
                         Utils.ShowChildrenSettings(Options.CustomRoleSpawnChances[role], ref sb, command: true);
                     var txt = sb.ToString();
                     sb.Clear().Append(txt.RemoveHtmlTags());
-                    foreach (var subRole in Main.PlayerStates[player.PlayerId].SubRoles)
+                    foreach (var subRole in Main.PlayerStates[player.PlayerId].SubRoles.ToArray())
                         sb.Append($"\n\n" + GetString($"{subRole}") + Utils.GetRoleMode(subRole) + GetString($"{subRole}InfoLong"));
                     if (CustomRolesHelper.RoleExist(CustomRoles.Ntr) && (role is not CustomRoles.GM and not CustomRoles.Ntr))
                         sb.Append($"\n\n" + GetString($"Lovers") + Utils.GetRoleMode(CustomRoles.Lovers) + GetString($"LoversInfoLong"));
@@ -1199,6 +1224,7 @@ internal class ChatCommands
 
             case "/win":
             case "/winner":
+            case "/vencedor":
                 if (!Main.winnerNameList.Any()) Utils.SendMessage(GetString("NoInfoExists"), player.PlayerId);
                 else Utils.SendMessage("Winner: " + string.Join(", ", Main.winnerNameList), player.PlayerId);
                 break;
@@ -1209,66 +1235,64 @@ internal class ChatCommands
                             break;
                         } */
 
-                case "/kcount":
-                        int impnum = 0;
-                        int neutralnum = 0;
-                        int covennum = 0;
+            case "/kcount":
+                int impnum = 0;
+                int neutralnum = 0;
+
+                foreach (var players in Main.AllAlivePlayerControls)
+                {
+                    if (Options.ShowImpRemainOnEject.GetBool())
                     {
-                        foreach (var players in Main.AllAlivePlayerControls)
-                        {
-                            if (Options.ShowImpRemainOnEject.GetBool())
-                            {
-                                if (players.GetCustomRole().IsImpostor())
-                                impnum++;
-                            }
-                            if (Options.ShowNKRemainOnEject.GetBool())
-                            {
-                                if (players.GetCustomRole().IsNK())
-                                neutralnum++;
-                            }
-                            if (Options.ShowCovenRemainOnEject.GetBool())
-                            {
-                                if (players.GetCustomRole().IsCoven())
-                                covennum++;
-                            }
-                        }
-                        if (!GameStates.IsLobby && Options.EnableKillerLeftCommand.GetBool()) 
-                        Utils.SendMessage(GetString("Remaining.ImpostorCount") + impnum + "\n\r" + GetString("Remaining.NeutralCount") + neutralnum + "\n\r" + GetString("Remaining.CovenCount") + covennum, player.PlayerId);
-                        break;
+                        if (players.GetCustomRole().IsImpostor())
+                            impnum++;
                     }
+                    if (Options.ShowNKRemainOnEject.GetBool())
+                    {
+                        if (players.GetCustomRole().IsNK())
+                            neutralnum++;
+                    }
+                }
+                if (!GameStates.IsLobby && Options.EnableKillerLeftCommand.GetBool())
+                {
+                    Utils.SendMessage(GetString("Remaining.ImpostorCount") + impnum + "\n\r" + GetString("Remaining.NeutralCount") + neutralnum, player.PlayerId);
+                }
+                break;
 
             case "/d":
             case "/death":
+            case "/morto":
 
                 if (GameStates.IsLobby)
                 {
                     Utils.SendMessage(GetString("Message.CanNotUseInLobby"), player.PlayerId);
                     break;
                 }
-                if (player.IsAlive())
+                else if (player.IsAlive())
                 {
                     Utils.SendMessage(GetString("DeathCmd.HeyPlayer") + "<b>" + player.GetRealName() + "</b>" + GetString("DeathCmd.YouAreRole") + "<b>" + $"<color={Utils.GetRoleColorCode(player.GetCustomRole())}>{Utils.GetRoleName(player.GetCustomRole())}</color>" + "</b>\n\n" + GetString("DeathCmd.NotDead"), player.PlayerId);
                     break;
                 }
-                if (Main.PlayerStates[player.PlayerId].deathReason == PlayerState.DeathReason.Vote)
+                else if (Main.PlayerStates[player.PlayerId].deathReason == PlayerState.DeathReason.Vote)
                 {
                     Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + player.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(player.GetCustomRole())}>{Utils.GetRoleName(player.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Ejected"), player.PlayerId);
                     break;
                 }
-                if (Main.PlayerStates[player.PlayerId].deathReason == PlayerState.DeathReason.Shrouded)
+                else if (Main.PlayerStates[player.PlayerId].deathReason == PlayerState.DeathReason.Shrouded)
                 {
                     Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + player.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(player.GetCustomRole())}>{Utils.GetRoleName(player.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Shrouded"), player.PlayerId);
                     break;
                 }
-                if (Main.PlayerStates[player.PlayerId].deathReason == PlayerState.DeathReason.FollowingSuicide)
+                else if (Main.PlayerStates[player.PlayerId].deathReason == PlayerState.DeathReason.FollowingSuicide)
                 {
                     Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + player.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(player.GetCustomRole())}>{Utils.GetRoleName(player.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.Lovers"), player.PlayerId);
                     break;
                 }
-
-                var killer = player.GetRealKiller();
-                Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + player.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(player.GetCustomRole())}>{Utils.GetRoleName(player.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.DeathReason") + "<b>" + Utils.GetVitalText(player.PlayerId) + "</b>" + "\n\r" + "</b>" + "\n\r" + GetString("DeathCmd.KillerName") + "<b>" + killer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.KillerRole") + "<b>" + $"<color={Utils.GetRoleColorCode(killer.GetCustomRole())}>{Utils.GetRoleName(killer.GetCustomRole())}</color>" + "</b>", player.PlayerId);
-                break;
+                else
+                {
+                    var killer = player.GetRealKiller();
+                    Utils.SendMessage(GetString("DeathCmd.YourName") + "<b>" + player.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.YourRole") + "<b>" + $"<color={Utils.GetRoleColorCode(player.GetCustomRole())}>{Utils.GetRoleName(player.GetCustomRole())}</color>" + "</b>" + "\n\r" + GetString("DeathCmd.DeathReason") + "<b>" + Utils.GetVitalText(player.PlayerId) + "</b>" + "\n\r" + "</b>" + "\n\r" + GetString("DeathCmd.KillerName") + "<b>" + killer.GetRealName() + "</b>" + "\n\r" + GetString("DeathCmd.KillerRole") + "<b>" + $"<color={Utils.GetRoleColorCode(killer.GetCustomRole())}>{Utils.GetRoleName(killer.GetCustomRole())}</color>" + "</b>", player.PlayerId);
+                    break;
+                }
 
             case "/t":
             case "/template":
@@ -1278,7 +1302,8 @@ internal class ChatCommands
 
             case "/colour":
             case "/color":
-                if (Options.PlayerCanSetColor.GetBool() || player.FriendCode.GetDevUser().IsDev || player.FriendCode.GetDevUser().ColorCmd)
+            case "/cor":
+                if (Options.PlayerCanSetColor.GetBool() || player.FriendCode.GetDevUser().IsDev || player.FriendCode.GetDevUser().ColorCmd || Utils.IsPlayerVIP(player.FriendCode))
                 {
                     if (GameStates.IsInGame)
                     {
@@ -1303,6 +1328,7 @@ internal class ChatCommands
 
             case "/quit":
             case "/qt":
+            case "/sair":
                 subArgs = args.Length < 2 ? "" : args[1];
                 var cid = player.PlayerId.ToString();
                 cid = cid.Length != 1 ? cid.Substring(1, 1) : cid;
@@ -1322,7 +1348,10 @@ internal class ChatCommands
 
                 string msgText = GetString("PlayerIdList");
                 foreach (var pc in Main.AllPlayerControls)
-                    msgText += "\n" + pc.PlayerId.ToString() + " → " + Main.AllPlayerNames[pc.PlayerId];
+                {
+                    if (pc == null) continue;
+                    msgText += "\n" + pc.PlayerId.ToString() + " → " + pc.GetRealName();
+                }
                 Utils.SendMessage(msgText, player.PlayerId);
                 break;
             case "/mid":
@@ -1341,10 +1370,14 @@ internal class ChatCommands
                 }
                 string msgText1 = GetString("PlayerIdList");
                 foreach (var pc in Main.AllPlayerControls)
-                    msgText1 += "\n" + pc.PlayerId.ToString() + " → " + Main.AllPlayerNames[pc.PlayerId];
+                {
+                    if (pc == null) continue;
+                    msgText1 += "\n" + pc.PlayerId.ToString() + " → " + pc.GetRealName();
+                }
                 Utils.SendMessage(msgText1, player.PlayerId);
                 break;
             case "/ban":
+            case "/banir":
                 //canceled = true;
                 // Check if the ban command is enabled in the settings
                 if (Options.ApplyModeratorList.GetValue() == 0)
@@ -1418,6 +1451,7 @@ internal class ChatCommands
                 File.AppendAllText(modLogFiles, logMessage + Environment.NewLine);
                 break;
             case "/warn":
+            case "/aviso":
                 if (Options.ApplyModeratorList.GetValue() == 0)
                 {
                     Utils.SendMessage(GetString("WarnCommandDisabled"), player.PlayerId);
@@ -1454,7 +1488,6 @@ internal class ChatCommands
                     break;
                 }
                 // warn the specified player
-                string textToSend2 = "";
                 string warnReason = "Reason : Not specified\n";
                 string warnedPlayerName = warnedPlayer.GetRealName();
                 //textToSend2 = $" {warnedPlayerName} {GetString("WarnCommandWarned")} ~{player.name}";
@@ -1466,8 +1499,7 @@ internal class ChatCommands
                 {
                     Utils.SendMessage("Use /warn [id] [reason] in future. \nExample :-\n /warn 5 lava chatting", player.PlayerId);
                 }
-                textToSend2 = $" {warnedPlayerName} {GetString("WarnCommandWarned")} {warnReason} ~{player.name}";
-                Utils.SendMessage(textToSend2);
+                Utils.SendMessage($" {warnedPlayerName} {GetString("WarnCommandWarned")} {warnReason} ~{player.name}");
                 //string moderatorName1 = player.GetRealName().ToString();
                 //int startIndex1 = moderatorName1.IndexOf("♥</color>") + "♥</color>".Length;
                 //moderatorName1 = moderatorName1.Substring(startIndex1);
@@ -1480,6 +1512,7 @@ internal class ChatCommands
 
                 break;
             case "/kick":
+            case "/expulsar":
                 // Check if the kick command is enabled in the settings
                 if (Options.ApplyModeratorList.GetValue() == 0)
                 {
@@ -1602,6 +1635,8 @@ internal class ChatCommands
                         Logger.Msg($"File Not exist, creating file at {modTagsFiles}/{player.FriendCode}.txt", "modcolor");
                         File.Create(colorFilePath).Close();
                     }
+                    //Logger.Msg($"File exists, creating file at {modTagsFiles}/{player.FriendCode}.txt", "modcolor");
+                    //Logger.Msg($"{subArgs}","modcolor");
                     File.WriteAllText(colorFilePath, $"{subArgs}");
                     break;
                 }
@@ -1673,8 +1708,8 @@ internal class ChatCommands
                         Utils.SendMessage(GetString("ColorCommandNoLobby"), player.PlayerId);
                         break;
                     }
-                    subArgs = args.Length < 3 ? "" : args[1] + " " + args[2];
-                    if (string.IsNullOrEmpty(subArgs) || !Utils.CheckGradientCode(subArgs))
+                    subArgs = args.Length != 2 ? "" : args[1];
+                    if (string.IsNullOrEmpty(subArgs) || !Utils.CheckColorHex(subArgs))
                     {
                         Logger.Msg($"{subArgs}", "tagcolor");
                         Utils.SendMessage(GetString("TagColorInvalidHexCode"), player.PlayerId);
@@ -1692,13 +1727,19 @@ internal class ChatCommands
                 break;
 
             case "/xf":
-                if (!GameStates.IsInGame)
+                if (GameStates.IsLobby)
                 {
                     Utils.SendMessage(GetString("Message.CanNotUseInLobby"), player.PlayerId);
                     break;
                 }
+                foreach (var pc in Main.AllPlayerControls)
+                {
+                    if (pc.IsAlive()) continue;
+
+                    pc.RpcSetNameEx(pc.GetRealName(isMeeting: true));
+                }
                 ChatUpdatePatch.DoBlockChat = false;
-                Utils.NotifyRoles(isForMeeting: GameStates.IsMeeting, NoCache: true);
+                //Utils.NotifyRoles(isForMeeting: GameStates.IsMeeting, NoCache: true);
                 Utils.SendMessage(GetString("Message.TryFixName"), player.PlayerId);
                 break;
 
@@ -1737,6 +1778,63 @@ internal class ChatCommands
                     }
                 }
                 break;
+            case "/rps":
+                //canceled = true;
+                subArgs = args.Length != 2 ? "" : args[1];
+
+                if (!GameStates.IsLobby && player.IsAlive())
+                {
+                    Utils.SendMessage(GetString("RpsCommandInfo"), player.PlayerId);
+                    break;
+                }
+
+                if (subArgs == "" || !int.TryParse(subArgs, out int playerChoice))
+                {
+                    Utils.SendMessage(GetString("RpsCommandInfo"), player.PlayerId);
+                    break;
+                }
+                else if (playerChoice < 0 || playerChoice > 2)
+                {
+                    Utils.SendMessage(GetString("RpsCommandInfo"), player.PlayerId);
+                    break;
+                }
+                else
+                {
+                    var rand = IRandom.Instance;
+                    int botChoice = rand.Next(0, 3);
+                    var rpsList = new List<string> { GetString("Rock"), GetString("Paper"), GetString("Scissors") };
+                    if (botChoice == playerChoice)
+                    {
+                        Utils.SendMessage(string.Format(GetString("RpsDraw"), rpsList[botChoice]), player.PlayerId);
+                    }
+                    else if ((botChoice == 0 && playerChoice == 2) ||
+                             (botChoice == 1 && playerChoice == 0) ||
+                             (botChoice == 2 && playerChoice == 1))
+                    {
+                        Utils.SendMessage(string.Format(GetString("RpsLose"), rpsList[botChoice]), player.PlayerId);
+                    }
+                    else
+                    {
+                        Utils.SendMessage(string.Format(GetString("RpsWin"), rpsList[botChoice]), player.PlayerId);
+                    }
+                    break;
+                }
+            case "/coinflip":
+                //canceled = true;
+
+                if (!GameStates.IsLobby && player.IsAlive())
+                {
+                    Utils.SendMessage(GetString("CoinflipCommandInfo"), player.PlayerId);
+                    break;
+                }
+                else
+                {
+                    var rand = IRandom.Instance;
+                    int botChoice = rand.Next(1, 101);
+                    var coinSide = (botChoice < 51) ? GetString("Heads") : GetString("Tails");
+                    Utils.SendMessage(string.Format(GetString("CoinFlipResult"), coinSide), player.PlayerId);
+                    break;
+                }
 
             default:
                 if (SpamManager.CheckSpam(player, text)) return;
