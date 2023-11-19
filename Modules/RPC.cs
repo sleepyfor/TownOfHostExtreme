@@ -42,6 +42,7 @@ enum CustomRPC
     SetExecutionerTarget,
     RemoveExecutionerTarget,
     SetLawyerTarget,
+    SetReaperTarget,
     RemoveLawyerTarget,
     SendFireWorksState,
     SetCurrentDousingTarget,
@@ -355,6 +356,9 @@ internal class RPCHandlerPatch
                 break;
             case CustomRPC.SetExecutionerTarget:
                 Executioner.ReceiveRPC(reader, SetTarget: true);
+                break;
+            case CustomRPC.SetReaperTarget:
+                Reaper.ReceiveRPC(reader, SetTarget: true);
                 break;
             case CustomRPC.RemoveExecutionerTarget:
                 Executioner.ReceiveRPC(reader, SetTarget: false);
@@ -790,9 +794,9 @@ internal static class RPC
             case CustomRoles.Crusader:
                 Crusader.Add(targetId);
                 break;
-        /*    case CustomRoles.Mare:
-                Mare.Add(targetId);
-                break; */
+            /*    case CustomRoles.Mare:
+                    Mare.Add(targetId);
+                    break; */
             case CustomRoles.EvilTracker:
                 EvilTracker.Add(targetId);
                 break;
@@ -807,6 +811,9 @@ internal static class RPC
                 break;
             case CustomRoles.Farseer:
                 Farseer.Add(targetId);
+                break;
+            case CustomRoles.Reaper:
+                Reaper.Add(targetId);
                 break;
             case CustomRoles.Lawyer:
                 Lawyer.Add(targetId);
@@ -1065,10 +1072,10 @@ internal static class RPC
                 Virus.Add(targetId);
                 break;
             case CustomRoles.Bloodhound:
-                Bloodhound.Add(targetId); 
+                Bloodhound.Add(targetId);
                 break;
             case CustomRoles.Vulture:
-                Vulture.Add(targetId); 
+                Vulture.Add(targetId);
                 break;
             case CustomRoles.PlagueBearer:
                 PlagueBearer.Add(targetId);
@@ -1139,7 +1146,7 @@ internal static class RPC
             case CustomRoles.Pitfall:
                 Pitfall.Add(targetId);
                 break;
-            case CustomRoles.Swapper: 
+            case CustomRoles.Swapper:
                 Swapper.Add(targetId);
                 break;
             case CustomRoles.ChiefOfPolice:
@@ -1147,7 +1154,7 @@ internal static class RPC
                 break;
         }
         HudManager.Instance.SetHudActive(true);
-    //    HudManager.Instance.Chat.SetVisible(true);
+        //    HudManager.Instance.Chat.SetVisible(true);
         if (PlayerControl.LocalPlayer.PlayerId == targetId) RemoveDisableDevicesPatch.UpdateDisableDevices();
     }
     public static void RpcDoSpell(byte targetId, byte killerId)

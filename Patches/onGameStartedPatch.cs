@@ -201,6 +201,7 @@ internal class ChangeRoleSettings
             SabotageMaster.Init();
             Executioner.Init();
             Lawyer.Init();
+            Reaper.Init();
             Jackal.Init();
             Sidekick.Init();
             Sheriff.Init();
@@ -560,6 +561,9 @@ internal class SelectRolesPatch
                         break;
                     case CustomRoles.Medusa:
                         Medusa.Add(pc.PlayerId);
+                        break;
+                    case CustomRoles.Reaper:
+                        Reaper.Add(pc.PlayerId);
                         break;
                     case CustomRoles.Necromancer:
                         Necromancer.Add(pc.PlayerId);

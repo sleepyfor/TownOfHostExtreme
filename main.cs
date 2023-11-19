@@ -36,8 +36,8 @@ public class Main : BasePlugin
     public static readonly string MainMenuText = " ";
 
     public const string PluginGuid = "com.karped1em.townofhostedited";
-    public const string PluginVersion = "4.2.0";
-    public const string PluginDisplayVersion = "4.2.0";
+    public const string PluginVersion = "5.0.0";
+    public const string PluginDisplayVersion = "5.0.0 (Dev 1)";
     public static readonly string SupportedVersionAU = "2023.10.24";
     public const bool Canary = false;
 
@@ -454,6 +454,7 @@ public class Main : BasePlugin
                 {CustomRoles.Medusa, "#663399"},
                 {CustomRoles.Baker, "#b58428"},
                 {CustomRoles.Famine, "#cb4d4d"},
+                {CustomRoles.Reaper, "#A30100"},
                 {CustomRoles.Spiritcaller, "#003366"},
                 {CustomRoles.EvilSpirit, "#003366"},
                 {CustomRoles.Convict, "#ff1919"},
@@ -765,6 +766,7 @@ public enum CustomRoles
     Jackal,
     Poisoner,
     NWitch,
+    Reaper,
     Innocent,
     Pelican,
     Revolutionist,
@@ -914,6 +916,7 @@ public enum CustomWinner
     Pelican = CustomRoles.Pelican,
     Youtuber = CustomRoles.Youtuber,
     Egoist = CustomRoles.Egoist,
+    Reaper = CustomRoles.Reaper,
     Gamer = CustomRoles.Gamer,
     DarkHide = CustomRoles.DarkHide,
     Workaholic = CustomRoles.Workaholic,
@@ -970,6 +973,7 @@ public enum AdditionalWinners
     VengefulRomantic = CustomRoles.VengefulRomantic,
     RuthlessRomantic = CustomRoles.RuthlessRomantic,
     Jackal = CustomRoles.Jackal,
+    Reaper = CustomRoles.Reaper,
     Sidekick = CustomRoles.Sidekick,
     Pursuer = CustomRoles.Pursuer,
     Phantom = CustomRoles.Phantom,

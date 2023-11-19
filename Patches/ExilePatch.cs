@@ -94,8 +94,12 @@ class ExileControllerWrapUpPatch
 
             //判断处刑人胜利
             foreach (var pc in Main.AllPlayerControls)
+            {
                 if (pc.Is(CustomRoles.Executioner))
-                    if (Executioner.CheckExileTarget(pc,exiled, DecidedWinner)) DecidedWinner = true;
+                    if (Executioner.CheckExileTarget(pc, exiled, DecidedWinner)) DecidedWinner = true;
+                if (pc.Is(CustomRoles.Reaper))
+                    if (Reaper.OnVoteEnd(pc, exiled, DecidedWinner)) DecidedWinner = true;
+            }
 
             if (Lawyer.CheckExileTarget(exiled, DecidedWinner)) DecidedWinner = false;
 

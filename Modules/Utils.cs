@@ -1932,11 +1932,12 @@ public static class Utils
                         SelfSuffix.Append(BountyHunter.GetTargetText(seer, false));
                         SelfSuffix.Append(BountyHunter.GetTargetArrow(seer));
                         break;
-
                     case CustomRoles.EvilTracker:
                         SelfSuffix.Append(EvilTracker.GetTargetArrow(seer, seer));
                         break;
-
+                    case CustomRoles.Reaper:
+                        SelfSuffix.Append(Reaper.GetTargetText(seer));
+                        break;
                     case CustomRoles.FireWorks:
                         SelfSuffix.Append(FireWorks.GetStateText(seer));
                         break;

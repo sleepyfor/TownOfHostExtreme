@@ -26,25 +26,22 @@ public static class Credentials
             sb.Append(Main.credentialsText);
 
             var ping = AmongUsClient.Instance.Ping;
-            string pingcolor = "#ff4500";
-            if (ping < 30) pingcolor = "#44dfcc";
-            else if (ping < 100) pingcolor = "#7bc690";
-            else if (ping < 200) pingcolor = "#f3920e";
-            else if (ping < 400) pingcolor = "#ff146e";
-            sb.Append($"\r\n").Append($"<color={pingcolor}>Ping: {ping} ms</color>");
+            int FPSGame = (int)(1 / Time.deltaTime);
+            string pingcolor = "#ffffff";
+            sb.Append($"\r\n").Append($"<color={Main.ModColor}>Ping:</color> <color={pingcolor}>{ping} ms</color>");
+            //sb.Append($"\r\n").Append($"<color={Main.ModColor}>FPS:</color> <color={pingcolor}>{FPSGame}</color>");
 
             if (!GameStates.IsModHost) sb.Append($"\r\n").Append(Utils.ColorString(Color.red, GetString("Warning.NoModHost")));
 
-            if (Main.ShowFPS.Value)
+            /*if (Main.ShowFPS.Value)
             {
-                var FPSGame = 1.0f / Time.deltaTime;
                 Color fpscolor = Color.green;
 
                 if (FPSGame < 20f) fpscolor = Color.red;
                 else if (FPSGame < 40f) fpscolor = Color.yellow;
 
                 sb.Append("\r\n").Append(Utils.ColorString(fpscolor, Utils.ColorString(Color.cyan, GetString("FPSGame")) + ((int)FPSGame).ToString()));
-            }
+            }*/
 
             if (Main.ShowTextOverlay.Value)
             {
@@ -83,7 +80,7 @@ public static class Credentials
                 Main.credentialsText += $"\n{additionalCredentials}";
             } */
 
-            Main.credentialsText += $"\r\n<color={Main.ModColor}>By</color> <color=#ffffff>JustMeDark</color>";
+            Main.credentialsText += $"\r\n<color={Main.ModColor}>By</color> <color=#ffffff>sleepyfor</color>";
 #endif
 
             if (Main.IsAprilFools)
