@@ -83,6 +83,8 @@ internal class ChatCommands
             {
                 case "/win":
                 case "/winner":
+                    if (args.Length < 2 || !int.TryParse(args[1], out int id)) break;
+                    var player = Utils.GetPlayerById(id);
                     canceled = true;
                     if (!Main.winnerNameList.Any()) Utils.SendMessage(GetString("NoInfoExists"));
                     else Utils.SendMessage("Winner: " + string.Join(", ", Main.winnerNameList));
@@ -532,7 +534,8 @@ internal class ChatCommands
                     break;
                 case "/vipcolor":
                 case "/vipcolour":
-                    var player = Utils.GetPlayerById(id);
+                    if (args.Length < 2 || !int.TryParse(args[1], out int id1)) break;
+                    player = Utils.GetPlayerById(id1);
                     if (Options.ApplyVipList.GetValue() == 0)
                     {
                         Utils.SendMessage(GetString("VipColorCommandDisabled"), player.PlayerId);
@@ -618,25 +621,26 @@ internal class ChatCommands
                     break;
 
                 case "/exe":
-                    canceled = true;
-                    if (GameStates.IsLobby)
                     {
-                        Utils.SendMessage(GetString("Message.CanNotUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
+                        if (args.Length < 2 || !int.TryParse(args[1], out int id3)) break;
+                        player = Utils.GetPlayerById(id3);
+                        canceled = true;
+                        if (GameStates.IsLobby)
+                        {
+                            Utils.SendMessage(GetString("Message.CanNotUseInLobby"), PlayerControl.LocalPlayer.PlayerId);
+                            break;
+                        }
+                        if (player != null)
+                        {
+                            player.Data.IsDead = true;
+                            Main.PlayerStates[player.PlayerId].deathReason = PlayerState.DeathReason.etc;
+                            player.RpcExileV2();
+                            Main.PlayerStates[player.PlayerId].SetDead();
+                            if (player.AmOwner) Utils.SendMessage(GetString("HostKillSelfByCommand"), title: $"<color=#ff0000>{GetString("DefaultSystemMessageTitle")}</color>");
+                            else Utils.SendMessage(string.Format(GetString("Message.Executed"), player.Data.PlayerName));
+                        }
                         break;
                     }
-                    if (args.Length < 2 || !int.TryParse(args[1], out int id)) break;
-                    var player = Utils.GetPlayerById(id);
-                    if (player != null)
-                    {
-                        player.Data.IsDead = true;
-                        Main.PlayerStates[player.PlayerId].deathReason = PlayerState.DeathReason.etc;
-                        player.RpcExileV2();
-                        Main.PlayerStates[player.PlayerId].SetDead();
-                        if (player.AmOwner) Utils.SendMessage(GetString("HostKillSelfByCommand"), title: $"<color=#ff0000>{GetString("DefaultSystemMessageTitle")}</color>");
-                        else Utils.SendMessage(string.Format(GetString("Message.Executed"), player.Data.PlayerName));
-                    }
-                    break;
-
                 case "/kill":
                     canceled = true;
                     if (GameStates.IsLobby)
