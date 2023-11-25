@@ -91,36 +91,8 @@ public static class Reaper
         return false;
     }
 
-    /* public static bool OnVoteEnd(PlayerControl reaper, PlayerInfo exiled, bool DecidedWinner)
-     {
-         *//* foreach (var kvp in TargetPlayer.Where(Reaper => Reaper.Value == exiled.PlayerId))
-          {
-              var target = Utils.GetPlayerById(kvp.Key);
-              if (target == null || !reaper.IsAlive() || target.Data.Disconnected || reaper.Data.Disconnected) continue;
-              ReaperWin(reaper, target, DecidedWinner);
-              return true;
-          }*//*
-         if (exiled.PlayerId == TargetPlayer[reaper.PlayerId])
-         {
-             if (!DecidedWinner)
-                 SendRPC(reaper.PlayerId, Progress: "WinCheck");
-             CustomWinnerHolder.AdditionalWinnerTeams.Add(AdditionalWinners.Reaper);
-             CustomWinnerHolder.WinnerIds.Add(reaper.PlayerId);
-             CustomWinnerHolder.WinnerIds.Add(exiled.PlayerId);
-             return true;
-         }
-         else return false;
-     }*/
-
     public static bool OnVoteEnd(PlayerControl executioner, PlayerInfo exiled, bool DecidedWinner)
     {
-        /*  foreach (var kvp in TargetPlayer.Where(x => x.Value == exiled.PlayerId))
-          {
-              var TargetExiled = Utils.GetPlayerById(kvp.Key);
-              if (TargetExiled == null || executioner.IsAlive() || TargetExiled.Data.Disconnected || executioner.Data.Disconnected) continue;
-              ReaperWin(executioner, TargetExiled, DecidedWinner);
-              return true;
-          }*/
         var temp = exiled.PlayerName;
         if (Utils.GetPlayerById(exiled.PlayerId).Is(CustomRoles.Reaped))
         {
@@ -134,9 +106,6 @@ public static class Reaper
 
     public static void ReaperWin(PlayerControl reaper, PlayerControl target, bool DecidedWinner)
     {
-        /*CustomWinnerHolder.AdditionalWinnerTeams.Add(AdditionalWinners.Reaper);
-        CustomWinnerHolder.WinnerIds.Add(reaper.PlayerId);
-        CustomWinnerHolder.WinnerIds.Add(target.PlayerId);*/
         Main.AllPlayerControls
                          .Where(pc => pc.Is(CustomRoles.Succubus) || pc.Is(CustomRoles.Charmed) && !pc.Is(CustomRoles.Rogue) && !pc.Is(CustomRoles.Admired))
                          .Do(pc => CustomWinnerHolder.WinnerIds.Add(pc.PlayerId));

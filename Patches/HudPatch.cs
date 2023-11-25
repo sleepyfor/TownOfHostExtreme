@@ -142,6 +142,12 @@ class HudManagerPatch
                         __instance.KillButton.OverrideText(GetString("ArsonistDouseButtonText"));
                         __instance.ImpostorVentButton.buttonLabelText.text = GetString("ArsonistVentButtonText");
                         break;
+                    case CustomRoles.Grappler:
+                        __instance.AbilityButton.OverrideText(GetString("GrapplerGrappleButtonText"));
+                        break;
+                    case CustomRoles.Illusion:
+                        __instance.AbilityButton.OverrideText(GetString("IllusionVentButtonText"));
+                        break;
                     case CustomRoles.Revolutionist:
                         __instance.ReportButton.OverrideText(GetString("ReportButtonText"));
                         __instance.KillButton.OverrideText(GetString("RevolutionistDrawButtonText"));

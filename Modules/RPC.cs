@@ -984,6 +984,9 @@ internal static class RPC
             case CustomRoles.Captain:
                 Captain.Add(targetId);
                 break;
+            case CustomRoles.Illusion:
+                Illusion.Add(targetId);
+                break;
             case CustomRoles.ParityCop:
                 ParityCop.Add(targetId);
                 break;

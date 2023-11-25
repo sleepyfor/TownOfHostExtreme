@@ -207,6 +207,7 @@ internal class ChangeRoleSettings
             Sheriff.Init();
             Captain.Init();
             CopyCat.Init();
+            Illusion.Init();
             Cleanser.Init();
             SwordsMan.Init();
             EvilTracker.Init();
@@ -594,6 +595,9 @@ internal class SelectRolesPatch
                         break;
                     case CustomRoles.Captain:
                         Captain.Add(pc.PlayerId);
+                        break;
+                    case CustomRoles.Illusion:
+                        Illusion.Add(pc.PlayerId);
                         break;
                     case CustomRoles.CopyCat:
                         CopyCat.Add(pc.PlayerId);

@@ -1881,6 +1881,10 @@ public static class Options
 
         SetupRoleOptions(9150, TabGroup.CrewmateRoles, CustomRoles.Lookout);
 
+        // Illusion
+
+        Illusion.SetupOptions();    
+
         // Marshall
 
         Marshall.SetupCustomOption();
@@ -2428,6 +2432,7 @@ public static class Options
         SetupAdtRoleOptions(17500, CustomRoles.ChokingHazard, canSetNum: true);
         ChokeChance = IntegerOptionItem.Create(17510, "ChokeChance", new(0, 100, 5), 50, TabGroup.Addons, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.ChokingHazard]);
+        SetupAdtRoleOptions(17550, CustomRoles.Heavy, canSetNum: true);
         SetupAdtRoleOptions(14400, CustomRoles.Necroview, canSetNum: true, tab: TabGroup.Addons);
         ImpCanBeNecroview = BooleanOptionItem.Create(14410, "ImpCanBeNecroview", true, TabGroup.Addons, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Necroview]);

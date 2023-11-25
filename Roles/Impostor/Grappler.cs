@@ -38,14 +38,19 @@ namespace TOHX.Roles.Impostor
         {
             if (shapeshifting)
             {
-                target.Notify(Translator.GetString("Grappling"));
-                _ = new LateTask(() =>
+                if (!target.Is(CustomRoles.Heavy))
                 {
-                    if (pc.IsAlive() && target.IsAlive() && !pc.inVent && !target.inVent)
-                        target.RpcTeleport(pc.transform.position);
-                    else
-                        pc.Notify(Translator.GetString("GrapplingFailed"));
-                }, 1.5f, "Grappler TP");
+                    target.Notify(Translator.GetString("Grappling"));
+                    _ = new LateTask(() =>
+                    {
+                        if (pc.IsAlive() && target.IsAlive() && !pc.inVent && !target.inVent)
+                            target.RpcTeleport(pc.transform.position);
+                        else
+                            pc.Notify(Translator.GetString("GrapplingFailed"));
+                    }, 1.5f, "Grappler TP");
+                }
+                else
+                    pc.Notify(Translator.GetString("GrapplerTooHeavy"));
             }
         }
     }
