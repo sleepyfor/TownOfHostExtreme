@@ -3094,6 +3094,9 @@ class EnterVentPatch
             case CustomRoles.Occultist:
                 Occultist.OnEnterVent(pc);
                 break;
+            case CustomRoles.Illusion:
+                pc.MyPhysics.RpcExitVent(pc.PlayerId);
+                break;
             case CustomRoles.Mayor:
                 if (Options.MayorHasPortableButton.GetBool())
                     if (Main.MayorUsedButtonCount.TryGetValue(pc.PlayerId, out var asshole) && asshole < Options.MayorNumOfUseButton.GetInt())
@@ -3101,9 +3104,6 @@ class EnterVentPatch
                         pc?.MyPhysics?.RpcBootFromVent(__instance.Id);
                         pc?.ReportDeadBody(null);
                     }
-                break;
-            case CustomRoles.Illusion:
-                Illusion.OnEnterVent(pc);
                 break;
             case CustomRoles.Paranoia:
                 if (Main.ParaUsedButtonCount.TryGetValue(pc.PlayerId, out var count) && count < Options.ParanoiaNumOfUseButton.GetInt())
@@ -3278,8 +3278,7 @@ class CoEnterVentPatch
     {
         if (!AmongUsClient.Instance.AmHost) return true;
 
-        if (AmongUsClient.Instance.IsGameStarted &&
-            __instance.myPlayer.IsDouseDone())
+        if (AmongUsClient.Instance.IsGameStarted && __instance.myPlayer.IsDouseDone())
         {
             CustomSoundsManager.RPCPlayCustomSoundAll("Boom");
             foreach (var pc in Main.AllAlivePlayerControls)
@@ -3341,6 +3340,11 @@ class CoEnterVentPatch
 
         if (__instance.myPlayer.Is(CustomRoles.Chameleon))
             Chameleon.OnCoEnterVent(__instance, id);
+
+        if (AmongUsClient.Instance.IsGameStarted && __instance.myPlayer.Is(CustomRoles.Illusion) && !__instance.myPlayer.inVent)
+        {
+            Illusion.OnExitVent(__instance.myPlayer);
+        }
 
         if (__instance.myPlayer.Is(CustomRoles.DovesOfNeace)) __instance.myPlayer.Notify(GetString("DovesOfNeaceMaxUsage"));
         if (__instance.myPlayer.Is(CustomRoles.Veteran)) __instance.myPlayer.Notify(GetString("VeteranMaxUsage"));
