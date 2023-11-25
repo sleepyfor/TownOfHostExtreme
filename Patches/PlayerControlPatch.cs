@@ -2378,6 +2378,15 @@ class FixedUpdatePatch
             Deathpact.OnFixedUpdate(player);
             Pelican.OnFixedUpdate();
 
+            if (player.Is(CustomRoles.Illusion))
+            {
+                if (Illusion.HasVented[player.PlayerId] && !player.inVent)
+                {
+                    Illusion.OnExitVent(player);
+                    Illusion.HasVented[player.PlayerId] = false;
+                }
+            }
+
             if (!lowLoad)
             {
                 //检查老兵技能是否失效
@@ -3095,7 +3104,8 @@ class EnterVentPatch
                 Occultist.OnEnterVent(pc);
                 break;
             case CustomRoles.Illusion:
-                pc.MyPhysics.RpcExitVent(pc.PlayerId);
+                Illusion.HasVented[pc.PlayerId] = true;
+                //pc.MyPhysics.RpcExitVent(pc.PlayerId);
                 break;
             case CustomRoles.Mayor:
                 if (Options.MayorHasPortableButton.GetBool())
@@ -3341,10 +3351,10 @@ class CoEnterVentPatch
         if (__instance.myPlayer.Is(CustomRoles.Chameleon))
             Chameleon.OnCoEnterVent(__instance, id);
 
-        if (AmongUsClient.Instance.IsGameStarted && __instance.myPlayer.Is(CustomRoles.Illusion) && !__instance.myPlayer.inVent)
+        /*if (AmongUsClient.Instance.IsGameStarted && __instance.myPlayer.Is(CustomRoles.Illusion) && !__instance.myPlayer.inVent)
         {
             Illusion.OnExitVent(__instance.myPlayer);
-        }
+        }*/
 
         if (__instance.myPlayer.Is(CustomRoles.DovesOfNeace)) __instance.myPlayer.Notify(GetString("DovesOfNeaceMaxUsage"));
         if (__instance.myPlayer.Is(CustomRoles.Veteran)) __instance.myPlayer.Notify(GetString("VeteranMaxUsage"));

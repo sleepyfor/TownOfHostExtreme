@@ -6,6 +6,7 @@ namespace TOHX.Roles.Crewmate
 {
     public static class Illusion
     {
+        public static Dictionary<byte, bool> HasVented = new();
         private static readonly int Id = 17800;
         public static OptionItem VentCooldown;
         public static OptionItem VentDuration;

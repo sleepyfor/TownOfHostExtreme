@@ -397,7 +397,7 @@ public class PlayerGameOptionsSender : GameOptionsSender
                 break;
             case CustomRoles.Illusion:
                 AURoleOptions.EngineerCooldown = Illusion.VentCooldown.GetFloat();
-                AURoleOptions.EngineerInVentMaxTime = 2;
+                AURoleOptions.EngineerInVentMaxTime = 1;
                 break;
             case CustomRoles.Addict:
                 AURoleOptions.EngineerCooldown = Addict.VentCooldown.GetFloat();
