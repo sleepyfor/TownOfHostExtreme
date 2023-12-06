@@ -1698,8 +1698,10 @@ public static class Utils
             {
                 if (!player.IsModClient()) return;
                 {
+                    // was high when i added the gradient name so idk if ill keep it
                     if (GameStates.IsOnlineGame || GameStates.IsLocalGame)
-                        name = $"<color={GetString("HostColor")}>{GetString("HostText")}</color><color={GetString("IconColor")}>{GetString("Icon")}</color><color={GetString("NameColor")}>{name}</color>";
+                        name = GradientColorText("972DFB", "FF0000", $"{GetString("HostText")}{GetString("Icon")}{name}");
+                        //name = $"<color=#00ff00>{GetString("HostText")}</color><color=#ff0000>{GetString("Icon")}</color>" + GradientColorText("00ff00", "ff0000", name);
 
                     //name = $"<color=#902efd>{GetString("HostText")}</color><color=#4bf4ff>♥</color>" + name;
                 }

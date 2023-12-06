@@ -28,7 +28,7 @@ public static class Credentials
             var ping = AmongUsClient.Instance.Ping;
             int FPSGame = (int)(1 / Time.deltaTime);
             string pingcolor = "#ffffff";
-            sb.Append($"\r\n").Append($"<color={Main.ModColor}>Ping:</color> <color={pingcolor}>{ping} ms</color>");
+            sb.Append($"\r\n").Append($"<color=#00FF00>Ping:</color> <color=#FF0000>{ping} ms</color>");
             //sb.Append($"\r\n").Append($"<color={Main.ModColor}>FPS:</color> <color={pingcolor}>{FPSGame}</color>");
 
             if (!GameStates.IsModHost) sb.Append($"\r\n").Append(Utils.ColorString(Color.red, GetString("Warning.NoModHost")));
@@ -66,22 +66,9 @@ public static class Credentials
         static TextMeshPro SpecialEventText;
         private static void Postfix(VersionShower __instance)
         {
-            Main.credentialsText = $"\r\n<color={Main.ModColor}>{Main.ModName}</color> v{Main.PluginDisplayVersion}";
+            Main.credentialsText = $"\r\n<color=#00FF00>{Main.ModName}</color> <color=#FF0000>v{Main.PluginDisplayVersion}</color>";
+            Main.credentialsText += $"\r\n<color=#00FF00>By</color> <color=#FF0000>sleepyfor</color>";
 
-#if RELEASE
-            //  Main.credentialsText += $"\r\n<color=#a54aff>Modified by </color><color=#ff3b6f>Loonie</color>";
-            Main.credentialsText += $"\r\n<color=#a54aff>By <color=#ffc0cb>KARPED1EM</color> & </color><color=#f34c50>Loonie</color>";
-#endif
-
-#if DEBUG
-         /* string additionalCredentials = GetString("TextBelowVersionText");
-            if (additionalCredentials != null && additionalCredentials != "*TextBelowVersionText")
-            {
-                Main.credentialsText += $"\n{additionalCredentials}";
-            } */
-
-            Main.credentialsText += $"\r\n<color={Main.ModColor}>By</color> <color=#ffffff>sleepyfor</color>";
-#endif
 
             if (Main.IsAprilFools)
                 Main.credentialsText = $"\r\n<color={Main.ModColor}>Town Of Laikrai</color> v69.420.96";
