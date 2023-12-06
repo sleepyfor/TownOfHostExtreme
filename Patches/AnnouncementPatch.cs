@@ -48,6 +48,22 @@ public class ModNewsHistory
         if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.English)
         {
             {
+                // TOHX v5.0.0
+                var news = new ModNews
+                {
+                    Number = 100010,
+                    Title = "TownOfHost Extreme v5.0.0",
+                    SubTitle = "\r★★ Feeling Festive! ★★",
+                    ShortTitle = "TOHX v5.0.0",
+                    Text = "<size=150%>Welcome to TownOfHost Extreme v5.0.0!</size>\n\n<size=125%>Support for Among Us 2023.10.24</size>\n"
+                        + "\n【Base】\n - Base on TOHRE v3.0.0\r\n"
+                        + "\n【Added】\n - Role: Illusion (Crewmate)\n\r - Addon: Heavy\n\r"
+                        + "\n【Changes】\n - Grappler button now says Grapple\n\r - Colorist can now know the color of the killer\n\r",
+                    Date = "2023-11-4T00:00:00Z"
+                };
+                AllModNews.Add(news);
+            }
+            {
                 // TOHX v4.2.0
                 var news = new ModNews
                 {

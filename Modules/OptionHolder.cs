@@ -202,6 +202,7 @@ public static class Options
     public static OptionItem ChokeChance;
     public static OptionItem VindicatorAdditionalVote;
     public static OptionItem VindicatorHideVote;
+    public static OptionItem ColoristSeeColorChance;
     public static OptionItem MayorAdditionalVote;
     public static OptionItem MayorHasPortableButton;
     public static OptionItem MayorNumOfUseButton;
@@ -1896,6 +1897,9 @@ public static class Options
         // Colorist
 
         SetupRoleOptions(9550, TabGroup.CrewmateRoles, CustomRoles.Colorist);
+        ColoristSeeColorChance = IntegerOptionItem.Create(9552, "ColoristSeeColorChance", new(0, 100, 5), 45, TabGroup.CrewmateRoles, false)
+            .SetParent(CustomRoleSpawnChances[CustomRoles.Colorist])
+            .SetValueFormat(OptionFormat.Percent);
 
         // Mayor
 

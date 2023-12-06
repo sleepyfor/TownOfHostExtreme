@@ -1694,7 +1694,6 @@ class ReportDeadBodyPatch
                     return false;
                 }
                 if (Vulture.UnreportablePlayers.Contains(target.PlayerId)) return false;
-
                 if (__instance.Is(CustomRoles.Vulture))
                 {
                     long now = Utils.GetTimeStamp();
@@ -1977,6 +1976,13 @@ class ReportDeadBodyPatch
                     }
                     Main.DetectiveNotify.Add(player.PlayerId, msg);
                 }
+                if (player.Is(CustomRoles.Colorist))
+                    if (IRandom.Instance.Next(0, 100) < Options.ColoristSeeColorChance.GetInt())
+                    {
+                        var tarColor = target.ColorName;
+                        Main.ColoristNotify[player.PlayerId] = tarColor;
+                        Main.ColoristNotifyBool[player.PlayerId] = true;
+                    }
                 if (player.Is(CustomRoles.Sleuth) && player.PlayerId != target.PlayerId)
                 {
                     string msg;
@@ -2011,6 +2017,15 @@ class ReportDeadBodyPatch
         Bloodhound.Clear();
         Vulture.Clear();
         Main.GodfatherTarget.Clear();
+
+        if (player.Is(CustomRoles.Colorist))
+        {
+            if (IRandom.Instance.Next(0, 100) < Options.ColoristSeeColorChance.GetInt())
+            {
+                var tarColor = Main.PlayerColors[target.PlayerId].ToString();
+                
+            }
+        }
 
         Camouflager.OnReportDeadBody();
         Psychic.OnReportDeadBody();

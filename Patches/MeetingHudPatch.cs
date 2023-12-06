@@ -9,6 +9,7 @@ using TOHX.Roles.Impostor;
 using TOHX.Roles.Neutral;
 using UnityEngine;
 using static TOHX.Translator;
+using static UnityEngine.GraphicsBuffer;
 
 namespace TOHX;
 
@@ -803,6 +804,8 @@ class MeetingHudStartPatch
                 AddMsg(GetString("NecromancerDeadMsg"), pc.PlayerId);
             if (pc.Is(CustomRoles.Retributionist) && !pc.IsAlive())
                 AddMsg(GetString("RetributionistDeadMsg"), pc.PlayerId);
+            if (pc.Is(CustomRoles.Colorist) && Main.ColoristNotifyBool[pc.PlayerId])
+                    Utils.SendMessage(string.Format(GetString("ColoristNotify"), Main.ColoristNotify[pc.PlayerId]));
             //网红死亡消息提示
             foreach (var csId in Main.CyberStarDead)
             {

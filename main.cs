@@ -37,7 +37,7 @@ public class Main : BasePlugin
 
     public const string PluginGuid = "com.karped1em.townofhostedited";
     public const string PluginVersion = "5.0.0";
-    public const string PluginDisplayVersion = "5.0.0_dev";
+    public const string PluginDisplayVersion = "5.0.0";
     public static readonly string SupportedVersionAU = "2023.10.24";
     public const bool Canary = false;
 
@@ -136,6 +136,8 @@ public class Main : BasePlugin
     //public static List<byte> ForFlashbang = new();
     public static Dictionary<byte, byte> KillerOfBoobyTrapBody = new();
     public static Dictionary<byte, string> DetectiveNotify = new();
+    public static Dictionary<byte, string> ColoristNotify = new();
+    public static Dictionary<byte, bool> ColoristNotifyBool = new();
     public static Dictionary<byte, string> SleuthNotify = new();
     public static Dictionary<byte, string> VirusNotify = new();
     public static List<byte> OverDeadPlayerList = new();
