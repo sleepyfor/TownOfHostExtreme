@@ -1700,12 +1700,15 @@ public static class Utils
                 {
                     // was high when i added the gradient name so idk if ill keep it
                     if (GameStates.IsOnlineGame || GameStates.IsLocalGame)
-                        name = GradientColorText("972DFB", "FF0000", $"{GetString("HostText")}{GetString("Icon")}{name}");
-                        //name = $"<color=#00ff00>{GetString("HostText")}</color><color=#ff0000>{GetString("Icon")}</color>" + GradientColorText("00ff00", "ff0000", name);
-
-                    //name = $"<color=#902efd>{GetString("HostText")}</color><color=#4bf4ff>♥</color>" + name;
+                        if (Options.GradientTagsOpt.GetBool())
+                            name = GradientColorText(GetString("HostColor"), GetString("HostColor2"), $"{GetString("HostText")}{GetString("Icon")}{name}");
+                        else
+                            name = $"<color=#{GetString("HostColor")}>{GetString("HostText")}{GetString("Icon")}</color><color=#{GetString("HostColor2")}>{name}</color>";
                 }
             }
+
+            // TODO Later: MAKE FULL GRADIENT VIP NAMES FOR 5.0.1
+
             var modtag = "";
             if (Options.ApplyVipList.GetValue() == 1 && player.FriendCode != PlayerControl.LocalPlayer.FriendCode)
             {
